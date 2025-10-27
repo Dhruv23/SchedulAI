@@ -1,0 +1,54 @@
+Course Section,Course Subject,Course Number,Section Number,Section Status,Enrolled/Capacity,All Instructors,Units,Meeting Patterns,Locations,Course Tags,Instructional Format,Delivery Mode,Start Date,End Date,Academic Period,Overlapping Course(s)
+CSCI 10-1 - Introduction to Computer Science,Computer Science,10,1,Open,0/33,Venkatesh Srinivasan,5,M W F | 8:00 AM - 9:05 AM,Rm 306 Kenna Hall,"Core Explorations :: Science, Technology and Society
+
+Pathways :: Design Thinking
+
+Pathways :: Paradigm Shifts and the Nature of Human Knowing
+
+Pathways :: The Digital Age
+
+Pathways :: Values in Science and Technology",Lecture,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,
+CSCI 10-2 - Introduction to Computer Science,Computer Science,10,2,Open,0/33,Venkatesh Srinivasan,5,M W F | 9:15 AM - 10:20 AM,Rm 306 Kenna Hall,"Core Explorations :: Science, Technology and Society
+
+Pathways :: Design Thinking
+
+Pathways :: Paradigm Shifts and the Nature of Human Knowing
+
+Pathways :: The Digital Age
+
+Pathways :: Values in Science and Technology",Lecture,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,
+CSCI 10-3 - Introduction to Computer Science,Computer Science,10,3,Open,0/80,Natalie Linnell,5,Th | 3:50 PM - 5:30 PM,Rm 207 Daly Science 200,"Core Explorations :: Science, Technology and Society
+
+Pathways :: Design Thinking
+
+Pathways :: Paradigm Shifts and the Nature of Human Knowing
+
+Pathways :: The Digital Age
+
+Pathways :: Values in Science and Technology",Laboratory,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,
+CSCI 10-4 - Introduction to Computer Science,Computer Science,10,4,Closed,0/0,Natalie Linnell,5,,,"Core Explorations :: Science, Technology and Society
+
+Pathways :: Design Thinking
+
+Pathways :: Paradigm Shifts and the Nature of Human Knowing
+
+Pathways :: The Digital Age
+
+Pathways :: Values in Science and Technology",Laboratory,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,
+CSCI 60-1 - Introduction to C++ and Object-Oriented Programming,Computer Science,60,1,Open,0/35,Tiantian Chen,5,M W F | 2:15 PM - 3:20 PM,Rm 204 O'Connor Hall,Pathways :: The Digital Age,Lecture,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,
+CSCI 60-2 - Introduction to C++ and Object-Oriented Programming,Computer Science,60,2,Open,0/37,Sara Krehbiel,5,M W F | 1:00 PM - 2:05 PM,Rm 361 Alumni Science Hall,Pathways :: The Digital Age,Lecture,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,
+CSCI 60-3 - Introduction to C++ and Object-Oriented Programming,Computer Science,60,3,Open,0/80,Natalie Linnell,5,Th | 5:40 PM - 7:20 PM,Rm 207 Daly Science 200,Pathways :: The Digital Age,Laboratory,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,
+CSCI 60-4 - Introduction to C++ and Object-Oriented Programming,Computer Science,60,4,Closed,0/0,Natalie Linnell,5,,,Pathways :: The Digital Age,Laboratory,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,
+CSCI 61-1 - Data Structures,Computer Science,61,1,Open,0/37,Smita Ghosh,4,M W F | 10:30 AM - 11:35 AM,Rm 306 Kenna Hall,Pathways :: The Digital Age,Lecture,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,
+CSCI 61-2 - Data Structures,Computer Science,61,2,Open,0/35,Hien Vu,4,M W F | 8:00 AM - 9:05 AM,Rm 204 O'Connor Hall,Pathways :: The Digital Age,Lecture,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,
+CSCI 62-1 - Advanced Programming,Computer Science,62,1,Open,0/37,Ray Li,4,M W F | 10:30 AM - 11:35 AM,Rm 116 Bergin Hall,,Lecture,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,
+CSCI 161-1 - Theory of Automata and Languages,Computer Science,161,1,Open,0/37,Sara Krehbiel,5,M W F | 11:45 AM - 12:50 PM,Rm 361 Alumni Science Hall,Pathways :: Paradigm Shifts and the Nature of Human Knowing,Lecture,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,
+CSCI 163-1 - Theory of Algorithms (-),Computer Science,163,1,Open,0/37,Nicholas Tran,5,M W F | 2:15 PM - 3:20 PM,Rm 101 Alameda hall,Pathways :: Paradigm Shifts and the Nature of Human Knowing,Lecture,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,CSCI 163-/CSEN 179-1
+CSCI 163-2 - Theory of Algorithms (-),Computer Science,163,2,Open,0/35,Hien Vu,5,M W F | 10:30 AM - 11:35 AM,Rm 204 O'Connor Hall,Pathways :: Paradigm Shifts and the Nature of Human Knowing,Lecture,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,CSCI 163-/CSEN 179-2
+CSCI 163-3 - Theory of Algorithms (-),Computer Science,163,3,Open,0/37,Byron Walden,5,M W F | 9:15 AM - 10:20 AM,Rm 359 Alumni Science Hall,Pathways :: Paradigm Shifts and the Nature of Human Knowing,Lecture,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,CSCI 163-/CSEN 179-3
+CSCI 168-1 - Computer Graphics,Computer Science,168,1,Open,0/40,Nicholas Tran,5,M W F | 10:30 AM - 11:35 AM,Rm 008 Casa Italiana Residence,,Lecture,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,
+CSCI 169-1 - Programming Languages,Computer Science,169,1,Open,0/30,Natalie Linnell,5,M W F | 2:15 PM - 3:20 PM,Rm 163 Graham Hall,,Lecture,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,
+CSCI 169-2 - Programming Languages,Computer Science,169,2,Open,0/30,Natalie Linnell,5,M W F | 3:30 PM - 4:35 PM,Rm 163 Graham Hall,,Lecture,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,
+CSCI 183-1 - Introduction to Data Science and Machine Learning,Computer Science,183,1,Open,0/30,Smita Ghosh,5,M W F | 11:45 AM - 12:50 PM,Rm 306 Kenna Hall,,Lecture,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,
+CSCI 184-1 - Advanced Machine Learning,Computer Science,184,1,Open,0/40,Tiantian Chen,5,M W F | 1:00 PM - 2:05 PM,Rm 204 O'Connor Hall,,Lecture,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,
+CSCI 197-1 - Advanced Topics (Quantum Computation),Computer Science,197,1,Open,0/30,Ray Li,5,M W F | 9:15 AM - 10:20 AM,Rm 116 Bergin Hall,,Lecture,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,

@@ -1,6 +1,28 @@
 Course Section,Course Subject,Course Number,Section Number,Section Status,Enrolled/Capacity,All Instructors,Units,Meeting Patterns,Locations,Course Tags,Instructional Format,Delivery Mode,Start Date,End Date,Academic Period,Overlapping Course(s)
-ARTH 12A-1 - Cultures and Ideas II (Arts of the Americas),Art History,12A,1,Open,0/25,Katie Ligmond,4,M W F | 9:15 AM - 10:20 AM,Rm 210 Edward M. Dowd Art & Art History,Core Foundations :: Cultures and Ideas 2,Lecture,In-Person,2026-03-30,2026-06-11,Spring 2026 Quarter,
-ARTH 12A-2 - Cultures and Ideas II (Art and Visual Culture of the African Diaspora),Art History,12A,2,Open,0/25,Linden Hill,4,M W F | 11:45 AM - 12:50 PM,Rm 208 Edward M. Dowd Art & Art History,Core Foundations :: Cultures and Ideas 2,Lecture,In-Person,2026-03-30,2026-06-11,Spring 2026 Quarter,
-ARTH 12A-3 - Cultures and Ideas II (Art and Visual Culture of the African Diaspora),Art History,12A,3,Open,0/25,Linden Hill,4,M W F | 1:00 PM - 2:05 PM,Rm 208 Edward M. Dowd Art & Art History,Core Foundations :: Cultures and Ideas 2,Lecture,In-Person,2026-03-30,2026-06-11,Spring 2026 Quarter,
-ARTH 12A-4 - Cultures and Ideas II (Venice: Crossroads of the World),Art History,12A,4,Open,0/25,Blake DeMaria,4,T Th | 8:30 AM - 10:10 AM,Rm 208 Edward M. Dowd Art & Art History,Core Foundations :: Cultures and Ideas 2,Lecture,In-Person,2026-03-30,2026-06-11,Spring 2026 Quarter,
-ARTH 12A-5 - Cultures and Ideas II (Oceania in a Global Context),Art History,12A,5,Open,0/25,,4,T Th | 12:10 PM - 1:50 PM,Rm 210 Edward M. Dowd Art & Art History,Core Foundations :: Cultures and Ideas 2,Lecture,In-Person,2026-03-30,2026-06-11,Spring 2026 Quarter,
+ARTH 11A-1 - Cultures and Ideas I (Arts of the Americas),Art History,11A,1,Open,0/25,Katie Ligmond,4,M W F | 9:15 AM - 10:20 AM,Rm 210 Edward M. Dowd Art & Art History,Core Foundations :: Cultures and Ideas 1,Lecture,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,
+ARTH 11A-2 - Cultures and Ideas I (Art and Visual Culture of the African Diaspora),Art History,11A,2,Open,0/25,Linden Hill,4,M W F | 11:45 AM - 12:50 PM,Rm 208 Edward M. Dowd Art & Art History,Core Foundations :: Cultures and Ideas 1,Lecture,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,
+ARTH 11A-3 - Cultures and Ideas I (Art and Visual Culture of the African Diaspora),Art History,11A,3,Open,0/25,Linden Hill,4,M W F | 1:00 PM - 2:05 PM,Rm 208 Edward M. Dowd Art & Art History,Core Foundations :: Cultures and Ideas 1,Lecture,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,
+ARTH 11A-4 - Cultures and Ideas I (Venice: Crossroads World),Art History,11A,4,Open,0/25,Blake DeMaria,4,T Th | 8:30 AM - 10:10 AM,Rm 208 Edward M. Dowd Art & Art History,Core Foundations :: Cultures and Ideas 1,Lecture,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,
+ARTH 11A-5 - Cultures and Ideas I (Art & Empire: Russian and Soviet Global Encounters),Art History,11A,5,Open,0/25,,4,T Th | 12:10 PM - 1:50 PM,Rm 210 Edward M. Dowd Art & Art History,Core Foundations :: Cultures and Ideas 1,Lecture,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,
+ARTH 12A-1 - Cultures and Ideas II (Art and Visual Culture of the African Diaspora),Art History,12A,1,Closed,22/0,Linden Hill,4,M W F | 8:00 AM - 9:05 AM,Rm 208 Edward M. Dowd Art & Art History,Core Foundations :: Cultures and Ideas 2,Lecture,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,
+ARTH 12A-2 - Cultures and Ideas II (Arts of the Americas),Art History,12A,2,Closed,22/0,Katie Ligmond,4,M W F | 11:45 AM - 12:50 PM,Rm 210 Edward M. Dowd Art & Art History,Core Foundations :: Cultures and Ideas 2,Lecture,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,
+ARTH 12A-3 - Cultures and Ideas II (Arts of the Americas),Art History,12A,3,Closed,23/0,Katie Ligmond,4,M W F | 1:00 PM - 2:05 PM,Rm 210 Edward M. Dowd Art & Art History,Core Foundations :: Cultures and Ideas 2,Lecture,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,
+ARTH 12A-4 - Cultures and Ideas II (Art & Empire: Russian and Soviet Global Encounters),Art History,12A,4,Closed,23/0,,4,T Th | 10:20 AM - 12:00 PM,Rm 210 Edward M. Dowd Art & Art History,Core Foundations :: Cultures and Ideas 2,Lecture,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,
+ARTH 12A-5 - Cultures and Ideas II (Art and Identity),Art History,12A,5,Closed,21/0,Andrea Pappas,4,T Th | 3:50 PM - 5:30 PM,Rm 208 Edward M. Dowd Art & Art History,Core Foundations :: Cultures and Ideas 2,Lecture,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,
+ARTH 12H-1 - Cultures and Ideas II - Honors (China on the Silk Roads),Art History,12H,1,Closed,16/0,Heather Clydesdale,4,T Th | 2:00 PM - 3:40 PM,Rm 210 Edward M. Dowd Art & Art History,Core Foundations :: Cultures and Ideas 2,Lecture,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,
+ARTH 20-1 - Sacred Treasures of the Ancient Mediterranean and Middle East (-),Art History,20,1,Open,0/25,Carolynn Roncaglia,4,M W F | 2:15 PM - 3:20 PM,Rm 208 Edward M. Dowd Art & Art History,"Core Explorations :: Religion, Theology and Culture 2",Lecture,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,ARTH 20-/CLAS 64-1
+ARTH 143-1 - Women's Work: American Women in the Visual Arts (-),Art History,143,1,Open,0/21,Andrea Pappas,5,W | 3:30 PM - 6:30 PM,Rm 208 Edward M. Dowd Art & Art History,"Core Explorations :: Diversity: US Perspectives
+
+Pathways :: American Studies
+
+Pathways :: Beauty
+
+Pathways :: Gender, Sexuality and the Body
+
+Pathways :: Human Rights in a Global World
+
+Pathways :: Justice and the Arts",Lecture,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,ARTH 143-/GNSX 156-1
+ARTH 166-1 - From Emaki to Manga,Art History,166,1,Open,0/25,Heather Clydesdale,5,T Th | 3:50 PM - 5:30 PM,Rm 210 Edward M. Dowd Art & Art History,"Pathways :: Beauty
+
+Pathways :: Gender, Sexuality and the Body",Lecture,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,
+ARTH 171-1 - The History and Theory of Exhibitions: Politics and Practices from 1937 to Present Day (-),Art History,171,1,Open,0/25,Ciara Ennis,5,M | 3:30 PM - 6:30 PM,Rm 210 Edward M. Dowd Art & Art History,,Lecture,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,

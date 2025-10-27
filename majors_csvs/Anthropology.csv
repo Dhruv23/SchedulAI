@@ -1,5 +1,53 @@
 Course Section,Course Subject,Course Number,Section Number,Section Status,Enrolled/Capacity,All Instructors,Units,Meeting Patterns,Locations,Course Tags,Instructional Format,Delivery Mode,Start Date,End Date,Academic Period,Overlapping Course(s)
-ANTH 12A-1 - Cultures and Ideas II (Peace and Violence),Anthropology,12A,1,Open,0/25,Samantha Grace | Sam Grace,4,T Th | 2:00 PM - 3:40 PM,Rm 102 O'Connor Hall,Core Foundations :: Cultures and Ideas 2,Lecture,In-Person,2026-03-30,2026-06-11,Spring 2026 Quarter,
-ANTH 12A-2 - Cultures and Ideas II (Humankind Unplugged),Anthropology,12A,2,Open,0/25,James McKenna,4,T Th | 10:20 AM - 12:00 PM,Rm 102 O'Connor Hall,Core Foundations :: Cultures and Ideas 2,Lecture,In-Person,2026-03-30,2026-06-11,Spring 2026 Quarter,
-ANTH 12A-3 - Cultures and Ideas II (Peace and Violence),Anthropology,12A,3,Open,0/25,Julia Alejandra Morales Fontanilla,4,T Th | 10:20 AM - 12:00 PM,Rm 109 O'Connor Hall,Core Foundations :: Cultures and Ideas 2,Lecture,In-Person,2026-03-30,2026-06-11,Spring 2026 Quarter,
-ANTH 12A-4 - Cultures and Ideas II (Peace and Violence),Anthropology,12A,4,Open,0/25,Nathan Anderson,4,M W F | 9:15 AM - 10:20 AM,Rm 307 Daly Science 300,Core Foundations :: Cultures and Ideas 2,Lecture,In-Person,2026-03-30,2026-06-11,Spring 2026 Quarter,
+ANTH 1-1 - Introduction to Biological Anthropology,Anthropology,1,1,Open,0/21,Isaura Cruz,4,M W F | 8:00 AM - 9:05 AM,Rm 209 O'Connor Hall,"Core Explorations :: Natural Science
+
+Pathways :: Values in Science and Technology",Lecture,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,
+ANTH 1-2 - Introduction to Biological Anthropology,Anthropology,1,2,Open,0/21,Isaura Cruz,4,W | 2:15 PM - 5:15 PM,Rm 155 Alumni Science Hall,"Core Explorations :: Natural Science
+
+Pathways :: Values in Science and Technology",Laboratory,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,
+ANTH 2-1 - Introduction to Archaeology,Anthropology,2,1,Open,0/21,Maia Dedrick,4,M W F | 11:45 AM - 12:50 PM,Rm 019 Sobrato Residence,"Core Explorations :: Natural Science
+
+Core Explorations :: Social Science
+
+Pathways :: Values in Science and Technology",Lecture,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,
+ANTH 2-2 - Introduction to Archaeology,Anthropology,2,2,Open,0/21,Maia Dedrick,4,M | 2:15 PM - 5:15 PM,Rm 155 Alumni Science Hall,"Core Explorations :: Natural Science
+
+Core Explorations :: Social Science
+
+Pathways :: Values in Science and Technology",Laboratory,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,
+ANTH 3-1 - Introduction to Cultural Anthropology (-),Anthropology,3,1,Open,0/33,Julia Alejandra Morales Fontanilla,4,T Th | 2:00 PM - 3:40 PM,Rm 104 O'Connor Hall,"Core Explorations :: Social Science
+
+Core Integrations :: Experiential Learning for Social Justice",Lecture,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,
+ANTH 4-1 - Vanished Peoples and Lost Civilizations,Anthropology,4,1,Open,0/40,Nathan Anderson,4,M W F | 10:30 AM - 11:35 AM,Rm 307 Daly Science 300,"Core Explorations :: Science, Technology and Society
+
+Pathways :: American Studies
+
+Pathways :: Values in Science and Technology",Lecture,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,
+ANTH 11A-1 - Cultures and Ideas I (Peace and Violence),Anthropology,11A,1,Open,0/25,Samantha Grace | Sam Grace,4,T Th | 2:00 PM - 3:40 PM,Rm 307 Daly Science 300,Core Foundations :: Cultures and Ideas 1,Lecture,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,
+ANTH 11A-2 - Cultures and Ideas I (Humankind Unplugged),Anthropology,11A,2,Open,0/25,James McKenna,4,T Th | 10:20 AM - 12:00 PM,Rm 307 Daly Science 300,Core Foundations :: Cultures and Ideas 1,Lecture,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,
+ANTH 11A-3 - Cultures and Ideas I (Peace and Violence),Anthropology,11A,3,Open,0/25,Julia Alejandra Morales Fontanilla,4,T Th | 10:20 AM - 12:00 PM,Rm 109 O'Connor Hall,Core Foundations :: Cultures and Ideas 1,Lecture,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,
+ANTH 11A-4 - Cultures and Ideas I (Peace and Violence),Anthropology,11A,4,Open,0/25,Nathan Anderson,4,M W F | 9:15 AM - 10:20 AM,Rm 307 Daly Science 300,Core Foundations :: Cultures and Ideas 1,Lecture,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,
+ANTH 12A-1 - Cultures and Ideas II (Peace and Violence),Anthropology,12A,1,Closed,24/0,Samantha Grace | Sam Grace,4,T Th | 12:10 PM - 1:50 PM,Rm 307 Daly Science 300,Core Foundations :: Cultures and Ideas 2,Lecture,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,
+ANTH 12A-2 - Cultures and Ideas II (Peace and Violence),Anthropology,12A,2,Closed,24/0,Samantha Grace | Sam Grace,4,T Th | 3:50 PM - 5:30 PM,Rm 307 Daly Science 300,Core Foundations :: Cultures and Ideas 2,Lecture,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,
+ANTH 12A-3 - Cultures and Ideas II (Measuring Humanity),Anthropology,12A,3,Closed,23/0,Isaura Cruz,4,M W F | 1:00 PM - 2:05 PM,Rm 102 O'Connor Hall,Core Foundations :: Cultures and Ideas 2,Lecture,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,
+ANTH 50-1 - World Geography (-),Anthropology,50,1,Open,0/38,Carolyn Trist,4,T Th | 3:50 PM - 5:30 PM,Rm 164 Graham Hall,"Core Explorations :: Cultures and Ideas 3
+
+Pathways :: Design Thinking
+
+Pathways :: Feeding the World
+
+Pathways :: Sustainability",Lecture,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,ANTH 50-/ENVS 50-1
+ANTH 110-1 - Anthropological Theory,Anthropology,110,1,Open,0/16,Ryan Anderson,5,M W F | 11:45 AM - 12:50 PM,Rm 333 O'Connor Hall,,Lecture,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,
+ANTH 114-1 - Senior Capstone,Anthropology,114,1,Open,0/16,Maia Dedrick,5,W | 2:15 PM - 5:35 PM,Rm 333 O'Connor Hall,Core Integrations :: Advanced Writing,Lecture,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,
+"ANTH 134-1 - Health, Disease, and Culture (-)",Anthropology,134,1,Open,0/30,,5,T Th | 3:50 PM - 5:30 PM,Rm 309 Daly Science 300,"Core Explorations :: Science, Technology and Society
+
+Pathways :: Global Health
+
+Pathways :: Sustainability",Lecture,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,
+ANTH 148-1 - Historical Archaeology,Anthropology,148,1,Open,0/30,Nathan Anderson,5,M W F | 2:15 PM - 3:20 PM,Rm 103 O'Connor Hall,"Core Explorations :: Diversity: US Perspectives
+
+Pathways :: American Studies",Lecture,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,
+"ANTH 160-1 - The Global Coast: Adaptation, Risk, and Resilience on the Edge of the Sea",Anthropology,160,1,Open,0/30,Ryan Anderson,5,M W F | 2:15 PM - 3:20 PM,Rm 109 O'Connor Hall,Core Explorations :: Social Science,Lecture,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,
+"ANTH 185-1 - Anthropologies of Latin America: Culture, Politics, & Power (-)",Anthropology,185,1,Open,0/30,Veronica Miranda,5,T Th | 12:10 PM - 1:50 PM,Rm 102 O'Connor Hall,"Core Explorations :: Cultures and Ideas 3
+
+Pathways :: Feeding the World",Lecture,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,

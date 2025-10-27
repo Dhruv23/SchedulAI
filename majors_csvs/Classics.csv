@@ -1,4 +1,26 @@
 Course Section,Course Subject,Course Number,Section Number,Section Status,Enrolled/Capacity,All Instructors,Units,Meeting Patterns,Locations,Course Tags,Instructional Format,Delivery Mode,Start Date,End Date,Academic Period,Overlapping Course(s)
-CLAS 12A-1 - Cultures and Ideas II (Ancient Spaces),Classics,12A,1,Open,0/25,Carolynn Roncaglia,4,M W F | 1:00 PM - 2:05 PM,Rm 204 O'Connor Hall,Core Foundations :: Cultures and Ideas 2,Lecture,In-Person,2026-03-30,2026-06-11,Spring 2026 Quarter,
-CLAS 12A-2 - Cultures and Ideas II (-),Classics,12A,2,Open,0/25,,4,T Th | 2:00 PM - 3:40 PM,,Core Foundations :: Cultures and Ideas 2,Lecture,In-Person,2026-03-30,2026-06-11,Spring 2026 Quarter,
-CLAS 12A-3 - Cultures and Ideas II (-),Classics,12A,3,Open,0/25,,4,T Th | 3:50 PM - 5:30 PM,,Core Foundations :: Cultures and Ideas 2,Lecture,In-Person,2026-03-30,2026-06-11,Spring 2026 Quarter,
+CLAS 2-1 - Introductory Latin 2: Fire and Lust in Ancient Rome,Classics,2,1,Open,0/22,Daniel Turkeltaub,4,M W F | 10:30 AM - 11:35 AM,Rm 103 O'Connor Hall,Core Foundations :: Second Language: Business and Natural Sciences,Lecture,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,
+CLAS 11A-1 - Cultures and Ideas I (Ancient Spaces),Classics,11A,1,Open,0/25,Carolynn Roncaglia,4,M W F | 1:00 PM - 2:05 PM,Rm 104 O'Connor Hall,Core Foundations :: Cultures and Ideas 1,Lecture,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,
+CLAS 11A-2 - Cultures and Ideas I (Gods & Mortals),Classics,11A,2,Open,0/25,Katherine Melberg,4,T Th | 2:00 PM - 3:40 PM,Rm 109 O'Connor Hall,Core Foundations :: Cultures and Ideas 1,Lecture,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,
+CLAS 11A-3 - Cultures and Ideas I (Gods & Mortals),Classics,11A,3,Open,0/25,Katherine Melberg,4,T Th | 3:50 PM - 5:30 PM,Rm 109 O'Connor Hall,Core Foundations :: Cultures and Ideas 1,Lecture,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,
+CLAS 12A-1 - Cultures and Ideas II (Creating Barbarians),Classics,12A,1,Closed,25/0,Jordan Cohen,4,M W F | 9:15 AM - 10:20 AM,Rm 109 O'Connor Hall,Core Foundations :: Cultures and Ideas 2,Lecture,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,
+CLAS 12A-2 - Cultures and Ideas II (Gods & Mortals),Classics,12A,2,Closed,24/0,Katherine Melberg,4,T Th | 10:20 AM - 12:00 PM,Rm 204 O'Connor Hall,Core Foundations :: Cultures and Ideas 2,Lecture,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,
+CLAS 22-1 - Greek Myth Through Introductory Greek II,Classics,22,1,Open,0/25,Jordan Cohen,4,M W F | 10:30 AM - 11:35 AM,Rm 109 O'Connor Hall,Core Foundations :: Second Language: Business and Natural Sciences,Lecture,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,
+CLAS 61-1 - Ancient Empires,Classics,61,1,Open,0/25,Nicholas Lindberg,4,T Th | 2:00 PM - 3:40 PM,Rm 209 O'Connor Hall,Core Explorations :: Cultures and Ideas 3,Lecture,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,
+CLAS 64-1 - Sacred Treasures of the Ancient Mediterranean and Middle East,Classics,64,1,Open,0/25,Carolynn Roncaglia,4,M W F | 2:15 PM - 3:20 PM,Rm 208 Edward M. Dowd Art & Art History,"Core Explorations :: Religion, Theology and Culture 2",Lecture,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,CLAS 64-/ARTH 20-1
+"CLAS 108-1 - Classical Greek History: Tyrants, Traitors, and Rebels (-)",Classics,108,1,Open,0/25,Nicholas Lindberg,5,M W F | 11:45 AM - 12:50 PM,Rm 107 O'Connor Hall,"Core Explorations :: Civic Engagement
+
+Pathways :: Democracy",Lecture,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,CLAS 108-/HIST 108-1
+CLAS 129-1 - The Roman Novel (-),Classics,129,1,Open,0/22,Daniel Turkeltaub,5,T Th | 5:40 PM - 7:20 PM,Rm 103 O'Connor Hall,"Core Foundations :: Second Language: Arts and Social Sciences
+
+Core Foundations :: Second Language: Business and Natural Sciences",Lecture,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,CLAS 129-/CLAS 129M-1
+CLAS 129M-1 - Roman Novel (Advanced) (-),Classics,129M,1,Open,0/22,Daniel Turkeltaub,5,T Th | 5:40 PM - 7:20 PM,Rm 103 O'Connor Hall,"Core Foundations :: Second Language: Arts and Social Sciences
+
+Core Foundations :: Second Language: Business and Natural Sciences",Lecture,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,CLAS 129M-/CLAS 129-1
+CLAS 155-1 - Plato,Classics,155,1,Open,0/22,Elizabeth Crofton-Sleigh | Lissa Crofton-Sleigh,5,T Th | 7:30 PM - 9:10 PM,Rm 103 O'Connor Hall,"Core Foundations :: Second Language: Arts and Social Sciences
+
+Core Foundations :: Second Language: Business and Natural Sciences",Lecture,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,CLAS 155-/CLAS 155M-1
+CLAS 155M-1 - Plato (Advanced),Classics,155M,1,Open,0/22,Elizabeth Crofton-Sleigh | Lissa Crofton-Sleigh,5,T Th | 7:30 PM - 9:10 PM,Rm 103 O'Connor Hall,"Core Foundations :: Second Language: Arts and Social Sciences
+
+Core Foundations :: Second Language: Business and Natural Sciences",Lecture,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,CLAS 155M-/CLAS 155-1
+CLAS 174-1 - Eureka! Exploring the Body in Ancient Greece and Rome,Classics,174,1,Open,0/25,Jordan Cohen,5,T Th | 3:50 PM - 5:30 PM,Rm 103 O'Connor Hall,"Core Explorations :: Science, Technology and Society",Lecture,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,

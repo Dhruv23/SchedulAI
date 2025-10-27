@@ -1,2 +1,35 @@
 Course Section,Course Subject,Course Number,Section Number,Section Status,Enrolled/Capacity,All Instructors,Units,Meeting Patterns,Locations,Course Tags,Instructional Format,Delivery Mode,Start Date,End Date,Academic Period,Overlapping Course(s)
-MUSC 12A-1 - Cultures and Ideas II (-),Music,12A,1,Open,0/25,,4,T Th | 10:20 AM - 12:00 PM,,Core Foundations :: Cultures and Ideas 2,Lecture,In-Person,2026-03-30,2026-06-11,Spring 2026 Quarter,
+MUSC 1-1 - Music Theory I (-),Music,1,1,Open,0/16,Jason Gallardo,4,M W F | 9:15 AM - 10:20 AM,Rm 119 Music And Dance,Core Explorations :: Arts,Lecture,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,
+MUSC 1A-1 - Musicianship I,Music,1A,1,Open,0/18,William Stevens,4,M W F | 3:30 PM - 4:35 PM,Rm 233 Music And Dance,Core Explorations :: Arts,Lecture,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,
+MUSC 2-1 - Music Theory II,Music,2,1,Open,0/16,Jason Gallardo,4,M W F | 10:30 AM - 11:35 AM,Rm 119 Music And Dance,Core Explorations :: Arts,Lecture,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,
+MUSC 2A-1 - Musicianship II,Music,2A,1,Open,0/18,William Stevens,4,M W F | 2:15 PM - 3:20 PM,Rm 233 Music And Dance,Core Explorations :: Arts,Lecture,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,
+MUSC 7-1 - Introduction to Listening: Global Music (-),Music,7,1,Open,0/28,Alexander Nunes,4,T Th | 8:30 AM - 10:10 AM,Rm 119 Music And Dance,Core Explorations :: Cultures and Ideas 3,Lecture,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,
+MUSC 8-1 - Introduction to Listening: Western Music (-),Music,8,1,Open,0/28,,4,M W F | 1:00 PM - 2:05 PM,Rm 119 Music And Dance,"Core Explorations :: Arts
+
+Pathways :: Beauty",Lecture,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,
+MUSC 10-1 - Introduction to Listening: Jazz,Music,10,1,Open,0/23,Carl Schultz,4,T Th | 12:10 PM - 1:50 PM,Rm 119 Music And Dance,Core Explorations :: Diversity: US Perspectives,Lecture,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,
+MUSC 11A-1 - Cultures and Ideas I (-),Music,11A,1,Open,0/25,,4,T Th | 10:20 AM - 12:00 PM,Rm 119 Music And Dance,Core Foundations :: Cultures and Ideas 1,Lecture,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,
+MUSC 16-1 - Music at Noon,Music,16,1,Open,0/99,Teresa McCollough,1,W | 11:45 AM - 12:50 PM,Rm 103 Music And Dance - Recital Hall,,Lecture,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,MUSC 16-/MUSC 116-1
+MUSC 34-1 - Beginning Voice Class (-),Music,34,1,Open,0/16,Nancy Wait-Kromm,4,T Th | 12:10 PM - 1:50 PM,Rm 106 Music And Dance - Rehearsal Hall,Core Explorations :: Arts,Studio,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,
+MUSC 116-1 - Music at Noon,Music,116,1,Open,0/99,Teresa McCollough,1,W | 11:45 AM - 12:50 PM,Rm 103 Music And Dance - Recital Hall,,Lecture,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,MUSC 116-/MUSC 16-1
+MUSC 117-1 - Contemporary Musical Style and Practice,Music,117,1,Open,0/18,Teresa McCollough,5,T Th | 2:00 PM - 3:40 PM,Rm 119 Music And Dance,,Lecture,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,
+MUSC 131-1 - Music Writing and Research,Music,131,1,Open,0/16,Christina Zanfagna,5,T Th | 12:10 PM - 1:50 PM,Rm 231 Mayer Theatre,"Core Integrations :: Advanced Writing
+
+Pathways :: Justice and the Arts",Lecture,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,
+"MUSC 134-1 - Popular Music, Race and American Culture",Music,134,1,Open,0/28,Christina Zanfagna,5,T Th | 10:20 AM - 12:00 PM,Rm 106 Music And Dance - Rehearsal Hall,"Core Explorations :: Diversity: US Perspectives
+
+Pathways :: American Studies
+
+Pathways :: Cinema Studies
+
+Pathways :: Justice and the Arts
+
+Pathways :: Race, Place and Social Inequalities",Lecture,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,
+MUSC 140-1 - University Orchestra,Music,140,1,Open,0/99,Anthony Rivera | Tony Rivera,2,T | 7:00 PM - 10:00 PM,Rm 106 Music And Dance - Rehearsal Hall,Core Explorations :: Arts,Studio,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,
+MUSC 142-1 - Concert Choir,Music,142,1,Open,0/99,Jason Gallardo,2,M W | 5:10 PM - 6:20 PM,Rm 103 Music And Dance - Recital Hall,Core Explorations :: Arts,Studio,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,
+MUSC 143-1 - Chamber Singers,Music,143,1,Open,0/99,Scot Hanna-Weir,2,T Th | 3:50 PM - 5:30 PM,Rm 103 Music And Dance - Recital Hall,Core Explorations :: Arts,Studio,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,
+MUSC 145-1 - Jazz Ensemble,Music,145,1,Open,0/99,Carl Schultz,2,W | 7:00 PM - 10:00 PM,Rm 106 Music And Dance - Rehearsal Hall,Core Explorations :: Arts,Studio,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,
+MUSC 146-1 - Jazz Combo,Music,146,1,Open,0/99,Jon Dryden | Jon Dryden,2,,,Core Explorations :: Arts,Workshop,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,
+MUSC 146-2 - Jazz Combo,Music,146,2,Open,0/99,Carl Schultz,2,,,Core Explorations :: Arts,Workshop,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,
+MUSC 153-1 - Music Theater Workshop (-),Music,153,1,Open,0/18,Nancy Wait-Kromm,2,T Th | 5:40 PM - 7:20 PM,Rm 119 Music And Dance,,Studio,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,
+MUSC 154-1 - Wind Ensemble,Music,154,1,Open,0/99,Anthony Rivera | Tony Rivera,2,M | 7:00 PM - 10:00 PM,Rm 106 Music And Dance - Rehearsal Hall,Core Explorations :: Arts,Studio,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,

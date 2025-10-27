@@ -1,11 +1,104 @@
 Course Section,Course Subject,Course Number,Section Number,Section Status,Enrolled/Capacity,All Instructors,Units,Meeting Patterns,Locations,Course Tags,Instructional Format,Delivery Mode,Start Date,End Date,Academic Period,Overlapping Course(s)
-PHIL 2A-1 - Critical Thinking and Writing II (-),Philosophy,2A,1,Open,18/19,Madeline Cronin,4,T Th | 10:20 AM - 12:00 PM,Rm 105 Kenna Hall,Core Foundations :: Critical Thinking and Writing 2,Lecture,In-Person,2026-03-30,2026-06-11,Spring 2026 Quarter,
-PHIL 2A-2 - Critical Thinking and Writing II (-),Philosophy,2A,2,Open,0/19,Robert Shanklin,4,M W F | 10:30 AM - 11:35 AM,Rm 105 Kenna Hall,Core Foundations :: Critical Thinking and Writing 2,Lecture,In-Person,2026-03-30,2026-06-11,Spring 2026 Quarter,
-PHIL 2A-3 - Critical Thinking and Writing II (-),Philosophy,2A,3,Open,0/19,Tyler van Wulven,4,M W F | 8:00 AM - 9:05 AM,,Core Foundations :: Critical Thinking and Writing 2,Lecture,In-Person,2026-03-30,2026-06-11,Spring 2026 Quarter,
-"PHIL 12A-1 - Cultures and Ideas II (Philosophy, Society, and Culture)",Philosophy,12A,1,Open,0/25,Kimberly Dill,4,T Th | 3:50 PM - 5:30 PM,,Core Foundations :: Cultures and Ideas 2,Lecture,In-Person,2026-03-30,2026-06-11,Spring 2026 Quarter,
-"PHIL 12A-2 - Cultures and Ideas II (Philosophy, Society, and Culture)",Philosophy,12A,2,Open,0/25,Kimberly Dill,4,T Th | 12:10 PM - 1:50 PM,,Core Foundations :: Cultures and Ideas 2,Lecture,In-Person,2026-03-30,2026-06-11,Spring 2026 Quarter,
-"PHIL 12A-3 - Cultures and Ideas II (Philosophy, Society, and Culture)",Philosophy,12A,3,Open,0/25,Matthew Izor,4,M W F | 11:45 AM - 12:50 PM,,Core Foundations :: Cultures and Ideas 2,Lecture,In-Person,2026-03-30,2026-06-11,Spring 2026 Quarter,
-"PHIL 12A-4 - Cultures and Ideas II (Philosophy, Society, and Culture)",Philosophy,12A,4,Open,0/25,Christine Wieseler,4,M W F | 3:30 PM - 4:35 PM,Rm 109 Kenna Hall,Core Foundations :: Cultures and Ideas 2,Lecture,In-Person,2026-03-30,2026-06-11,Spring 2026 Quarter,
-"PHIL 12A-5 - Cultures and Ideas II (Philosophy, Society, and Culture)",Philosophy,12A,5,Open,0/25,Christine Wieseler,4,M W F | 4:45 PM - 5:50 PM,Rm 212 Kenna Hall,Core Foundations :: Cultures and Ideas 2,Lecture,In-Person,2026-03-30,2026-06-11,Spring 2026 Quarter,
-"PHIL 12A-6 - Cultures and Ideas II (Philosophy, Society, and Culture)",Philosophy,12A,6,Open,0/25,,4,M W F | 9:15 AM - 10:20 AM,,Core Foundations :: Cultures and Ideas 2,Lecture,In-Person,2026-03-30,2026-06-11,Spring 2026 Quarter,
-PHIL 12H-1 - Cultures and Ideas II - Honors (Emotions),Philosophy,12H,1,Closed,17/17,Erick Ramirez,4,T Th | 8:30 AM - 10:10 AM,Rm 109 Kenna Hall,Core Foundations :: Cultures and Ideas 2,Lecture,In-Person,2026-03-30,2026-06-11,Spring 2026 Quarter,
+PHIL 1A-1 - Critical Thinking and Writing I (-),Philosophy,1A,1,Open,0/19,Tyler van Wulven,4,M W F | 8:00 AM - 9:05 AM,Rm 231 Mayer Theatre,Core Foundations :: Critical Thinking and Writing 1,Lecture,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,
+PHIL 1A-2 - Critical Thinking and Writing I (-),Philosophy,1A,2,Open,0/19,Robert Shanklin,4,M W F | 10:30 AM - 11:35 AM,Rm 108 Edward M. Dowd Art & Art History,Core Foundations :: Critical Thinking and Writing 1,Lecture,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,
+PHIL 2A-1 - Critical Thinking and Writing II (-),Philosophy,2A,1,Closed,19/19,Madeline Cronin,4,T Th | 8:30 AM - 10:10 AM,Rm 105 Kenna Hall,Core Foundations :: Critical Thinking and Writing 2,Lecture,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,
+PHIL 2H-1 - Critical Think and Write II: Honors (-),Philosophy,2H,1,Closed,17/0,Robert Shanklin,4,M W F | 1:00 PM - 2:05 PM,Rm 122 Edward M. Dowd Art & Art History,Core Foundations :: Critical Thinking and Writing 2,Lecture,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,
+"PHIL 11A-1 - Cultures and Ideas I (Philosophy, Society, & Culture)",Philosophy,11A,1,Open,0/25,Kimberly Dill,4,T Th | 3:50 PM - 5:30 PM,Rm 101 Alameda hall,Core Foundations :: Cultures and Ideas 1,Lecture,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,
+"PHIL 11A-2 - Cultures and Ideas I (Philosophy, Society, & Culture)",Philosophy,11A,2,Open,0/25,Kimberly Dill,4,T Th | 12:10 PM - 1:50 PM,Rm 109 Kenna Hall,Core Foundations :: Cultures and Ideas 1,Lecture,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,
+"PHIL 11A-3 - Cultures and Ideas I (Philosophy, Society, & Culture)",Philosophy,11A,3,Open,0/25,Matthew Izor,4,M W F | 11:45 AM - 12:50 PM,Rm 107 Kenna Hall,Core Foundations :: Cultures and Ideas 1,Lecture,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,
+"PHIL 11A-4 - Cultures and Ideas I (Philosophy, Society, & Culture)",Philosophy,11A,4,Open,0/25,Christine Wieseler,4,M W F | 3:30 PM - 4:35 PM,Rm 109 Kenna Hall,Core Foundations :: Cultures and Ideas 1,Lecture,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,
+"PHIL 11A-5 - Cultures and Ideas I (Philosophy, Society, & Culture)",Philosophy,11A,5,Open,0/25,Christine Wieseler,4,M W F | 4:45 PM - 5:50 PM,Rm 109 Kenna Hall,Core Foundations :: Cultures and Ideas 1,Lecture,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,
+"PHIL 11A-6 - Cultures and Ideas I (Philosophy, Society, & Culture)",Philosophy,11A,6,Open,0/25,Nathan Lackey,4,M W F | 9:15 AM - 10:20 AM,Rm 108 Alameda hall,Core Foundations :: Cultures and Ideas 1,Lecture,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,
+"PHIL 11A-7 - Cultures and Ideas I (Philosophy, Society, & Culture)",Philosophy,11A,7,Open,0/25,Christine Wieseler,4,M W F | 1:00 PM - 2:05 PM,Rm 105 Kenna Hall,Core Foundations :: Cultures and Ideas 1,Lecture,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,
+PHIL 11H-1 - Cultures and Ideas I - Honors (Emotions),Philosophy,11H,1,Closed,17/17,Erick Ramirez,4,T Th | 8:30 AM - 10:10 AM,Rm 109 Kenna Hall,Core Foundations :: Cultures and Ideas 1,Lecture,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,
+"PHIL 12A-1 - Cultures and Ideas II (Philosophy, Society, and Culture)",Philosophy,12A,1,Closed,24/0,Justin Clardy,4,T Th | 10:20 AM - 12:00 PM,Rm 109 Kenna Hall,Core Foundations :: Cultures and Ideas 2,Lecture,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,
+PHIL 12A-2 - Cultures and Ideas II (Justice and the Just Society),Philosophy,12A,2,Closed,26/0,Scott LaBarge,4,M W F | 1:00 PM - 2:05 PM,Rm 209 O'Connor Hall,Core Foundations :: Cultures and Ideas 2,Lecture,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,
+"PHIL 12A-3 - Cultures and Ideas II (Philosophy, Society, and Culture)",Philosophy,12A,3,Closed,25/0,Justin Clardy,4,T Th | 2:00 PM - 3:40 PM,Rm 109 Kenna Hall,Core Foundations :: Cultures and Ideas 2,Lecture,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,
+PHIL 12A-4 - Cultures and Ideas II (Justice: Self/Others/Society),Philosophy,12A,4,Closed,24/0,Erin Bradfield,4,T Th | 8:30 AM - 10:10 AM,Rm 308 Kenna Hall,Core Foundations :: Cultures and Ideas 2,Lecture,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,
+"PHIL 12A-5 - Cultures and Ideas II (Philosophy, Society, and Culture)",Philosophy,12A,5,Closed,24/0,Matthew Izor,4,M W F | 8:00 AM - 9:05 AM,Rm 003 Casa Italiana Residence,Core Foundations :: Cultures and Ideas 2,Lecture,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,
+PHIL 12A-6 - Cultures and Ideas II (Personal Identity and Community),Philosophy,12A,6,Closed,24/0,Jeffrey Steele | Jeff Steele,4,T Th | 8:30 AM - 10:10 AM,Rm 111 Kenna Hall,Core Foundations :: Cultures and Ideas 2,Lecture,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,
+PHIL 12H-1 - Cultures and Ideas II - Honors (Personal Identity and Community),Philosophy,12H,1,Closed,17/0,Jeffrey Steele | Jeff Steele,4,T Th | 10:20 AM - 12:00 PM,Rm 111 Kenna Hall,Core Foundations :: Cultures and Ideas 2,Lecture,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,
+PHIL 15-1 - History of Western Philosophy: Early Modern,Philosophy,15,1,Open,0/35,Madeline Cronin,4,T Th | 2:00 PM - 3:40 PM,Rm 105 Kenna Hall,,Lecture,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,
+PHIL 21B-1 - Intro to Ethics in Chinese Philosophy,Philosophy,21B,1,Open,0/35,Meilin Chinn,4,M W F | 9:15 AM - 10:20 AM,Rm 104 Kenna Hall,Core Explorations :: Ethics,Lecture,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,
+PHIL 25-1 - Ethics in Society (-),Philosophy,25,1,Open,0/35,Matthew Izor,4,M W F | 3:30 PM - 4:35 PM,Rm 359 Alumni Science Hall,"Core Explorations :: Ethics
+
+Pathways :: Applied Ethics
+
+Pathways :: Law and Social Justice
+
+Pathways :: Public Policy",Lecture,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,
+PHIL 26-1 - Ethics in Business (-),Philosophy,26,1,Open,0/35,Erin Bradfield,4,T Th | 12:10 PM - 1:50 PM,Rm 103 Alameda hall,"Core Explorations :: Ethics
+
+LSB Core :: Undergraduate Business Core
+
+Pathways :: Applied Ethics
+
+Pathways :: Design Thinking
+
+Pathways :: Public Policy",Lecture,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,
+PHIL 26-2 - Ethics in Business (-),Philosophy,26,2,Open,0/35,Jeffrey Steele | Jeff Steele,4,T Th | 2:00 PM - 3:40 PM,Rm 111 Kenna Hall,"Core Explorations :: Ethics
+
+LSB Core :: Undergraduate Business Core
+
+Pathways :: Applied Ethics
+
+Pathways :: Design Thinking
+
+Pathways :: Public Policy",Lecture,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,
+PHIL 27A-1 - Ethics in Health Care (-),Philosophy,27A,1,Open,0/35,Nathan Lackey,4,M W F | 4:45 PM - 5:50 PM,Rm 359 Alumni Science Hall,"Core Explorations :: Ethics
+
+Pathways :: Applied Ethics
+
+Pathways :: Values in Science and Technology",Lecture,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,
+PHIL 27A-2 - Ethics in Health Care (-),Philosophy,27A,2,Open,0/35,Nathan Lackey,4,M W F | 2:15 PM - 3:20 PM,Rm 102 Alameda hall,"Core Explorations :: Ethics
+
+Pathways :: Applied Ethics
+
+Pathways :: Values in Science and Technology",Lecture,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,
+PHIL 28-1 - Ethics in Politics (-),Philosophy,28,1,Open,0/35,Scott LaBarge,4,M W F | 10:30 AM - 11:35 AM,Rm 310 Kenna Hall,"Core Explorations :: Ethics
+
+Pathways :: Applied Ethics
+
+Pathways :: Democracy
+
+Pathways :: Public Policy",Lecture,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,
+PHIL 30H-1 - Ethics and the Law- Honors,Philosophy,30H,1,Open,0/17,Lawrence Nelson,4,M W F | 10:30 AM - 11:35 AM,Rm 206 Edward M. Dowd Art & Art History,"Core Explorations :: Ethics
+
+Pathways :: Applied Ethics
+
+Pathways :: Law and Social Justice",Lecture,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,
+PHIL 34-1 - Ethics and Adulthood,Philosophy,34,1,Open,0/35,Christopher Kulp,4,T Th | 8:30 AM - 10:10 AM,Rm 163 Graham Hall,"Core Explorations :: Ethics
+
+Pathways :: Applied Ethics",Lecture,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,
+"PHIL 40-1 - Science, Technology, and Society",Philosophy,40,1,Open,0/35,Susan Kennedy,4,T Th | 12:10 PM - 1:50 PM,Rm 310 Alumni Science Hall,"Core Explorations :: Science, Technology and Society
+
+Pathways :: Applied Ethics
+
+Pathways :: Design Thinking
+
+Pathways :: Paradigm Shifts and the Nature of Human Knowing
+
+Pathways :: The Digital Age
+
+Pathways :: Values in Science and Technology",Lecture,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,
+PHIL 118-1 - Ethics and Constitutional Law,Philosophy,118,1,Open,0/25,Lawrence Nelson,5,M W F | 3:30 PM - 4:35 PM,Rm 111 Kenna Hall,"Core Explorations :: Ethics
+
+Pathways :: Applied Ethics
+
+Pathways :: Democracy
+
+Pathways :: Human Rights in a Global World
+
+Pathways :: Law and Social Justice",Lecture,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,
+PHIL 127-1 - Marx and Ethics (-),Philosophy,127,1,Open,0/25,Tyler van Wulven,5,M W F | 10:30 AM - 11:35 AM,Rm 108 Alameda hall,"Core Explorations :: Ethics
+
+Pathways :: Democracy",Lecture,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,
+PHIL 130-1 - Ethics of Artificial Intelligence,Philosophy,130,1,Open,0/25,Susan Kennedy,5,T Th | 2:00 PM - 3:40 PM,Rm 310 Alumni Science Hall,"Core Explorations :: Ethics
+
+Pathways :: Applied Ethics
+
+Pathways :: The Digital Age",Lecture,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,
+PHIL 162-1 - Philosophy of Language (Meaning and Interpretation),Philosophy,162,1,Open,0/25,Robert Shanklin,5,M W F | 2:15 PM - 3:20 PM,Rm 108 Edward M. Dowd Art & Art History,,Lecture,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,
+PHIL 164-1 - Special Topics in Metaphysics and Epistemology (Pragmatism),Philosophy,164,1,Open,0/25,Christopher Kulp,5,T Th | 2:00 PM - 3:40 PM,Rm 101 Alameda hall,,Lecture,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,
+PHIL 180-1 - Special Topics in Non Western Philosophy (Chinese Philosophy After Buddhism),Philosophy,180,1,Open,0/25,Meilin Chinn,5,M W F | 11:45 AM - 12:50 PM,Rm 220 Alumni Science Hall,,Lecture,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,
+PHIL 184B-1 - Faith and Philosophy: Latine Perspectives,Philosophy,184B,1,Open,0/25,,5,T Th | 12:10 PM - 1:50 PM,Rm 304 Kenna Hall,"Core Explorations :: Religion, Theology and Culture 3",Lecture,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,PHIL 184B-/ETHN 129-1/RSOC 161-1

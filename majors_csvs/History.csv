@@ -1,8 +1,72 @@
 Course Section,Course Subject,Course Number,Section Number,Section Status,Enrolled/Capacity,All Instructors,Units,Meeting Patterns,Locations,Course Tags,Instructional Format,Delivery Mode,Start Date,End Date,Academic Period,Overlapping Course(s)
-HIST 12A-1 - Cultures and Ideas II (-),History,12A,1,Open,0/25,,4,M W F | 1:00 PM - 2:05 PM,,Core Foundations :: Cultures and Ideas 2,Lecture,In-Person,2026-03-30,2026-06-11,Spring 2026 Quarter,
-HIST 12A-2 - Cultures and Ideas II (Cultures of Islam),History,12A,2,Open,0/25,Marwan Daoud Hanania,4,M W F | 11:45 AM - 12:50 PM,,Core Foundations :: Cultures and Ideas 2,Lecture,In-Person,2026-03-30,2026-06-11,Spring 2026 Quarter,
-HIST 12A-3 - Cultures and Ideas II (Africa and the Atlantic World),History,12A,3,Open,0/25,Harry Odamtten,4,M W F | 11:45 AM - 12:50 PM,,Core Foundations :: Cultures and Ideas 2,Lecture,In-Person,2026-03-30,2026-06-11,Spring 2026 Quarter,
-HIST 12A-4 - Cultures and Ideas II (Cultures of Islam),History,12A,4,Open,0/25,Marwan Daoud Hanania,4,M W F | 1:00 PM - 2:05 PM,,Core Foundations :: Cultures and Ideas 2,Lecture,In-Person,2026-03-30,2026-06-11,Spring 2026 Quarter,
-HIST 12A-5 - Cultures and Ideas II (Latin American Mobilities),History,12A,5,Open,0/25,Mateo Carrillo,4,M W F | 3:30 PM - 4:35 PM,,Core Foundations :: Cultures and Ideas 2,Lecture,In-Person,2026-03-30,2026-06-11,Spring 2026 Quarter,
-HIST 12A-7 - Cultures and Ideas II (-),History,12A,7,Open,0/25,,4,M W F | 8:00 AM - 9:05 AM,,Core Foundations :: Cultures and Ideas 2,Lecture,In-Person,2026-03-30,2026-06-11,Spring 2026 Quarter,
-HIST 12H-1 - Cultures and Ideas II - Honors (Slavery & Unfreedom),History,12H,1,Closed,19/18,Megan Gudgeirsson | Meg Gudgeirsson,4,M W F | 8:00 AM - 9:05 AM,,Core Foundations :: Cultures and Ideas 2,Lecture,In-Person,2026-03-30,2026-06-11,Spring 2026 Quarter,
+HIST 11A-1 - Cultures and Ideas I (Transnational Migration),History,11A,1,Open,0/25,Sohini Majumdar,4,M W F | 8:00 AM - 9:05 AM,Rm 107 O'Connor Hall,Core Foundations :: Cultures and Ideas 1,Lecture,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,
+HIST 11A-2 - Cultures and Ideas I (Cultures of Islam),History,11A,2,Open,0/25,Marwan Daoud Hanania,4,M W F | 11:45 AM - 12:50 PM,Rm 206 Daly Science 200,Core Foundations :: Cultures and Ideas 1,Lecture,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,
+HIST 11A-3 - Cultures and Ideas I (Africa and the Atlantic World),History,11A,3,Open,0/25,Harry Odamtten,4,M W F | 11:45 AM - 12:50 PM,Rm 109 O'Connor Hall,Core Foundations :: Cultures and Ideas 1,Lecture,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,
+HIST 11A-4 - Cultures and Ideas I (Cultures of Islam),History,11A,4,Open,0/25,Marwan Daoud Hanania,4,M W F | 1:00 PM - 2:05 PM,Rm 206 Daly Science 200,Core Foundations :: Cultures and Ideas 1,Lecture,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,
+HIST 11A-5 - Cultures and Ideas I (Latin American Mobilities),History,11A,5,Open,0/25,Mateo Carrillo,4,M W | 3:30 PM - 5:10 PM,Rm 102 O'Connor Hall,Core Foundations :: Cultures and Ideas 1,Lecture,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,
+HIST 11H-1 - Cultures and Ideas I - Honors (Slavery & Unfreedom),History,11H,1,Closed,19/17,Megan Gudgeirsson | Meg Gudgeirsson,4,M W F | 8:00 AM - 9:05 AM,Rm 210 O'Connor Hall,Core Foundations :: Cultures and Ideas 1,Lecture,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,
+HIST 12A-1 - Cultures and Ideas II (Cultures of Islam),History,12A,1,Closed,23/0,Marwan Daoud Hanania,4,M W F | 8:00 AM - 9:05 AM,Rm 216 Kenna Hall,Core Foundations :: Cultures and Ideas 2,Lecture,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,
+HIST 12A-2 - Cultures and Ideas II (War & Society in Modern Age),History,12A,2,Closed,23/0,Gregory Wigmore | Greg Wigmore,4,T Th | 3:50 PM - 5:30 PM,Rm 209 O'Connor Hall,Core Foundations :: Cultures and Ideas 2,Lecture,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,
+HIST 12A-3 - Cultures and Ideas II (Civilization & the City),History,12A,3,Closed,24/0,Thomas Turley,4,M W F | 9:15 AM - 10:20 AM,Rm 103 O'Connor Hall,Core Foundations :: Cultures and Ideas 2,Lecture,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,
+HIST 12A-4 - Cultures and Ideas II (Across the Pacific),History,12A,4,Closed,24/0,Barbara Molony,4,T Th | 10:20 AM - 12:00 PM,Rm 201 O'Connor Hall,Core Foundations :: Cultures and Ideas 2,Lecture,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,
+HIST 12A-5 - Cultures and Ideas II (Transnational Migration),History,12A,5,Closed,22/0,Sonia Gomez,4,T Th | 10:20 AM - 12:00 PM,Rm 133 Vari Hall,Core Foundations :: Cultures and Ideas 2,Lecture,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,
+HIST 12A-6 - Cultures and Ideas II (Civilization & the City),History,12A,6,Closed,24/0,Thomas Turley,4,M W F | 1:00 PM - 2:05 PM,Rm 103 O'Connor Hall,Core Foundations :: Cultures and Ideas 2,Lecture,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,
+HIST 12A-7 - Cultures and Ideas II (Transnational Migration),History,12A,7,Closed,20/0,Sonia Gomez,4,T Th | 2:00 PM - 3:40 PM,Rm 003 Casa Italiana Residence,Core Foundations :: Cultures and Ideas 2,Lecture,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,
+HIST 12A-8 - Cultures and Ideas II (Global Environmental Histories),History,12A,8,Closed,25/0,Jeannette Alden Estruth,4,T Th | 3:50 PM - 5:30 PM,Rm 003 Casa Italiana Residence,Core Foundations :: Cultures and Ideas 2,Lecture,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,
+"HIST 59-1 - War, Peace, and Global Politics: 1500-Present",History,59,1,Open,0/28,Matthew Specter,4,T Th | 12:10 PM - 1:50 PM,Rm 220 Alumni Science Hall,,Lecture,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,
+HIST 70-1 - The American Revolution,History,70,1,Open,0/28,Gregory Wigmore | Greg Wigmore,4,T Th | 12:10 PM - 1:50 PM,Rm 207 O'Connor Hall,"Core Explorations :: Civic Engagement
+
+Pathways :: American Studies",Lecture,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,HIST 70-/HIST 170-1
+HIST 72B-1 - Reconstruction through Progressive Era,History,72B,1,Open,0/28,Megan Gudgeirsson | Meg Gudgeirsson,4,M W F | 2:15 PM - 3:20 PM,Rm 104 O'Connor Hall,"Core Explorations :: Civic Engagement
+
+Core Explorations :: Diversity: US Perspectives
+
+Pathways :: Democracy",Lecture,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,HIST 72B-/HIST 172B-1
+HIST 82B-1 - Childhood in the US,History,82B,1,Open,0/28,Megan Gudgeirsson | Meg Gudgeirsson,4,M W F | 1:00 PM - 2:05 PM,Rm 109 O'Connor Hall,"Core Explorations :: Civic Engagement
+
+Pathways :: American Studies
+
+Pathways :: Children, Family and Society
+
+Pathways :: Public Policy",Lecture,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,HIST 82B-/HIST 182B-1
+HIST 101S-1 - Historical Writing,History,101S,1,Open,0/13,Gregory Wigmore | Greg Wigmore,5,W | 3:30 PM - 6:30 PM,Rm 207 O'Connor Hall,Core Integrations :: Advanced Writing,Seminar,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,
+"HIST 108-1 - Classical Greek History: Tyrants, Traitors, and Rebels (-)",History,108,1,Open,0/25,Nicholas Lindberg,5,M W F | 11:45 AM - 12:50 PM,Rm 107 O'Connor Hall,"Core Explorations :: Civic Engagement
+
+Pathways :: Democracy",Lecture,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,HIST 108-/CLAS 108-1
+HIST 113-1 - Black Power,History,113,1,Open,0/30,Anthony Hazard,5,T Th | 3:50 PM - 5:30 PM,Rm 129 Heafey Hall,"Core Explorations :: Science, Technology and Society
+
+Pathways :: Children, Family and Society",Lecture,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,HIST 113-/ETHN 175-1
+HIST 122-1 - The Holocaust,History,122,1,Open,0/28,Amy Randall,5,T Th | 2:00 PM - 3:40 PM,Rm 103 O'Connor Hall,"Core Explorations :: Cultures and Ideas 3
+
+Pathways :: Human Rights in a Global World
+
+Pathways :: Paradigm Shifts and the Nature of Human Knowing",Lecture,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,
+HIST 124-1 - History of Sexually Transmitted Diseases,History,124,1,Open,0/28,Matthew Newsom Kerr,5,T Th | 2:00 PM - 3:40 PM,Rm 309 Daly Science 300,"Core Explorations :: Science, Technology and Society
+
+Pathways :: Gender, Sexuality and the Body
+
+Pathways :: Values in Science and Technology",Lecture,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,HIST 124-/GNSX 140A-1
+HIST 146B-1 - Modern Japan in the World (-),History,146B,1,Open,0/25,Barbara Molony,5,T Th | 2:00 PM - 3:40 PM,Rm 201 O'Connor Hall,Core Explorations :: Cultures and Ideas 3,Lecture,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,
+HIST 157S-1 - Africa and the Disciplines,History,157S,1,Open,0/15,Harry Odamtten,5,M | 3:30 PM - 6:30 PM,Rm 205 O'Connor Hall,,Seminar,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,
+HIST 170-1 - The American Revolution,History,170,1,Open,0/28,Gregory Wigmore | Greg Wigmore,5,T Th | 12:10 PM - 1:50 PM,Rm 207 O'Connor Hall,"Core Explorations :: Civic Engagement
+
+Pathways :: American Studies
+
+Pathways :: Democracy",Lecture,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,HIST 170-/HIST 70-1
+HIST 172B-1 - Reconstruction through Progressive Era,History,172B,1,Open,0/28,Megan Gudgeirsson | Meg Gudgeirsson,5,M W F | 2:15 PM - 3:20 PM,Rm 104 O'Connor Hall,"Core Explorations :: Civic Engagement
+
+Core Explorations :: Diversity: US Perspectives
+
+Pathways :: Democracy",Lecture,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,HIST 172B-/HIST 72B-1
+HIST 182B-1 - Childhood in the US,History,182B,1,Open,0/28,Megan Gudgeirsson | Meg Gudgeirsson,5,M W F | 1:00 PM - 2:05 PM,Rm 109 O'Connor Hall,"Core Explorations :: Civic Engagement
+
+Pathways :: American Studies
+
+Pathways :: Children, Family and Society
+
+Pathways :: Public Policy",Lecture,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,HIST 182B-/HIST 82B-1
+HIST 187-1 - Racism in the United States,History,187,1,Open,0/30,Sakina Hughes,5,M W | 3:30 PM - 5:15 PM,Rm 204 O'Connor Hall,Core Explorations :: Diversity: US Perspectives,Lecture,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,HIST 187-/ETHN 155-1
+"HIST 190-1 - Commodities, Technologies, Conservation - Environmental Histories of Latin America (-)",History,190,1,Open,0/28,Mateo Carrillo,5,M W F | 11:45 AM - 12:50 PM,Rm 104 O'Connor Hall,"Core Explorations :: Cultures and Ideas 3
+
+Pathways :: Sustainability",Lecture,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,
+HIST 191-1 - Immigrant Communities of Silicon Valley,History,191,1,Open,0/25,Sohini Majumdar,5,M W | 3:30 PM - 5:15 PM,Commons Mclaughlin-Walsh Residence Hall,,Lecture,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,

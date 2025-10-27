@@ -1,2 +1,127 @@
 Course Section,Course Subject,Course Number,Section Number,Section Status,Enrolled/Capacity,All Instructors,Units,Meeting Patterns,Locations,Course Tags,Instructional Format,Delivery Mode,Start Date,End Date,Academic Period,Overlapping Course(s)
-ENVS 12A-1 - Cultures and Ideas II (Nature and Colonialism),Environ Studies & Sciences,12A,1,Open,0/25,Theodore Grudin | Ted Grudin,4,M W F | 9:15 AM - 10:20 AM,,Core Foundations :: Cultures and Ideas 2,Lecture,In-Person,2026-03-30,2026-06-11,Spring 2026 Quarter,
+ENVS 5-1 - My Environment,Environ Studies & Sciences,5,1,Open,0/40,Kaleigh Fisher,5,M W | 3:30 PM - 5:15 PM,RM 3115 SCDI,"Core Explorations :: Natural Science
+
+Pathways :: Sustainability",Lecture,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,
+ENVS 5-2 - My Environment,Environ Studies & Sciences,5,2,Open,0/20,Kaleigh Fisher,5,M | 11:45 AM - 2:30 PM,RM 3205 SCDI,"Core Explorations :: Natural Science
+
+Pathways :: Sustainability",Laboratory,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,
+ENVS 5-3 - My Environment,Environ Studies & Sciences,5,3,Open,0/20,Kaleigh Fisher,5,W | 8:00 AM - 10:45 AM,RM 3205 SCDI,"Core Explorations :: Natural Science
+
+Pathways :: Sustainability",Laboratory,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,
+ENVS 21-1 - Environmental Biology L and L,Environ Studies & Sciences,21,1,Open,0/30,Kaleigh Fisher,5,T Th | 8:30 AM - 10:10 AM,RM 1302 SCDI,"Core Explorations :: Natural Science
+
+Pathways :: Design Thinking
+
+Pathways :: Feeding the World
+
+Pathways :: Global Health
+
+Pathways :: Sustainability
+
+Pathways :: Values in Science and Technology",Lecture,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,
+ENVS 21-2 - Environmental Biology L and L,Environ Studies & Sciences,21,2,Open,0/14,Kaleigh Fisher,5,T | 10:20 AM - 1:05 PM,RM 3205 SCDI,"Core Explorations :: Natural Science
+
+Pathways :: Design Thinking
+
+Pathways :: Feeding the World
+
+Pathways :: Global Health
+
+Pathways :: Sustainability
+
+Pathways :: Values in Science and Technology",Laboratory,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,
+ENVS 21-3 - Environmental Biology L and L,Environ Studies & Sciences,21,3,Open,0/14,Kaleigh Fisher,5,Th | 10:20 AM - 1:05 PM,RM 3205 SCDI,"Core Explorations :: Natural Science
+
+Pathways :: Design Thinking
+
+Pathways :: Feeding the World
+
+Pathways :: Global Health
+
+Pathways :: Sustainability
+
+Pathways :: Values in Science and Technology",Laboratory,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,
+ENVS 22-1 - Environment and Society (-),Environ Studies & Sciences,22,1,Open,0/38,Nicolas Hernandez,4,M W F | 10:30 AM - 11:35 AM,Rm 102 Kenna Hall,"Core Explorations :: Civic Engagement
+
+Pathways :: Democracy
+
+Pathways :: Feeding the World
+
+Pathways :: Sustainability
+
+Pathways :: Values in Science and Technology
+
+Pathways :: Vocation",Lecture,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,
+ENVS 50-1 - World Geography (-),Environ Studies & Sciences,50,1,Open,0/38,Carolyn Trist,4,T Th | 3:50 PM - 5:30 PM,Rm 164 Graham Hall,"Core Explorations :: Cultures and Ideas 3
+
+Pathways :: Design Thinking
+
+Pathways :: Feeding the World
+
+Pathways :: Sustainability",Lecture,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,ENVS 50-/ANTH 50-1
+ENVS 95-1 - Sustainability 101,Environ Studies & Sciences,95,1,Open,0/20,Maria Judnick,2,T | 3:50 PM - 5:30 PM,Rm 231 Aloysius Varsi Hall,Pathways :: Sustainability,Independent Study,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,
+ENVS 101-1 - Capstone Seminar,Environ Studies & Sciences,101,1,Closed,0/0,Iris Stewart-Frey,5,T Th | 10:20 AM - 12:00 PM,,,Lecture,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,
+ENVS 101-2 - Capstone Seminar,Environ Studies & Sciences,101,2,Closed,0/0,Christopher Bacon,5,T Th | 3:50 PM - 5:30 PM,Rm 232 Vari Hall,,Lecture,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,
+ENVS 101-3 - Capstone Seminar,Environ Studies & Sciences,101,3,Closed,0/0,John Dialesandro,5,T Th | 3:50 PM - 5:30 PM,RM 3116 SCDI,,Lecture,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,
+ENVS 110-1 - Environmental Statistics L and L (-),Environ Studies & Sciences,110,1,Open,0/28,Michelle Marvier,5,M W F | 9:15 AM - 10:20 AM,Rm 361 Alumni Science Hall,,Lecture,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,ENVS 110-/BIOL 160-1
+ENVS 110-2 - Environmental Statistics L and L (-),Environ Studies & Sciences,110,2,Open,0/14,Michelle Marvier,5,Th | 9:15 AM - 12:00 PM,Rm 214 Heafey Hall,,Laboratory,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,ENVS 110-/BIOL 160-2
+ENVS 110-3 - Environmental Statistics L and L (-),Environ Studies & Sciences,110,3,Open,0/14,Michelle Marvier,5,Th | 2:15 PM - 5:00 PM,Rm 214 Heafey Hall,,Laboratory,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,ENVS 110-/BIOL 160-3
+ENVS 111-1 - Mixed Methods for the Environment,Environ Studies & Sciences,111,1,Open,0/23,Charles Gabbe | C.J. Gabbe,5,T Th | 2:00 PM - 3:40 PM,RM 1302 SCDI,,Lecture,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,
+ENVS 116-1 - Introduction to Geographic Information Systems (GIS),Environ Studies & Sciences,116,1,Open,0/14,John Dialesandro,5,T Th | 8:30 AM - 10:10 AM,Rm 107 Heafey Hall,,Lecture,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,
+ENVS 116-2 - Introduction to Geographic Information Systems (GIS),Environ Studies & Sciences,116,2,Closed,0/0,John Dialesandro,5,T Th | 10:20 AM - 12:00 PM,Rm 107 Heafey Hall,,Lecture,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,
+ENVS 122-1 - Environmental Politics and Policy (-),Environ Studies & Sciences,122,1,Open,0/33,Carolyn Trist,5,M W | 3:30 PM - 5:15 PM,Rm 306 Kenna Hall,"Core Explorations :: Civic Engagement
+
+Pathways :: Democracy
+
+Pathways :: Design Thinking
+
+Pathways :: Public Policy
+
+Pathways :: Sustainability
+
+Pathways :: Values in Science and Technology",Lecture,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,ENVS 122-/POLI 157-1
+ENVS 143-1 - Advanced Writing for the Environment ((-)),Environ Studies & Sciences,143,1,Open,0/25,,5,M W F | 8:00 AM - 9:05 AM,Rm 163 Graham Hall,"Core Integrations :: Advanced Writing
+
+Pathways :: Sustainability
+
+Pathways :: Vocation",Lecture,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,
+ENVS 144-1 - Natural History of Baja CA L and L,Environ Studies & Sciences,144,1,Closed,0/0,Virginia Matzek,5,T Th | 10:20 AM - 12:00 PM,RM 1301 SCDI,"Pathways :: Sustainability
+
+Pathways :: Values in Science and Technology",Lecture,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,ENVS 144-/BIOL 144-1
+ENVS 144-2 - Natural History of Baja CA L and L,Environ Studies & Sciences,144,2,Closed,0/0,Virginia Matzek,5,M | 5:25 PM - 7:10 PM,Rm 310 Alumni Science Hall,"Pathways :: Sustainability
+
+Pathways :: Values in Science and Technology",Laboratory,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,ENVS 144-/BIOL 144-2
+ENVS 144-3 - Natural History of Baja CA L and L,Environ Studies & Sciences,144,3,Closed,0/0,Virginia Matzek,5,W | 5:25 PM - 7:10 PM,RM 1301 SCDI,"Pathways :: Sustainability
+
+Pathways :: Values in Science and Technology",Laboratory,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,ENVS 144-/BIOL 144-3
+ENVS 145-1 - Environmental Technology,Environ Studies & Sciences,145,1,Open,0/30,Stephanie Hughes,5,M W F | 10:30 AM - 11:35 AM,RM 3116 SCDI,"Core Explorations :: Science, Technology and Society
+
+Pathways :: Design Thinking
+
+Pathways :: Sustainability
+
+Pathways :: Values in Science and Technology",Lecture,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,
+ENVS 145-2 - Environmental Technology,Environ Studies & Sciences,145,2,Open,0/15,Stephanie Hughes,5,W | 11:45 AM - 2:30 PM,RM 3205 SCDI,"Core Explorations :: Science, Technology and Society
+
+Pathways :: Design Thinking
+
+Pathways :: Sustainability
+
+Pathways :: Values in Science and Technology",Laboratory,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,
+ENVS 145-3 - Environmental Technology,Environ Studies & Sciences,145,3,Open,0/15,Stephanie Hughes,5,F | 11:45 AM - 2:30 PM,RM 3205 SCDI,"Core Explorations :: Science, Technology and Society
+
+Pathways :: Design Thinking
+
+Pathways :: Sustainability
+
+Pathways :: Values in Science and Technology",Laboratory,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,
+ENVS 153-1 - Conservation Science (-),Environ Studies & Sciences,153,1,Open,0/33,Virginia Matzek,5,T Th | 2:00 PM - 3:40 PM,RM 1301 SCDI,"Core Explorations :: Science, Technology and Society
+
+Pathways :: Sustainability
+
+Pathways :: Values in Science and Technology",Lecture,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,ENVS 153-/BIOL 153-1
+ENVS 175-1 - Oceanography (-),Environ Studies & Sciences,175,1,Open,0/33,William Rush,5,M W | 3:30 PM - 5:15 PM,RM 3302 SCDI,,Lecture,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,
+ENVS 177-1 - Race and the Environment,Environ Studies & Sciences,177,1,Open,0/33,Nicolas Hernandez,5,M W F | 2:15 PM - 3:20 PM,Rm 101 Alumni Science Hall,,Lecture,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,
+ENVS 188-1 - Environmental Colloquium (-),Environ Studies & Sciences,188,1,Open,0/20,William Rush,1,W | 11:45 AM - 12:50 PM,Rm 225 Heafey Hall,,Lecture,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,
+ENVS 195-1 - SLURP: Sustainable Living Undergraduate Research Project,Environ Studies & Sciences,195,1,Open,0/20,Veronica Johnson,4,F | 11:45 AM - 3:00 PM,Rm 207 Daly Science 200,Pathways :: Sustainability,Independent Study,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,
+ENVS 198-1 - Environmental Proseminar (-),Environ Studies & Sciences,198,1,Open,0/35,Iris Stewart-Frey,2,Th | 3:50 PM - 5:30 PM,RM 1301 SCDI,,Seminar,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,

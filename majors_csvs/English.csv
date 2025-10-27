@@ -1,60 +1,144 @@
 Course Section,Course Subject,Course Number,Section Number,Section Status,Enrolled/Capacity,All Instructors,Units,Meeting Patterns,Locations,Course Tags,Instructional Format,Delivery Mode,Start Date,End Date,Academic Period,Overlapping Course(s)
-ENGL 2A-1 - Critical Thinking and Writing II (-),English,2A,1,Closed,19/19,Melissa Donegan,4,M W F | 1:00 PM - 2:05 PM,Rm 210 O'Connor Hall,Core Foundations :: Critical Thinking and Writing 2,Lecture,In-Person,2026-03-30,2026-06-11,Spring 2026 Quarter,
-ENGL 2A-2 - Critical Thinking and Writing II (-),English,2A,2,Closed,19/19,Olivier Bochettaz,4,M W F | 11:45 AM - 12:50 PM,Rm 110 O'Connor Hall,Core Foundations :: Critical Thinking and Writing 2,Lecture,In-Person,2026-03-30,2026-06-11,Spring 2026 Quarter,
-ENGL 2A-3 - Critical Thinking and Writing II (-),English,2A,3,Open,15/19,Stephen Carroll,4,T Th | 10:20 AM - 12:00 PM,Rm 205 O'Connor Hall,Core Foundations :: Critical Thinking and Writing 2,Lecture,In-Person,2026-03-30,2026-06-11,Spring 2026 Quarter,
-ENGL 2A-4 - Critical Thinking and Writing II (-),English,2A,4,Open,16/19,Theresa Conefrey,4,T | 3:50 PM - 6:50 PM,Rm 110 O'Connor Hall,Core Foundations :: Critical Thinking and Writing 2,Lecture,In-Person,2026-03-30,2026-06-11,Spring 2026 Quarter,
-ENGL 2A-5 - Critical Thinking and Writing II (-),English,2A,5,Open,18/19,Mostafa Jalal,4,M W F | 1:00 PM - 2:05 PM,RM 3301 SCDI,Core Foundations :: Critical Thinking and Writing 2,Lecture,In-Person,2026-03-30,2026-06-11,Spring 2026 Quarter,
-ENGL 2A-6 - Critical Thinking and Writing II (-),English,2A,6,Open,18/19,Matthew Driscoll | Matt Driscoll,4,T Th | 12:10 PM - 1:50 PM,Rm 308 Kenna Hall,Core Foundations :: Critical Thinking and Writing 2,Lecture,In-Person,2026-03-30,2026-06-11,Spring 2026 Quarter,
-ENGL 2A-7 - Critical Thinking and Writing II (-),English,2A,7,Closed,19/19,David Keaton,4,T Th | 3:50 PM - 5:30 PM,Rm 210 O'Connor Hall,Core Foundations :: Critical Thinking and Writing 2,Lecture,In-Person,2026-03-30,2026-06-11,Spring 2026 Quarter,
-ENGL 2A-8 - Critical Thinking and Writing II (-),English,2A,8,Closed,19/19,Jean-Pierre Lacrampe,4,T Th | 12:10 PM - 1:50 PM,Rm 110 O'Connor Hall,Core Foundations :: Critical Thinking and Writing 2,Lecture,In-Person,2026-03-30,2026-06-11,Spring 2026 Quarter,
-ENGL 2A-9 - Critical Thinking and Writing II (-),English,2A,9,Open,17/19,,4,T Th | 12:10 PM - 1:50 PM,Rm 210 O'Connor Hall,Core Foundations :: Critical Thinking and Writing 2,Lecture,In-Person,2026-03-30,2026-06-11,Spring 2026 Quarter,
-ENGL 2A-10 - Critical Thinking and Writing II (-),English,2A,10,Closed,19/19,Michael Lasley,4,M W F | 10:30 AM - 11:35 AM,Rm 210 O'Connor Hall,Core Foundations :: Critical Thinking and Writing 2,Lecture,In-Person,2026-03-30,2026-06-11,Spring 2026 Quarter,
-ENGL 2A-11 - Critical Thinking and Writing II (-),English,2A,11,Open,17/19,Mostafa Jalal,4,M W F | 8:00 AM - 9:05 AM,Rm 114 Aloysius Varsi Hall,Core Foundations :: Critical Thinking and Writing 2,Lecture,In-Person,2026-03-30,2026-06-11,Spring 2026 Quarter,
-ENGL 2A-12 - Critical Thinking and Writing II (-),English,2A,12,Closed,19/19,Scott Wagar,4,M W F | 11:45 AM - 12:50 PM,Rm 104 O'Connor Hall,Core Foundations :: Critical Thinking and Writing 2,Lecture,In-Person,2026-03-30,2026-06-11,Spring 2026 Quarter,
-ENGL 2A-13 - Critical Thinking and Writing II (-),English,2A,13,Closed,19/19,Caleb Gonzalez,4,M W F | 3:30 PM - 4:35 PM,Rm 110 O'Connor Hall,Core Foundations :: Critical Thinking and Writing 2,Lecture,In-Person,2026-03-30,2026-06-11,Spring 2026 Quarter,
-ENGL 2A-14 - Critical Thinking and Writing II (-),English,2A,14,Open,18/19,Leonard Crosby,4,M W F | 3:30 PM - 4:35 PM,Rm 304 Kenna Hall,Core Foundations :: Critical Thinking and Writing 2,Lecture,In-Person,2026-03-30,2026-06-11,Spring 2026 Quarter,
-ENGL 2A-15 - Critical Thinking and Writing II (-),English,2A,15,Closed,19/19,Nicholas Leither,4,M W | 5:25 PM - 7:10 PM,Rm 104 Alameda hall,Core Foundations :: Critical Thinking and Writing 2,Lecture,In-Person,2026-03-30,2026-06-11,Spring 2026 Quarter,
-ENGL 2A-16 - Critical Thinking and Writing II (-),English,2A,16,Closed,19/19,Kirstyn Leuner,4,M W F | 8:00 AM - 9:05 AM,Rm 108 Edward M. Dowd Art & Art History,Core Foundations :: Critical Thinking and Writing 2,Lecture,In-Person,2026-03-30,2026-06-11,Spring 2026 Quarter,
-ENGL 2A-17 - Critical Thinking and Writing II (-),English,2A,17,Open,16/19,Lina Geriguis,4,T Th | 3:50 PM - 5:30 PM,Rm 206 O'Connor Hall,Core Foundations :: Critical Thinking and Writing 2,Lecture,In-Person,2026-03-30,2026-06-11,Spring 2026 Quarter,
-ENGL 2A-18 - Critical Thinking and Writing II (-),English,2A,18,Open,13/19,Timothy Myers,4,T | 5:40 PM - 8:40 PM,Rm 134 Vari Hall,Core Foundations :: Critical Thinking and Writing 2,Lecture,In-Person,2026-03-30,2026-06-11,Spring 2026 Quarter,
-ENGL 2A-19 - Critical Thinking and Writing II (-),English,2A,19,Closed,20/19,Maria Judnick,4,M W F | 9:15 AM - 10:20 AM,Rm 218 Kenna Hall,Core Foundations :: Critical Thinking and Writing 2,Lecture,In-Person,2026-03-30,2026-06-11,Spring 2026 Quarter,
-ENGL 2A-20 - Critical Thinking and Writing II (-),English,2A,20,Open,0/19,Olivier Bochettaz,4,M W F | 10:30 AM - 11:35 AM,,Core Foundations :: Critical Thinking and Writing 2,Lecture,In-Person,2026-03-30,2026-06-11,Spring 2026 Quarter,
-ENGL 2A-21 - Critical Thinking and Writing II (-),English,2A,21,Open,0/19,Stephen Carroll,4,T Th | 3:50 PM - 5:30 PM,,Core Foundations :: Critical Thinking and Writing 2,Lecture,In-Person,2026-03-30,2026-06-11,Spring 2026 Quarter,
-ENGL 2A-22 - Critical Thinking and Writing II (-),English,2A,22,Open,0/19,David Coad,4,M W F | 11:45 AM - 12:50 PM,Rm 204 O'Connor Hall,Core Foundations :: Critical Thinking and Writing 2,Lecture,In-Person,2026-03-30,2026-06-11,Spring 2026 Quarter,
-ENGL 2A-23 - Critical Thinking and Writing II (-),English,2A,23,Open,0/19,David Coad,4,M W F | 9:15 AM - 10:20 AM,Rm 204 O'Connor Hall,Core Foundations :: Critical Thinking and Writing 2,Lecture,In-Person,2026-03-30,2026-06-11,Spring 2026 Quarter,
-ENGL 2A-24 - Critical Thinking and Writing II (-),English,2A,24,Open,0/19,David Coad,4,M W F | 8:00 AM - 9:05 AM,Rm 204 O'Connor Hall,Core Foundations :: Critical Thinking and Writing 2,Lecture,In-Person,2026-03-30,2026-06-11,Spring 2026 Quarter,
-ENGL 2A-25 - Critical Thinking and Writing II (-),English,2A,25,Open,0/19,Olivier Bochettaz,4,M W F | 8:00 AM - 9:05 AM,,Core Foundations :: Critical Thinking and Writing 2,Lecture,In-Person,2026-03-30,2026-06-11,Spring 2026 Quarter,
-ENGL 2A-26 - Critical Thinking and Writing II (-),English,2A,26,Open,0/19,Christopher Pascua,4,T Th | 8:30 AM - 10:10 AM,,Core Foundations :: Critical Thinking and Writing 2,Lecture,In-Person,2026-03-30,2026-06-11,Spring 2026 Quarter,
-ENGL 2A-27 - Critical Thinking and Writing II (-),English,2A,27,Open,0/19,Matthew Driscoll | Matt Driscoll,4,T Th | 10:20 AM - 12:00 PM,,Core Foundations :: Critical Thinking and Writing 2,Lecture,In-Person,2026-03-30,2026-06-11,Spring 2026 Quarter,
-ENGL 2A-28 - Critical Thinking and Writing II (-),English,2A,28,Open,0/19,Lina Geriguis,4,T Th | 5:40 PM - 7:20 PM,,Core Foundations :: Critical Thinking and Writing 2,Lecture,In-Person,2026-03-30,2026-06-11,Spring 2026 Quarter,
-ENGL 2A-29 - Critical Thinking and Writing II (-),English,2A,29,Open,0/19,Caleb Gonzalez,4,M W F | 4:45 PM - 5:50 PM,,Core Foundations :: Critical Thinking and Writing 2,Lecture,In-Person,2026-03-30,2026-06-11,Spring 2026 Quarter,
-ENGL 2A-30 - Critical Thinking and Writing II (-),English,2A,30,Open,0/19,Mostafa Jalal,4,M W F | 11:45 AM - 12:50 PM,,Core Foundations :: Critical Thinking and Writing 2,Lecture,In-Person,2026-03-30,2026-06-11,Spring 2026 Quarter,
-ENGL 2A-31 - Critical Thinking and Writing II (-),English,2A,31,Open,0/19,Maria Judnick,4,M W F | 10:30 AM - 11:35 AM,,Core Foundations :: Critical Thinking and Writing 2,Lecture,In-Person,2026-03-30,2026-06-11,Spring 2026 Quarter,
-ENGL 2A-32 - Critical Thinking and Writing II (-),English,2A,32,Open,0/19,David Keaton,4,T Th | 12:10 PM - 1:50 PM,Rm 204 O'Connor Hall,Core Foundations :: Critical Thinking and Writing 2,Lecture,In-Person,2026-03-30,2026-06-11,Spring 2026 Quarter,
-ENGL 2A-33 - Critical Thinking and Writing II (-),English,2A,33,Open,0/19,David Keaton,4,T Th | 2:00 PM - 3:40 PM,Rm 204 O'Connor Hall,Core Foundations :: Critical Thinking and Writing 2,Lecture,In-Person,2026-03-30,2026-06-11,Spring 2026 Quarter,
-ENGL 2A-34 - Critical Thinking and Writing II (-),English,2A,34,Open,0/19,Michael Lasley,4,M W F | 8:00 AM - 9:05 AM,,Core Foundations :: Critical Thinking and Writing 2,Lecture,In-Person,2026-03-30,2026-06-11,Spring 2026 Quarter,
-ENGL 2A-35 - Critical Thinking and Writing II (-),English,2A,35,Open,0/19,Nicholas Leither,4,M W | 7:20 PM - 9:05 PM,Rm 104 Alameda hall,Core Foundations :: Critical Thinking and Writing 2,Lecture,In-Person,2026-03-30,2026-06-11,Spring 2026 Quarter,
-ENGL 2A-36 - Critical Thinking and Writing II (-),English,2A,36,Open,0/19,Margarita Levantovskaya,4,M W | 3:30 PM - 5:15 PM,,Core Foundations :: Critical Thinking and Writing 2,Lecture,In-Person,2026-03-30,2026-06-11,Spring 2026 Quarter,
-ENGL 2A-37 - Critical Thinking and Writing II (-),English,2A,37,Open,0/19,Leonard Crosby,4,M W F | 11:45 AM - 12:50 PM,,Core Foundations :: Critical Thinking and Writing 2,Lecture,In-Person,2026-03-30,2026-06-11,Spring 2026 Quarter,
-ENGL 2A-38 - Critical Thinking and Writing II (-),English,2A,38,Open,0/19,Leonard Crosby,4,M W F | 2:15 PM - 3:20 PM,,Core Foundations :: Critical Thinking and Writing 2,Lecture,In-Person,2026-03-30,2026-06-11,Spring 2026 Quarter,
-ENGL 2A-39 - Critical Thinking and Writing II (-),English,2A,39,Open,0/19,Claudia McIsaac,4,T Th | 3:50 PM - 5:30 PM,Rm 134 Vari Hall,Core Foundations :: Critical Thinking and Writing 2,Lecture,In-Person,2026-03-30,2026-06-11,Spring 2026 Quarter,
-ENGL 2A-40 - Critical Thinking and Writing II (-),English,2A,40,Open,0/19,Robin Tremblay-McGaw,4,T Th | 2:00 PM - 3:40 PM,,Core Foundations :: Critical Thinking and Writing 2,Lecture,In-Person,2026-03-30,2026-06-11,Spring 2026 Quarter,
-ENGL 2A-41 - Critical Thinking and Writing II (-),English,2A,41,Open,0/19,Juan Velasco-Moreno,4,M W | 5:25 PM - 7:10 PM,,Core Foundations :: Critical Thinking and Writing 2,Lecture,In-Person,2026-03-30,2026-06-11,Spring 2026 Quarter,
-ENGL 2A-42 - Critical Thinking and Writing II (-),English,2A,42,Open,0/19,Amna Yusuf,4,M W F | 1:00 PM - 2:05 PM,,Core Foundations :: Critical Thinking and Writing 2,Lecture,In-Person,2026-03-30,2026-06-11,Spring 2026 Quarter,
-ENGL 2A-43 - Critical Thinking and Writing II (-),English,2A,43,Open,18/19,Denise Krane,4,T Th | 2:00 PM - 3:40 PM,Rm 114 Aloysius Varsi Hall,Core Foundations :: Critical Thinking and Writing 2,Lecture,In-Person,2026-03-30,2026-06-11,Spring 2026 Quarter,
-ENGL 2A-44 - Critical Thinking and Writing II (-),English,2A,44,Open,14/19,Margarita Levantovskaya,4,M W | 5:25 PM - 7:10 PM,Rm 231 Aloysius Varsi Hall,Core Foundations :: Critical Thinking and Writing 2,Lecture,In-Person,2026-03-30,2026-06-11,Spring 2026 Quarter,
-ENGL 2A-45 - Critical Thinking and Writing II (-),English,2A,45,Open,16/19,Amna Yusuf,4,M W F | 2:15 PM - 3:20 PM,Rm 110 O'Connor Hall,Core Foundations :: Critical Thinking and Writing 2,Lecture,In-Person,2026-03-30,2026-06-11,Spring 2026 Quarter,
-ENGL 2A-46 - Critical Thinking and Writing II (-),English,2A,46,Open,0/19,Lina Geriguis,4,T Th | 12:10 PM - 1:50 PM,,Core Foundations :: Critical Thinking and Writing 2,Lecture,In-Person,2026-03-30,2026-06-11,Spring 2026 Quarter,
-ENGL 2A-47 - Critical Thinking and Writing II (-),English,2A,47,Open,0/19,Scott Wagar,4,M W F | 9:15 AM - 10:20 AM,,Core Foundations :: Critical Thinking and Writing 2,Lecture,In-Person,2026-03-30,2026-06-11,Spring 2026 Quarter,
-ENGL 2A-48 - Critical Thinking and Writing II (-),English,2A,48,Open,0/19,Jean-Pierre Lacrampe,4,T Th | 8:30 AM - 10:10 AM,,Core Foundations :: Critical Thinking and Writing 2,Lecture,In-Person,2026-03-30,2026-06-11,Spring 2026 Quarter,
-ENGL 2A-49 - Critical Thinking and Writing II (-),English,2A,49,Open,0/19,Scott Wagar,4,M W F | 8:00 AM - 9:05 AM,,Core Foundations :: Critical Thinking and Writing 2,Lecture,In-Person,2026-03-30,2026-06-11,Spring 2026 Quarter,
-ENGL 2A-50 - Critical Thinking and Writing II (-),English,2A,50,Open,0/19,,4,M W F | 2:15 PM - 3:20 PM,,Core Foundations :: Critical Thinking and Writing 2,Lecture,In-Person,2026-03-30,2026-06-11,Spring 2026 Quarter,
-ENGL 2A-51 - Critical Thinking and Writing II (-),English,2A,51,Open,0/19,,4,T Th | 2:00 PM - 3:40 PM,,Core Foundations :: Critical Thinking and Writing 2,Lecture,In-Person,2026-03-30,2026-06-11,Spring 2026 Quarter,
-ENGL 2H-1 - Critical Thinking and Writing II: Honors (-),English,2H,1,Open,15/17,Melissa Donegan,4,M W F | 10:30 AM - 11:35 AM,Rm 114 Aloysius Varsi Hall,Core Foundations :: Critical Thinking and Writing 2,Lecture,In-Person,2026-03-30,2026-06-11,Spring 2026 Quarter,
-ENGL 12A-1 - Cultures and Ideas II (-),English,12A,1,Open,0/25,Jean-Pierre Lacrampe,4,T Th | 2:00 PM - 3:40 PM,,Core Foundations :: Cultures and Ideas 2,Lecture,In-Person,2026-03-30,2026-06-11,Spring 2026 Quarter,
-ENGL 12A-2 - Cultures and Ideas II (-),English,12A,2,Open,0/25,Robin Tremblay-McGaw,4,T Th | 10:20 AM - 12:00 PM,,Core Foundations :: Cultures and Ideas 2,Lecture,In-Person,2026-03-30,2026-06-11,Spring 2026 Quarter,
-ENGL 12A-3 - Cultures and Ideas II (-),English,12A,3,Open,0/25,Robin Tremblay-McGaw,4,T Th | 12:10 PM - 1:50 PM,,Core Foundations :: Cultures and Ideas 2,Lecture,In-Person,2026-03-30,2026-06-11,Spring 2026 Quarter,
-ENGL 12A-4 - Cultures and Ideas II (-),English,12A,4,Open,0/25,Supurna Dasgupta,4,T Th | 10:20 AM - 12:00 PM,,Core Foundations :: Cultures and Ideas 2,Lecture,In-Person,2026-03-30,2026-06-11,Spring 2026 Quarter,
-ENGL 12A-5 - Cultures and Ideas II (-),English,12A,5,Open,0/25,Jean-Pierre Lacrampe,4,T Th | 2:00 PM - 3:40 PM,,Core Foundations :: Cultures and Ideas 2,Lecture,In-Person,2026-03-30,2026-06-11,Spring 2026 Quarter,
-ENGL 12A-6 - Cultures and Ideas II (-),English,12A,6,Open,0/25,Robin Tremblay-McGaw,4,T Th | 10:20 AM - 12:00 PM,,Core Foundations :: Cultures and Ideas 2,Lecture,In-Person,2026-03-30,2026-06-11,Spring 2026 Quarter,
-ENGL 12A-7 - Cultures and Ideas II (-),English,12A,7,Open,0/25,Robin Tremblay-McGaw,4,T Th | 3:50 PM - 5:30 PM,,Core Foundations :: Cultures and Ideas 2,Lecture,In-Person,2026-03-30,2026-06-11,Spring 2026 Quarter,
+ENGL 1A-1 - Critical Thinking and Writing I (-),English,1A,1,Open,2/19,Olivier Bochettaz,4,M W F | 10:30 AM - 11:35 AM,Rm 210 O'Connor Hall,Core Foundations :: Critical Thinking and Writing 1,Lecture,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,
+ENGL 1A-2 - Critical Thinking and Writing I (-),English,1A,2,Open,0/19,Stephen Carroll,4,T Th | 3:50 PM - 5:30 PM,Rm 210 O'Connor Hall,Core Foundations :: Critical Thinking and Writing 1,Lecture,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,
+ENGL 1A-3 - Critical Thinking and Writing I (-),English,1A,3,Open,1/19,David Coad,4,M W F | 11:45 AM - 12:50 PM,Rm 204 O'Connor Hall,Core Foundations :: Critical Thinking and Writing 1,Lecture,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,
+ENGL 1A-4 - Critical Thinking and Writing I (-),English,1A,4,Open,1/19,David Coad,4,M W F | 9:15 AM - 10:20 AM,Rm 204 O'Connor Hall,Core Foundations :: Critical Thinking and Writing 1,Lecture,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,
+ENGL 1A-5 - Critical Thinking and Writing I (-),English,1A,5,Open,0/19,Nora Eltahawy,4,M W F | 8:00 AM - 9:05 AM,Rm 205 O'Connor Hall,Core Foundations :: Critical Thinking and Writing 1,Lecture,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,
+ENGL 1A-6 - Critical Thinking and Writing I (-),English,1A,6,Open,0/19,Cindy Chavez Swenson,4,M W F | 8:00 AM - 9:05 AM,Rm 114 Aloysius Varsi Hall,Core Foundations :: Critical Thinking and Writing 1,Lecture,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,
+ENGL 1A-7 - Critical Thinking and Writing I (-),English,1A,7,Open,2/19,Aparajita Nanda,4,T Th | 8:30 AM - 10:10 AM,Rm 103 O'Connor Hall,Core Foundations :: Critical Thinking and Writing 1,Lecture,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,
+ENGL 1A-8 - Critical Thinking and Writing I (-),English,1A,8,Open,2/19,Matthew Driscoll | Matt Driscoll,4,T Th | 10:20 AM - 12:00 PM,Rm 225 Heafey Hall,Core Foundations :: Critical Thinking and Writing 1,Lecture,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,
+ENGL 1A-9 - Critical Thinking and Writing I (-),English,1A,9,Open,0/19,Lina Geriguis,4,T Th | 5:40 PM - 7:20 PM,Rm 210 O'Connor Hall,Core Foundations :: Critical Thinking and Writing 1,Lecture,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,
+ENGL 1A-10 - Critical Thinking and Writing I (-),English,1A,10,Open,0/19,Caleb Gonzalez,4,M W F | 4:45 PM - 5:50 PM,Rm 212 Kenna Hall,Core Foundations :: Critical Thinking and Writing 1,Lecture,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,
+ENGL 1A-11 - Critical Thinking and Writing I (-),English,1A,11,Open,3/19,Mostafa Jalal,4,M W F | 11:45 AM - 12:50 PM,Rm 210 O'Connor Hall,Core Foundations :: Critical Thinking and Writing 1,Lecture,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,
+ENGL 1A-12 - Critical Thinking and Writing I (-),English,1A,12,Open,0/19,Cindy Chavez Swenson,4,M W F | 10:30 AM - 11:35 AM,Rm 163 Graham Hall,Core Foundations :: Critical Thinking and Writing 1,Lecture,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,
+ENGL 1A-13 - Critical Thinking and Writing I (-),English,1A,13,Open,0/19,David Keaton,4,T Th | 12:10 PM - 1:50 PM,Rm 204 O'Connor Hall,Core Foundations :: Critical Thinking and Writing 1,Lecture,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,
+ENGL 1A-14 - Critical Thinking and Writing I (-),English,1A,14,Open,3/19,David Keaton,4,T Th | 2:00 PM - 3:40 PM,Rm 204 O'Connor Hall,Core Foundations :: Critical Thinking and Writing 1,Lecture,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,
+ENGL 1A-15 - Critical Thinking and Writing I (-),English,1A,15,Open,1/19,Michael Lasley,4,M W F | 8:00 AM - 9:05 AM,Rm 110 O'Connor Hall,Core Foundations :: Critical Thinking and Writing 1,Lecture,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,
+ENGL 1A-16 - Critical Thinking and Writing I (-),English,1A,16,Open,0/19,Nicholas Leither,4,M W | 7:20 PM - 9:05 PM,Rm 104 Alameda hall,Core Foundations :: Critical Thinking and Writing 1,Lecture,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,
+ENGL 1A-17 - Critical Thinking and Writing I (-),English,1A,17,Open,0/19,Margarita Levantovskaya,4,M W | 3:30 PM - 5:15 PM,Rm 114 Aloysius Varsi Hall,Core Foundations :: Critical Thinking and Writing 1,Lecture,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,
+ENGL 1A-18 - Critical Thinking and Writing I (-),English,1A,18,Open,0/19,Leonard Crosby,4,M W F | 11:45 AM - 12:50 PM,Rm 110 O'Connor Hall,Core Foundations :: Critical Thinking and Writing 1,Lecture,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,
+ENGL 1A-19 - Critical Thinking and Writing I (-),English,1A,19,Open,1/19,Lamia Benyoussef,4,M W F | 2:15 PM - 3:20 PM,Rm 110 O'Connor Hall,Core Foundations :: Critical Thinking and Writing 1,Lecture,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,
+ENGL 1A-20 - Critical Thinking and Writing I (-),English,1A,20,Open,0/19,Lina Geriguis,4,T Th | 3:50 PM - 5:30 PM,Rm 134 Vari Hall,Core Foundations :: Critical Thinking and Writing 1,Lecture,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,
+ENGL 1A-21 - Critical Thinking and Writing I (-),English,1A,21,Open,0/19,Christopher Pascua,4,T Th | 2:00 PM - 3:40 PM,Rm 114 Aloysius Varsi Hall,Core Foundations :: Critical Thinking and Writing 1,Lecture,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,
+ENGL 1A-22 - Critical Thinking and Writing I (-),English,1A,22,Open,0/19,Juan Velasco-Moreno,4,M W | 5:25 PM - 7:10 PM,Rm 309 Daly Science 300,Core Foundations :: Critical Thinking and Writing 1,Lecture,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,
+ENGL 1A-23 - Critical Thinking and Writing I (-),English,1A,23,Open,0/19,Nora Eltahawy,4,M W F | 1:00 PM - 2:05 PM,Rm 210 O'Connor Hall,Core Foundations :: Critical Thinking and Writing 1,Lecture,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,
+ENGL 1A-24 - Critical Thinking and Writing I (-),English,1A,24,Open,0/19,Stephen Carroll,4,T Th | 12:10 PM - 1:50 PM,Rm 110 O'Connor Hall,Core Foundations :: Critical Thinking and Writing 1,Lecture,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,
+ENGL 1A-25 - Critical Thinking and Writing I (-),English,1A,25,Open,1/19,Scott Wagar,4,M W F | 9:15 AM - 10:20 AM,Rm 110 O'Connor Hall,Core Foundations :: Critical Thinking and Writing 1,Lecture,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,
+ENGL 1A-26 - Critical Thinking and Writing I (-),English,1A,26,Open,0/19,,4,M W F | 2:15 PM - 3:20 PM,Rm 114 Aloysius Varsi Hall,Core Foundations :: Critical Thinking and Writing 1,Lecture,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,
+ENGL 1A-27 - Critical Thinking and Writing I (-),English,1A,27,Open,0/19,Matthew Driscoll | Matt Driscoll,4,T Th | 2:00 PM - 3:40 PM,Rm 110 O'Connor Hall,Core Foundations :: Critical Thinking and Writing 1,Lecture,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,
+ENGL 1H-1 - Critical Thinking and Writing I: Honors (-),English,1H,1,Open,15/17,Melissa Donegan,4,M W F | 10:30 AM - 11:35 AM,Rm 114 Aloysius Varsi Hall,Core Foundations :: Critical Thinking and Writing 1,Lecture,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,
+ENGL 2A-1 - Critical Thinking and Writing II (-),English,2A,1,Closed,19/19,Olivier Bochettaz,4,M W F | 1:00 PM - 2:05 PM,Rm 110 O'Connor Hall,Core Foundations :: Critical Thinking and Writing 2,Lecture,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,
+ENGL 2A-2 - Critical Thinking and Writing II (-),English,2A,2,Open,18/19,Scott Wagar,4,M W F | 8:00 AM - 9:05 AM,RM 2301 SCDI,Core Foundations :: Critical Thinking and Writing 2,Lecture,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,
+ENGL 2A-3 - Critical Thinking and Writing II (-),English,2A,3,Closed,19/19,Olivier Bochettaz,4,M W F | 9:15 AM - 10:20 AM,Rm 302 Edward M. Dowd Art & Art History,Core Foundations :: Critical Thinking and Writing 2,Lecture,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,
+ENGL 2A-4 - Critical Thinking and Writing II (-),English,2A,4,Closed,20/19,Matthew Driscoll | Matt Driscoll,4,T Th | 8:30 AM - 10:10 AM,Rm 210 O'Connor Hall,Core Foundations :: Critical Thinking and Writing 2,Lecture,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,
+ENGL 2A-5 - Critical Thinking and Writing II (-),English,2A,5,Open,18/19,David Keaton,4,T Th | 10:20 AM - 12:00 PM,Rm 210 O'Connor Hall,Core Foundations :: Critical Thinking and Writing 2,Lecture,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,
+ENGL 2A-6 - Critical Thinking and Writing II (-),English,2A,6,Closed,15/15,Mathew Gomes | Matt Gomes,4,T Th | 8:30 AM - 10:10 AM,Rm 225 Heafey Hall,Core Foundations :: Critical Thinking and Writing 2,Lecture,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,
+ENGL 2A-7 - Critical Thinking and Writing II (-),English,2A,7,Closed,15/15,Kai Harris,4,T Th | 10:20 AM - 12:00 PM,Rm 122 Edward M. Dowd Art & Art History,Core Foundations :: Critical Thinking and Writing 2,Lecture,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,
+ENGL 2A-8 - Critical Thinking and Writing II (-),English,2A,8,Open,18/19,Mostafa Jalal,4,M W F | 8:00 AM - 9:05 AM,Rm 102 Alameda hall,Core Foundations :: Critical Thinking and Writing 2,Lecture,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,
+ENGL 2A-9 - Critical Thinking and Writing II (-),English,2A,9,Closed,19/19,Mostafa Jalal,4,M W F | 9:15 AM - 10:20 AM,Rm 102 Alameda hall,Core Foundations :: Critical Thinking and Writing 2,Lecture,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,
+ENGL 2A-10 - Critical Thinking and Writing II (-),English,2A,10,Open,13/15,Jeremiah Jeffra | Miah Jeffra,4,T Th | 8:30 AM - 10:10 AM,Rm 232 Vari Hall,Core Foundations :: Critical Thinking and Writing 2,Lecture,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,
+ENGL 2A-11 - Critical Thinking and Writing II (-),English,2A,11,Closed,19/19,Jean-Pierre Lacrampe,4,T Th | 8:30 AM - 10:10 AM,Rm 110 O'Connor Hall,Core Foundations :: Critical Thinking and Writing 2,Lecture,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,
+ENGL 2A-13 - Critical Thinking and Writing II (-),English,2A,13,Closed,19/19,Michael Lasley,4,M W F | 9:15 AM - 10:20 AM,Rm 210 O'Connor Hall,Core Foundations :: Critical Thinking and Writing 2,Lecture,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,
+ENGL 2A-14 - Critical Thinking and Writing II (-),English,2A,14,Open,14/15,Jessica Young,4,M W F | 9:15 AM - 10:20 AM,Rm 122 Edward M. Dowd Art & Art History,Core Foundations :: Critical Thinking and Writing 2,Lecture,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,
+ENGL 2A-15 - Critical Thinking and Writing II (-),English,2A,15,Open,18/19,Scott Wagar,4,M W F | 10:30 AM - 11:35 AM,Rm 104 O'Connor Hall,Core Foundations :: Critical Thinking and Writing 2,Lecture,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,
+ENGL 2A-16 - Critical Thinking and Writing II (-),English,2A,16,Closed,19/19,Leonard Crosby,4,M W F | 10:30 AM - 11:35 AM,Rm 110 O'Connor Hall,Core Foundations :: Critical Thinking and Writing 2,Lecture,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,
+ENGL 2A-17 - Critical Thinking and Writing II (-),English,2A,17,Open,14/15,Maura Tarnoff,4,M W F | 9:15 AM - 10:20 AM,Rm 232 Vari Hall,Core Foundations :: Critical Thinking and Writing 2,Lecture,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,
+ENGL 2A-18 - Critical Thinking and Writing II (-),English,2A,18,Closed,15/15,Caleb Gonzalez,4,M W F | 1:00 PM - 2:05 PM,Commons Mclaughlin-Walsh Residence Hall,Core Foundations :: Critical Thinking and Writing 2,Lecture,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,
+ENGL 2A-19 - Critical Thinking and Writing II (-),English,2A,19,Closed,15/15,Amna Yusuf,4,M W F | 2:15 PM - 3:20 PM,Rm 105 Alameda hall,Core Foundations :: Critical Thinking and Writing 2,Lecture,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,
+ENGL 2A-20 - Critical Thinking and Writing II (-),English,2A,20,Open,18/19,Leonard Crosby,4,M W F | 2:15 PM - 3:20 PM,Rm 304 Kenna Hall,Core Foundations :: Critical Thinking and Writing 2,Lecture,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,
+ENGL 2A-21 - Critical Thinking and Writing II (-),English,2A,21,Open,18/19,Caleb Gonzalez,4,M W F | 2:15 PM - 3:20 PM,Rm 214 Kenna Hall,Core Foundations :: Critical Thinking and Writing 2,Lecture,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,
+ENGL 2A-22 - Critical Thinking and Writing II (-),English,2A,22,Closed,19/19,Nicholas Leither,4,M W | 3:30 PM - 5:15 PM,Rm 104 Alameda hall,Core Foundations :: Critical Thinking and Writing 2,Lecture,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,
+ENGL 2A-23 - Critical Thinking and Writing II (-),English,2A,23,Open,18/19,Timothy Myers,4,M | 5:25 PM - 8:25 PM,Rm 134 Vari Hall,Core Foundations :: Critical Thinking and Writing 2,Lecture,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,
+ENGL 2A-24 - Critical Thinking and Writing II (-),English,2A,24,Closed,19/19,Margarita Levantovskaya,4,M W F | 1:00 PM - 2:05 PM,Rm 114 Aloysius Varsi Hall,Core Foundations :: Critical Thinking and Writing 2,Lecture,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,
+ENGL 2A-25 - Critical Thinking and Writing II (-),English,2A,25,Open,11/15,Jose Villagrana,4,T Th | 12:10 PM - 1:50 PM,Rm 101 Alameda hall,Core Foundations :: Critical Thinking and Writing 2,Lecture,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,
+ENGL 2A-26 - Critical Thinking and Writing II (-),English,2A,26,Closed,20/19,Claudia McIsaac,4,T Th | 12:10 PM - 1:50 PM,Rm 134 Vari Hall,Core Foundations :: Critical Thinking and Writing 2,Lecture,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,
+ENGL 2A-27 - Critical Thinking and Writing II (-),English,2A,27,Open,12/15,Cruz Medina,4,T Th | 12:10 PM - 1:50 PM,Rm 310 Kenna Hall,Core Foundations :: Critical Thinking and Writing 2,Lecture,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,
+ENGL 2A-28 - Critical Thinking and Writing II (-),English,2A,28,Open,14/15,Ruby Mendoza | Ruby Mendoza,4,M W | 3:30 PM - 5:15 PM,Rm 232 Vari Hall,Core Foundations :: Critical Thinking and Writing 2,Lecture,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,
+ENGL 2A-30 - Critical Thinking and Writing II (-),English,2A,30,Closed,19/19,Christopher Pascua,4,T Th | 8:30 AM - 10:10 AM,Rm 302 Edward M. Dowd Art & Art History,Core Foundations :: Critical Thinking and Writing 2,Lecture,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,
+ENGL 2A-31 - Critical Thinking and Writing II (-),English,2A,31,Closed,19/19,Lina Geriguis,4,T Th | 2:00 PM - 3:40 PM,Rm 206 O'Connor Hall,Core Foundations :: Critical Thinking and Writing 2,Lecture,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,
+ENGL 2A-33 - Critical Thinking and Writing II (-),English,2A,33,Closed,19/19,Amna Yusuf,4,M W F | 11:45 AM - 12:50 PM,Rm 103 Alameda hall,Core Foundations :: Critical Thinking and Writing 2,Lecture,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,
+ENGL 2A-34 - Critical Thinking and Writing II (-),English,2A,34,Open,15/19,Timothy Myers,4,Th | 5:40 PM - 8:40 PM,Rm 134 Vari Hall,Core Foundations :: Critical Thinking and Writing 2,Lecture,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,
+ENGL 2A-35 - Critical Thinking and Writing II (-),English,2A,35,Closed,19/19,Aparajita Nanda,4,T Th | 10:20 AM - 12:00 PM,Rm 310 Alumni Science Hall,Core Foundations :: Critical Thinking and Writing 2,Lecture,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,
+ENGL 2A-37 - Critical Thinking and Writing II (-),English,2A,37,Open,13/15,Daniel B. Summerhill,4,T Th | 12:10 PM - 1:50 PM,Rm 206 Edward M. Dowd Art & Art History,Core Foundations :: Critical Thinking and Writing 2,Lecture,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,
+ENGL 2A-38 - Critical Thinking and Writing II (-),English,2A,38,Open,13/15,Maura Tarnoff,4,M W F | 10:30 AM - 11:35 AM,Rm 232 Vari Hall,Core Foundations :: Critical Thinking and Writing 2,Lecture,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,
+ENGL 2A-39 - Critical Thinking and Writing II (-),English,2A,39,Open,15/19,Amna Yusuf,4,M W F | 9:15 AM - 10:20 AM,Rm 134 Vari Hall,Core Foundations :: Critical Thinking and Writing 2,Lecture,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,
+ENGL 2A-40 - Critical Thinking and Writing II (-),English,2A,40,Closed,19/19,Heather Turner,4,T Th | 10:20 AM - 12:00 PM,Rm 110 O'Connor Hall,Core Foundations :: Critical Thinking and Writing 2,Lecture,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,
+ENGL 2A-43 - Critical Thinking and Writing II (-),English,2A,43,Open,18/19,Cindy Chavez Swenson,4,M W F | 9:15 AM - 10:20 AM,Rm 163 Graham Hall,Core Foundations :: Critical Thinking and Writing 2,Lecture,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,
+ENGL 2H-1 - Critical Thinking and Writing II: Honors (-),English,2H,1,Closed,17/0,Melissa Donegan,4,M W F | 9:15 AM - 10:20 AM,Rm 114 Aloysius Varsi Hall,Core Foundations :: Critical Thinking and Writing 2,Lecture,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,
+ENGL 2H-2 - Critical Thinking and Writing II: Honors (-),English,2H,2,Closed,18/0,Loring Pfeiffer,4,M W F | 9:15 AM - 10:20 AM,Rm 218 Kenna Hall,Core Foundations :: Critical Thinking and Writing 2,Lecture,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,
+ENGL 2H-3 - Critical Thinking and Writing II: Honors (-),English,2H,3,Closed,15/0,Loring Pfeiffer,4,M W F | 8:00 AM - 9:05 AM,Rm 218 Kenna Hall,Core Foundations :: Critical Thinking and Writing 2,Lecture,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,
+ENGL 11A-1 - Cultures and Ideas I (Film Around the Globe),English,11A,1,Open,0/25,Robin Tremblay-McGaw,4,T Th | 2:00 PM - 3:40 PM,Rm 220 Alumni Science Hall,Core Foundations :: Cultures and Ideas 1,Lecture,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,
+ENGL 11A-2 - Cultures and Ideas I (Film Around the Globe),English,11A,2,Open,0/25,Robin Tremblay-McGaw,4,T Th | 10:20 AM - 12:00 PM,Rm 220 Alumni Science Hall,Core Foundations :: Cultures and Ideas 1,Lecture,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,
+ENGL 11A-3 - Cultures and Ideas I (Film Around the Globe),English,11A,3,Open,0/25,Robin Tremblay-McGaw,4,T Th | 3:50 PM - 5:30 PM,Rm 220 Alumni Science Hall,Core Foundations :: Cultures and Ideas 1,Lecture,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,
+ENGL 11A-4 - Cultures and Ideas I (Global Aesthetics and Culture),English,11A,4,Open,0/25,Supurna Dasgupta,4,T Th | 10:20 AM - 12:00 PM,RM 1302 SCDI,Core Foundations :: Cultures and Ideas 1,Lecture,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,
+ENGL 12A-1 - Cultures and Ideas II ((De)Colonial Narratives),English,12A,1,Closed,24/0,Jacquelyn Hendricks,4,M W F | 10:30 AM - 11:35 AM,Rm 201 O'Connor Hall,Core Foundations :: Cultures and Ideas 2,Lecture,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,
+ENGL 12A-2 - Cultures and Ideas II ((De)Colonial Narratives),English,12A,2,Closed,23/0,Jacquelyn Hendricks,4,M W F | 1:00 PM - 2:05 PM,Rm 225 Heafey Hall,Core Foundations :: Cultures and Ideas 2,Lecture,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,
+ENGL 12H-1 - Cultures and Ideas II - Honors (Literatures of the World),English,12H,1,Closed,18/0,Michelle Burnham,4,T Th | 10:20 AM - 12:00 PM,Rm 007 Casa Italiana Residence,Core Foundations :: Cultures and Ideas 2,Lecture,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,
+ENGL 14-1 - Introduction to Literary History and Interpretation,English,14,1,Open,0/10,Jessica Young,4,M W F | 11:45 AM - 12:50 PM,Rm 232 Vari Hall,,Lecture,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,
+ENGL 15-1 - Introduction to Cultural Studies and Literary Theory,English,15,1,Open,0/25,Amy Lueck,4,M W | 3:30 PM - 5:15 PM,Rm 105 Alameda hall,,Lecture,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,
+ENGL 38-1 - Introduction to Asian-American Literature,English,38,1,Open,0/30,Aparajita Nanda,4,T Th | 2:00 PM - 3:40 PM,RM 3301 SCDI,"Core Explorations :: Diversity: US Perspectives
+
+Pathways :: American Studies
+
+Pathways :: Gender, Globalization and Empire
+
+Pathways :: Race, Place and Social Inequalities",Lecture,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,ENGL 38-/ETHN 41-1
+ENGL 55-1 - Shakespeare and Film,English,55,1,Open,0/20,Maura Tarnoff,4,M W F | 2:15 PM - 3:20 PM,Commons Mclaughlin-Walsh Residence Hall,"Core Integrations :: Advanced Writing
+
+Pathways :: Cinema Studies",Lecture,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,
+"ENGL 57-1 - Decolonial Differences, Debates, and Dreams",English,57,1,Open,0/25,Supurna Dasgupta,4,T Th | 12:10 PM - 1:50 PM,RM 1302 SCDI,Core Explorations :: Cultures and Ideas 3,Lecture,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,
+ENGL 62-1 - East Asian Literature & Christianity,English,62,1,Open,0/35,Haruka Umetsu Cho,4,M W F | 8:00 AM - 9:05 AM,Rm 111 Kenna Hall,,Lecture,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,ENGL 62-/TESP 78-1
+ENGL 68AM-1 - American Literature and Women (-),English,68AM,1,Open,0/30,Kirstyn Leuner,4,M W F | 11:45 AM - 12:50 PM,Rm 119 Music And Dance,"Core Explorations :: Diversity: US Perspectives
+
+Pathways :: American Studies
+
+Pathways :: Gender, Sexuality and the Body",Lecture,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,ENGL 68AM-/GNSX 56-1
+ENGL 71-1 - Fiction Writing (-),English,71,1,Open,0/17,Kirk Glaser,4,T Th | 12:10 PM - 1:50 PM,Rm 208 Edward M. Dowd Art & Art History,Core Explorations :: Arts,Lecture,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,
+ENGL 72-1 - Poetry Writing,English,72,1,Open,0/17,Daniel B. Summerhill,4,T Th | 10:20 AM - 12:00 PM,Rm 108 Edward M. Dowd Art & Art History,"Core Explorations :: Arts
+
+Pathways :: Vocation",Lecture,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,
+ENGL 73-1 - Life Writing,English,73,1,Open,0/17,Juan Velasco-Moreno,4,M W | 3:30 PM - 5:15 PM,Rm 309 Daly Science 300,"Core Explorations :: Arts
+
+Core Integrations :: Advanced Writing
+
+Pathways :: Vocation",Lecture,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,
+ENGL 74-1 - New Forms for Creative Writing,English,74,1,Open,0/17,Jeremiah Jeffra | Miah Jeffra,4,T Th | 2:00 PM - 3:40 PM,Rm 019 Sobrato Residence,Core Explorations :: Arts,Lecture,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,
+ENGL 91-1 - Literary Magazine Production (-),English,91,1,Open,0/22,Kirk Glaser,1,T | 3:50 PM - 4:50 PM,Rm 016 Benson Center,,Independent Study,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,
+ENGL 101-1 - Professional Writing (-),English,101,1,Open,0/25,Ruby Mendoza | Ruby Mendoza,5,Th | 3:50 PM - 6:50 PM,Rm 204 O'Connor Hall,"Core Integrations :: Advanced Writing
+
+LSB Core :: Undergraduate Business Core",Lecture,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,
+ENGL 116-1 - Letterpress Composition (-),English,116,1,Open,0/30,Kirstyn Leuner,5,M W | 3:30 PM - 5:50 PM,Rm 310 Edward M. Dowd Art & Art History,Core Integrations :: Advanced Writing,Lecture,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,
+ENGL 141-1 - Medieval Literature (-),English,141,1,Open,0/25,Jacquelyn Hendricks,5,M W F | 2:15 PM - 3:20 PM,Rm 119 Music And Dance,"Core Explorations :: Religion, Theology and Culture 2",Lecture,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,
+ENGL 153-1 - In Memory of Toni Morrison (-),English,153,1,Open,0/25,Allia Griffin,5,M W F | 10:30 AM - 11:35 AM,Rm 102 O'Connor Hall,"Core Explorations :: Diversity: US Perspectives
+
+Core Integrations :: Advanced Writing",Lecture,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,ENGL 153-/ETHN 131-1
+ENGL 176-1 - Creative Writing and Social Justice (-),English,176,1,Open,0/17,Claudia McIsaac,5,T Th | 3:50 PM - 5:30 PM,Rm 128 Vari Hall,"Core Explorations :: Arts
+
+Core Integrations :: Advanced Writing
+
+Core Integrations :: Experiential Learning for Social Justice
+
+Pathways :: Justice and the Arts
+
+Pathways :: Sustainability
+
+Pathways :: Vocation",Lecture,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,
+ENGL 179AW-1 - Playwriting,English,179AW,1,Open,0/20,Brian Thorstenson,5,T Th | 3:50 PM - 5:30 PM,Rm 231 Mayer Theatre,,Lecture,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,ENGL 179AW-/THTR 170-1
+ENGL 179-1 - Advanced Playwriting,English,179,1,Open,0/20,Brian Thorstenson,5,T Th | 12:10 PM - 1:50 PM,,,Lecture,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,ENGL 179-/THTR 171-1
+ENGL 180-1 - The Black Woman’s Bildungsroman (Reading and Writing Coming of Age Stories),English,180,1,Open,0/17,Kai Harris,5,T Th | 2:00 PM - 3:40 PM,Rm 104 Kenna Hall,,Lecture,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,
+ENGL 181-1 - Engineering Communications: Practical Writing and Presentation Skills for Engineers (-),English,181,1,Open,0/20,David Coad,4,M | 3:30 PM - 6:30 PM,Rm 209 O'Connor Hall,"Core Integrations :: Advanced Writing
+
+Pathways :: Design Thinking",Lecture,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,
+ENGL 181-2 - Engineering Communications: Practical Writing and Presentation Skills for Engineers (-),English,181,2,Open,0/20,Maria Judnick,4,M W F | 1:00 PM - 2:05 PM,Rm 108 Alameda hall,"Core Integrations :: Advanced Writing
+
+Pathways :: Design Thinking",Lecture,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,
+ENGL 181-3 - Engineering Communications: Practical Writing and Presentation Skills for Engineers (-),English,181,3,Open,0/20,Maria Judnick,4,M W F | 2:15 PM - 3:20 PM,Rm 108 Alameda hall,"Core Integrations :: Advanced Writing
+
+Pathways :: Design Thinking",Lecture,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,
+ENGL 181-4 - Engineering Communications: Practical Writing and Presentation Skills for Engineers (-),English,181,4,Open,0/20,Maria Judnick,4,M W F | 4:45 PM - 5:50 PM,Rm 103 O'Connor Hall,"Core Integrations :: Advanced Writing
+
+Pathways :: Design Thinking",Lecture,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,
+ENGL 181-5 - Engineering Communications: Practical Writing and Presentation Skills for Engineers (-),English,181,5,Open,0/20,Nicholas Leither,4,M W | 5:25 PM - 7:10 PM,Rm 201 O'Connor Hall,"Core Integrations :: Advanced Writing
+
+Pathways :: Design Thinking",Lecture,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,
+ENGL 190-1 - Senior Seminar (The Doctrine of Discovery and Legal Culture),English,190,1,Closed,0/0,Jose Villagrana,5,T Th | 10:20 AM - 12:00 PM,Rm 309 St. Joseph's Hall,,Seminar,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,

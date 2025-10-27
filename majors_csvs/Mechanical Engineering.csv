@@ -1,0 +1,55 @@
+Course Section,Course Subject,Course Number,Section Number,Section Status,Enrolled/Capacity,All Instructors,Units,Meeting Patterns,Locations,Course Tags,Instructional Format,Delivery Mode,Start Date,End Date,Academic Period,Overlapping Course(s)
+MECH 11-1 - Materials and Manufacturing Processes,Mechanical Engineering,11,1,Open,0/35,Panthea Sepehrband,4,T Th | 8:30 AM - 10:10 AM,Rm 122 Heafey Hall,,Lecture,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,
+MECH 11-2 - Materials and Manufacturing Processes,Mechanical Engineering,11,2,Open,0/35,Panthea Sepehrband,4,T Th | 10:20 AM - 12:00 PM,Rm 129 Heafey Hall,,Lecture,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,
+MECH 12L-1 - Engineering Graphics and Computer Aided Design II,Mechanical Engineering,12L,1,Open,0/20,"Rodney Broome
+
+Sthanu Mahadev",1,T | 11:00 AM - 1:45 PM,Rm 202 Heafey Hall,,Laboratory,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,
+MECH 12L-2 - Engineering Graphics and Computer Aided Design II,Mechanical Engineering,12L,2,Open,0/20,"Rodney Broome
+
+Sthanu Mahadev",1,T | 2:15 PM - 5:00 PM,Rm 202 Heafey Hall,,Laboratory,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,
+MECH 12L-3 - Engineering Graphics and Computer Aided Design II,Mechanical Engineering,12L,3,Open,0/20,"Rodney Broome
+
+Sthanu Mahadev",1,F | 11:00 AM - 1:45 PM,Rm 202 Heafey Hall,,Laboratory,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,
+MECH 12L-4 - Engineering Graphics and Computer Aided Design II,Mechanical Engineering,12L,4,Open,0/20,"Rodney Broome
+
+Sthanu Mahadev",1,Th | 11:00 AM - 1:45 PM,Rm 202 Heafey Hall,,Laboratory,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,
+MECH 12L-5 - Engineering Graphics and Computer Aided Design II,Mechanical Engineering,12L,5,Open,0/20,"Rodney Broome
+
+Sthanu Mahadev",1,Th | 2:15 PM - 5:00 PM,Rm 202 Heafey Hall,,Laboratory,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,
+MECH 12L-6 - Engineering Graphics and Computer Aided Design II,Mechanical Engineering,12L,6,Open,0/20,"Rodney Broome
+
+Sthanu Mahadev",1,F | 2:15 PM - 5:00 PM,Rm 202 Heafey Hall,,Laboratory,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,
+MECH 45-1 - Applied Programming for Mechanical Engineers,Mechanical Engineering,45,1,Open,0/40,Rudi Schuech,4,M W F | 11:45 AM - 12:50 PM,Rm 102 Kenna Hall,,Lecture,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,
+MECH 45L-1 - Applied Programming for Mechanical Engineers Lab,Mechanical Engineering,45L,1,Open,0/20,Rudi Schuech,1,T | 2:15 PM - 5:00 PM,Rm 107 Heafey Hall,,Laboratory,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,
+MECH 45L-2 - Applied Programming for Mechanical Engineers Lab,Mechanical Engineering,45L,2,Open,0/20,Rudi Schuech,1,W | 2:15 PM - 5:00 PM,Rm 107 Heafey Hall,,Laboratory,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,
+MECH 114-1 - Machine Design I,Mechanical Engineering,114,1,Open,0/30,Sthanu Mahadev,4,M W F | 8:00 AM - 9:05 AM,Rm 129 Heafey Hall,,Lecture,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,
+MECH 114-2 - Machine Design I,Mechanical Engineering,114,2,Open,0/30,Xiaoou Yang,4,M W F | 11:45 AM - 12:50 PM,Rm 308 Kenna Hall,,Lecture,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,
+MECH 114-3 - Machine Design I,Mechanical Engineering,114,3,Open,0/30,Xiaoou Yang,4,M W F | 1:00 PM - 2:05 PM,Rm 308 Kenna Hall,,Lecture,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,
+MECH 121-1 - Thermodynamics I (-),Mechanical Engineering,121,1,Open,0/30,Robert Marks,4,M W F | 9:15 AM - 10:20 AM,Rm 125 Heafey Hall,Pathways :: Values in Science and Technology,Lecture,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,
+MECH 121-2 - Thermodynamics I (-),Mechanical Engineering,121,2,Open,0/30,Robert Marks,4,M W F | 10:30 AM - 11:35 AM,Rm 125 Heafey Hall,Pathways :: Values in Science and Technology,Lecture,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,
+MECH 121-3 - Thermodynamics I (-),Mechanical Engineering,121,3,Open,0/30,Elaine Scott,4,T Th | 10:20 AM - 12:00 PM,Rm 125 Heafey Hall,Pathways :: Values in Science and Technology,Lecture,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,
+MECH 121-4 - Thermodynamics I (-),Mechanical Engineering,121,4,Open,0/30,Elaine Scott,4,T Th | 12:10 PM - 1:50 PM,Rm 125 Heafey Hall,Pathways :: Values in Science and Technology,Lecture,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,
+MECH 121R-1 - Thermodynamics I Recitation,Mechanical Engineering,121R,1,Open,0/30,Robert Marks,1,W | 2:15 PM - 3:20 PM,Rm 129 Heafey Hall,,Recitation,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,
+MECH 121R-2 - Thermodynamics I Recitation,Mechanical Engineering,121R,2,Open,0/30,Robert Marks,1,W | 3:30 PM - 4:35 PM,Rm 129 Heafey Hall,,Recitation,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,
+MECH 121R-3 - Thermodynamics I Recitation,Mechanical Engineering,121R,3,Open,0/30,Elaine Scott,1,W | 2:15 PM - 3:20 PM,Rm 125 Heafey Hall,,Recitation,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,
+MECH 121R-4 - Thermodynamics I Recitation,Mechanical Engineering,121R,4,Open,0/30,Elaine Scott,1,W | 3:30 PM - 4:35 PM,Rm 125 Heafey Hall,,Recitation,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,
+MECH 122-1 - Fluid Mechanics (-),Mechanical Engineering,122,1,Open,0/20,Henry Chi-Wah Chu | Henry Chu,4,M W F | 9:15 AM - 10:20 AM,Rm 225 Heafey Hall,,Lecture,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,
+MECH 122L-1 - Fluid Mechanics I Lab (-),Mechanical Engineering,122L,1,Open,0/20,Henry Chi-Wah Chu | Henry Chu,1,F | 2:15 PM - 5:00 PM,Rm 214 Heafey Hall,,Laboratory,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,
+MECH 141-1 - Mechanical Vibrations (-),Mechanical Engineering,141,1,Open,0/20,Mahantesh Hiremath,4,T Th | 8:30 AM - 10:10 AM,Rm 214 Bergin Hall,,Lecture,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,
+MECH 141-2 - Mechanical Vibrations (-),Mechanical Engineering,141,2,Open,0/20,Mahantesh Hiremath,4,T Th | 10:20 AM - 12:00 PM,Rm 214 Bergin Hall,,Lecture,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,
+MECH 141-3 - Mechanical Vibrations (-),Mechanical Engineering,141,3,Open,0/20,Michael Neumann,4,T Th | 12:10 PM - 1:50 PM,Rm 214 Bergin Hall,,Lecture,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,
+MECH 141-4 - Mechanical Vibrations (-),Mechanical Engineering,141,4,Open,0/20,Henry Chi-Wah Chu | Henry Chu,4,T Th | 8:30 AM - 10:10 AM,Rm 108 Alameda hall,,Lecture,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,
+MECH 141L-1 - Mechanical Vibrations Lab,Mechanical Engineering,141L,1,Open,0/20,,1,T | 2:15 PM - 5:00 PM,Rm 225 Heafey Hall,,Laboratory,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,
+MECH 141L-2 - Mechanical Vibrations Lab,Mechanical Engineering,141L,2,Open,0/20,Michael Neumann,1,W | 2:15 PM - 5:00 PM,Rm 202 Heafey Hall,,Laboratory,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,
+MECH 141L-3 - Mechanical Vibrations Lab,Mechanical Engineering,141L,3,Open,0/20,Mahantesh Hiremath,1,Th | 2:15 PM - 5:00 PM,Rm 107 Heafey Hall,,Laboratory,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,
+MECH 141L-4 - Mechanical Vibrations Lab,Mechanical Engineering,141L,4,Open,0/20,Mahantesh Hiremath,1,F | 2:15 PM - 5:00 PM,Rm 107 Heafey Hall,,Laboratory,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,
+MECH 141L-5 - Mechanical Vibrations Lab,Mechanical Engineering,141L,5,Open,0/20,Mahantesh Hiremath,1,W | 11:00 AM - 1:45 PM,Rm 201 Heafey Hall,,Laboratory,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,
+MECH 143-1 - Mechatronics,Mechanical Engineering,143,1,Open,0/8,Maria Kyrarini,4,T Th | 8:30 AM - 10:10 AM,RM 1301 SCDI,Pathways :: Design Thinking,Lecture,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,MECH 143-/ECEN 123-1/CSEN 123-1
+MECH 143L-1 - Mechatronics Lab,Mechanical Engineering,143L,1,Open,0/8,Andrew Wolfe | Andy Wolfe,1,T | 2:15 PM - 5:00 PM,RM 4003 SCDI,Pathways :: Design Thinking,Laboratory,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,MECH 143L-/ECEN 123L-1/CSEN 123L-1
+MECH 145-1 - Introduction to Aerospace Engineering,Mechanical Engineering,145,1,Open,0/30,Mohammad Ayoubi,4,T Th | 12:10 PM - 1:50 PM,Rm 122 Heafey Hall,,Lecture,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,
+MECH 145-2 - Introduction to Aerospace Engineering,Mechanical Engineering,145,2,Open,0/30,Sthanu Mahadev,4,T Th | 8:30 AM - 10:10 AM,Rm 129 Heafey Hall,,Lecture,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,
+MECH 159-1 - Engineering and Design with Applied Machine Learning,Mechanical Engineering,159,1,Open,0/30,Jun Wang,4,M W | 7:10 AM - 9:00 AM,Rm 122 Heafey Hall,,Lecture,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,MECH 159-/MECH 259-1
+MECH 174-1 - Microfabrication and Microfluidics,Mechanical Engineering,174,1,Open,0/32,Ismail Araci | Emre Araci,4,T Th | 12:10 PM - 1:50 PM,Rm 129 Heafey Hall,,Lecture,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,MECH 174-/BIOE 174-1/MECH 274-1
+MECH 174L-1 - Microfabrication and Microfluidics Laboratory,Mechanical Engineering,174L,1,Open,0/16,Ismail Araci | Emre Araci,1,Th | 2:15 PM - 5:00 PM,RM 2307 SCDI,,Laboratory,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,MECH 174L-/BIOE 174L-1/MECH 274L-1
+MECH 174L-2 - Microfabrication and Microfluidics Laboratory,Mechanical Engineering,174L,2,Open,0/16,Ismail Araci | Emre Araci,1,F | 2:15 PM - 5:00 PM,RM 2307 SCDI,,Laboratory,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,MECH 174L-/BIOE 174L-2/MECH 274L-2
+MECH 195-1 - Advanced Design II: Implementation,Mechanical Engineering,195,1,Open,0/90,Michael Abbott,3,M W F | 4:45 PM - 5:50 PM,Rm 207 Daly Science 200,Pathways :: Design Thinking,Lecture,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,

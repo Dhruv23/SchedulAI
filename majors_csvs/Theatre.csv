@@ -1,4 +1,31 @@
 Course Section,Course Subject,Course Number,Section Number,Section Status,Enrolled/Capacity,All Instructors,Units,Meeting Patterns,Locations,Course Tags,Instructional Format,Delivery Mode,Start Date,End Date,Academic Period,Overlapping Course(s)
-THTR 2A-1 - Critical Thinking and Writing II,Theatre,2A,1,Open,0/19,,4,M W F | 2:15 PM - 3:20 PM,Rm 231 Mayer Theatre,Core Foundations :: Critical Thinking and Writing 2,Lecture,In-Person,2026-03-30,2026-06-11,Spring 2026 Quarter,
-THTR 12A-1 - Cultures and Ideas II (All the World's a Stage),Theatre,12A,1,Open,0/24,Lazlo Ilya Pearlman | Lazlo Ilya Pearlman,4,M W F | 3:30 PM - 4:35 PM,Rm 231 Mayer Theatre,Core Foundations :: Cultures and Ideas 2,Lecture,In-Person,2026-03-30,2026-06-11,Spring 2026 Quarter,
-THTR 12A-2 - Cultures and Ideas II (All the World's a Stage),Theatre,12A,2,Open,0/24,Benjamin Gillespie,4,T Th | 8:30 AM - 10:10 AM,Rm 231 Mayer Theatre,Core Foundations :: Cultures and Ideas 2,Lecture,In-Person,2026-03-30,2026-06-11,Spring 2026 Quarter,
+THTR 1A-1 - Critical Thinking and Writing I,Theatre,1A,1,Open,0/19,Gaywyn Moore,4,M W F | 2:15 PM - 3:20 PM,Rm 231 Mayer Theatre,Core Foundations :: Critical Thinking and Writing 1,Lecture,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,
+THTR 7-1 - Improv,Theatre,7,1,Open,0/20,Jan Lee Marshall,4,T Th | 10:20 AM - 12:00 PM,Rm 224 Mayer Theatre - Fess Parker Theatre,Core Explorations :: Arts,Studio,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,
+THTR 8-1 - Acting for All (-),Theatre,8,1,Open,0/20,Jeffrey Bracco,4,M W F | 11:45 AM - 12:50 PM,Rm 226 Mayer Theatre - Rehearsal Hall,Core Explorations :: Arts,Studio,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,
+THTR 8-2 - Acting for All (-),Theatre,8,2,Open,0/20,Jan Lee Marshall,4,T Th | 2:00 PM - 3:40 PM,Rm 224 Mayer Theatre - Fess Parker Theatre,Core Explorations :: Arts,Studio,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,
+THTR 11A-1 - Cultures and Ideas I (All the World's a Stage),Theatre,11A,1,Open,0/24,Lazlo Ilya Pearlman | Lazlo Ilya Pearlman,4,M W F | 3:30 PM - 4:35 PM,Rm 231 Mayer Theatre,Core Foundations :: Cultures and Ideas 1,Lecture,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,
+THTR 11A-2 - Cultures and Ideas I (All the World's a Stage),Theatre,11A,2,Open,0/24,Benjamin Gillespie,4,T Th | 8:30 AM - 10:10 AM,Rm 231 Mayer Theatre,Core Foundations :: Cultures and Ideas 1,Lecture,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,
+THTR 12A-1 - Cultures and Ideas II (All the World's a Stage),Theatre,12A,1,Closed,24/0,Lazlo Ilya Pearlman | Lazlo Ilya Pearlman,4,M W F | 1:00 PM - 2:05 PM,Rm 231 Mayer Theatre,Core Foundations :: Cultures and Ideas 2,Lecture,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,
+THTR 12A-2 - Cultures and Ideas II (All the World's a Stage),Theatre,12A,2,Closed,22/0,Lazlo Ilya Pearlman | Lazlo Ilya Pearlman,4,M W | 5:25 PM - 7:10 PM,Rm 231 Mayer Theatre,Core Foundations :: Cultures and Ideas 2,Lecture,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,
+THTR 12A-3 - Cultures and Ideas II (All the World's a Stage),Theatre,12A,3,Closed,22/0,Gaywyn Moore,4,M W F | 10:30 AM - 11:35 AM,Rm 164 Graham Hall,Core Foundations :: Cultures and Ideas 2,Lecture,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,
+"THTR 21-1 - Voice I: Voice, Speech and Presentation Skills",Theatre,21,1,Open,0/20,Kimberly Hill | Kimberly Hill,4,T Th | 2:00 PM - 3:40 PM,Rm 226 Mayer Theatre - Rehearsal Hall,Core Explorations :: Arts,Studio,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,
+THTR 24-1 - Acting Scene Study (-),Theatre,24,1,Open,0/20,Aldo Billingslea,4,T Th | 10:20 AM - 12:00 PM,Rm 226 Mayer Theatre - Rehearsal Hall,Core Explorations :: Arts,Studio,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,
+THTR 29-1 - Rehearsal and Performance (Electricidad),Theatre,29,1,Open,0/20,,2,,,,Experiential,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,THTR 29-/THTR 129-1
+THTR 30-1 - Introduction to Design,Theatre,30,1,Open,0/24,Heather Kenyon,4,T Th | 10:20 AM - 12:00 PM,Rm 231 Mayer Theatre,"Core Explorations :: Arts
+
+Pathways :: Beauty
+
+Pathways :: Design Thinking",Lecture,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,
+THTR 32-1 - Costume Construction,Theatre,32,1,Open,0/10,Kathryn Dowse | Katie Dowse,4,T Th | 8:30 AM - 10:10 AM,Rm 121 Mayer Theatre - Costume Shop,"Core Explorations :: Arts
+
+Pathways :: Design Thinking",Lecture,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,
+THTR 39-1 - Production Workshop,Theatre,39,1,Open,0/25,Erik Sunderman,2,W | 4:45 PM - 5:50 PM,Rm 224 Mayer Theatre - Fess Parker Theatre,,Laboratory,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,THTR 39-/THTR 139-1
+THTR 42-1 - Theatre History II: World Drama,Theatre,42,1,Open,0/20,Benjamin Gillespie,4,T Th | 12:10 PM - 1:50 PM,Rm 301 Mayer Theatre - Library,,Lecture,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,
+THTR 123-1 - Acting in Musical Theatre,Theatre,123,1,Open,0/20,Jeffrey Bracco,5,M W F | 1:00 PM - 2:05 PM,Rm 226 Mayer Theatre - Rehearsal Hall,,Studio,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,
+THTR 129-1 - Rehearsal and Performance (Electricidad),Theatre,129,1,Open,0/20,,2,,,,Experiential,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,THTR 129-/THTR 29-1
+THTR 138-1 - Production Management,Theatre,138,1,Open,0/20,Erik Sunderman,5,T Th | 8:30 AM - 10:10 AM,Rm 301 Mayer Theatre - Library,,Studio,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,
+THTR 139-1 - Production Workshop,Theatre,139,1,Open,0/25,Erik Sunderman,2,W | 4:45 PM - 5:50 PM,Rm 224 Mayer Theatre - Fess Parker Theatre,,Laboratory,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,THTR 139-/THTR 39-1
+THTR 170-1 - Playwriting,Theatre,170,1,Open,0/20,Brian Thorstenson,5,T Th | 3:50 PM - 5:30 PM,Rm 231 Mayer Theatre,Core Integrations :: Advanced Writing,Lecture,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,THTR 170-/ENGL 179AW-1
+THTR 171-1 - Advanced Playwriting,Theatre,171,1,Open,0/20,Brian Thorstenson,5,T Th | 12:10 PM - 1:50 PM,,,Lecture,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,THTR 171-/ENGL 179-1
+THTR 192-1 - Senior Project: Performance (-),Theatre,192,1,Closed,0/0,Kimberly Hill | Kimberly Hill,2 - 5,,,,Independent Study,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,
+THTR 196-1 - Senior Project: Directing (Winter One Acts),Theatre,196,1,Open,0/4,Jeffrey Bracco,2 - 5,,,,Independent Study,In-Person,2026-01-05,2026-03-20,Winter 2026 Quarter,
