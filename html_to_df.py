@@ -2,56 +2,111 @@ import requests
 from bs4 import BeautifulSoup
 import pandas as pd
 
-def extract_courses_from_major(url: str):
-    # Fetch the HTML (acts like curl)
-    response = requests.get(url)
-    response.raise_for_status()
-    html = response.text
+class MajorCourseScraper:
+    """
+    A class for scraping major course listings and descriptions
+    from Santa Clara University's online bulletin.
+    """
 
-    # Parse the HTML
-    soup = BeautifulSoup(html, "html.parser")
+    def __init__(self, url: str):
+        """
+        Initialize the scraper with a target SCU major URL.
 
-    # Find all course blocks — they are marked by <h3> tags with <span class="gdbold"> inside
-    courses = []
-    for header in soup.find_all("h3"):
-        title_tag = header.find("span", class_="gdbold")
-        if not title_tag:
-            continue
+        Args:
+            url (str): URL of the major's bulletin page.
+        """
+        self.url = url
+        self.html = None
+        self.soup = None
+        self.df = None
 
-        title_text = title_tag.get_text(strip=True)
-        if not title_text:
-            continue
+    def fetch_html(self) -> str:
+        """
+        Fetch the HTML page for the provided major URL.
+        Returns the HTML text.
+        """
+        print(f"🌐 Fetching: {self.url}")
+        response = requests.get(self.url)
+        response.raise_for_status()
+        self.html = response.text
+        print("✅ HTML fetched successfully.")
+        return self.html
 
-        # Extract course number and name
-        # e.g., "166. Artificial Intelligence" → ("166", "Artificial Intelligence")
-        parts = title_text.split('.', 1)
-        if len(parts) == 2 and parts[0].strip().isdigit():
-            course_number = parts[0].strip()
-            course_name = parts[1].strip()
-        else:
-            course_number = None
-            course_name = title_text.strip()
+    def parse_html(self) -> pd.DataFrame:
+        """
+        Parse the HTML and extract course numbers, names, and descriptions.
+        Returns a pandas DataFrame.
+        """
+        if self.html is None:
+            self.fetch_html()
 
-        # The next <p> (paragraph) usually contains the description
-        desc_tag = header.find_next_sibling("p")
-        description = desc_tag.get_text(" ", strip=True) if desc_tag else ""
+        self.soup = BeautifulSoup(self.html, "html.parser")
+        courses = []
 
-        courses.append({
-            "Course Number": course_number,
-            "Course Name": course_name,
-            "Description": description
-        })
+        # Each course is usually listed in an <h3> with a bolded <span>
+        for header in self.soup.find_all("h3"):
+            title_tag = header.find("span", class_="gdbold")
+            if not title_tag:
+                continue
 
-    # Convert to DataFrame
-    df = pd.DataFrame(courses)
-    return df
+            title_text = title_tag.get_text(strip=True)
+            if not title_text:
+                continue
 
+            # Extract course number and name
+            parts = title_text.split('.', 1)
+            if len(parts) == 2 and parts[0].strip().isdigit():
+                course_number = parts[0].strip()
+                course_name = parts[1].strip()
+            else:
+                course_number = None
+                course_name = title_text.strip()
+
+            # Get the next <p> (description)
+            desc_tag = header.find_next_sibling("p")
+            description = desc_tag.get_text(" ", strip=True) if desc_tag else ""
+
+            courses.append({
+                "Course Number": course_number,
+                "Course Name": course_name,
+                "Description": description
+            })
+
+        self.df = pd.DataFrame(courses)
+        print(f"📘 Extracted {len(self.df)} courses.")
+        return self.df
+
+    def save_to_csv(self, filename: str = "major_courses.csv") -> None:
+        """
+        Save the parsed course DataFrame to a CSV file.
+
+        Args:
+            filename (str): The CSV file path to save the data.
+        """
+        if self.df is None:
+            raise ValueError("❌ No data to save. Run parse_html() first.")
+        self.df.to_csv(filename, index=False)
+        print(f"💾 Saved courses to {filename}")
+
+    def run_full_pipeline(self, output_csv: str = "major_courses.csv") -> pd.DataFrame:
+        """
+        Runs the full pipeline:
+          1. Fetch the HTML
+          2. Parse the courses
+          3. Save to CSV
+
+        Returns:
+            pd.DataFrame: Parsed course DataFrame.
+        """
+        self.fetch_html()
+        df = self.parse_html()
+        self.save_to_csv(output_csv)
+        return df
+
+
+# Example usage
 if __name__ == "__main__":
     url = "https://www.scu.edu/bulletin//undergraduate/chapter-5-school-of-engineering/computer-science-and-engineering.html#59ffa8ec905c"
-    df = extract_courses_from_major(url)
-
-    # Display a sample of the result
+    scraper = MajorCourseScraper(url)
+    df = scraper.run_full_pipeline("CSEN_courses.csv")
     print(df.head())
-
-    # Save to CSV (optional)
-    df.to_csv("CSEN_courses.csv", index=False)
