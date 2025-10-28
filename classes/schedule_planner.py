@@ -51,18 +51,31 @@ class SchedulePlanner:
     def generate_schedules(self, course_codes: list[str], max_results: int = 10):
         """
         Generate all valid schedules (no time conflicts) given a list of course codes.
+        Each code is matched against section data; valid combinations are concatenated.
         """
-        grouped = [self.sections_df[self.sections_df["Course"].str.contains(c)] for c in course_codes]
-        schedules = []
+        grouped = []
+        for code in course_codes:
+            matches = self.sections_df[self.sections_df["Course"].str.contains(code, na=False)]
+            if not matches.empty:
+                # ✅ wrap in list so itertools.product sees a list, not a DataFrame
+                grouped.append([matches])
+            else:
+                print(f"[WARN] No matches found for course code: {code}")
 
+        if not grouped:
+            print("[ERROR] No valid course combinations found.")
+            return []
+
+        schedules = []
         for combo in itertools.product(*grouped):
-            schedule = pd.concat(combo)
+            # combo is a tuple of DataFrames
+            schedule = pd.concat(combo, ignore_index=True)
             if not self.detect_conflicts(schedule):
                 schedules.append(schedule)
             if len(schedules) >= max_results:
                 break
 
-        print(f"✅ Generated {len(schedules)} valid schedules.")
+        print(f"[INFO] Generated {len(schedules)} valid schedules.")
         return schedules
 
     # ----------------------------------------------------------
@@ -71,13 +84,15 @@ class SchedulePlanner:
     def filter_preferred_professor(self, df: pd.DataFrame, professor_name: str):
         """Filter sections taught by a preferred professor."""
         return df[df["Instructor"].str.contains(professor_name, case=False, na=False)]
-
+    
     def filter_preferred_time(self, df: pd.DataFrame, earliest: str = None, latest: str = None):
         """Filter sections within a preferred time window."""
         if earliest:
-            df = df[df["Start Time"].apply(lambda t: self._parse_time(t) >= self._parse_time(earliest))]
+            earliest_time = self._parse_time(earliest)
+            df = df[df["Start Time"].apply(lambda t: (self._parse_time(t) or earliest_time) >= earliest_time)]
         if latest:
-            df = df[df["End Time"].apply(lambda t: self._parse_time(t) <= self._parse_time(latest))]
+            latest_time = self._parse_time(latest)
+            df = df[df["End Time"].apply(lambda t: (self._parse_time(t) or latest_time) <= latest_time)]
         return df
 
     # ----------------------------------------------------------
@@ -86,4 +101,4 @@ class SchedulePlanner:
     def export_schedule(self, schedule_df: pd.DataFrame, filename: str):
         """Export a chosen schedule to CSV."""
         schedule_df.to_csv(filename, index=False)
-        print(f"💾 Saved schedule to {filename}")
+        print(f"[SAVE] Saved schedule to {filename}")

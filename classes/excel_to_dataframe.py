@@ -31,7 +31,7 @@ class CourseExcelParser:
 
         # Save to master CSV
         combined_df.to_csv(csv_path, index=False)
-        print(f"✅ Saved combined CSV: {csv_path}")
+        print(f"[INFO] Saved combined CSV: {csv_path}")
 
         # Store internally for later splitting
         self.df = combined_df
@@ -43,10 +43,10 @@ class CourseExcelParser:
         and saves each subset as a CSV file inside the output directory.
         """
         if self.df is None:
-            raise ValueError("❌ No DataFrame loaded. Run parse_courses() first.")
+            raise ValueError("[ERROR] No DataFrame loaded. Run parse_courses() first.")
 
         if "Course Subject" not in self.df.columns:
-            raise ValueError("❌ The DataFrame does not contain a 'Course Subject' column.")
+            raise ValueError("[ERROR] The DataFrame does not contain a 'Course Subject' column.")
 
         os.makedirs(self.output_dir, exist_ok=True)
 
@@ -57,7 +57,7 @@ class CourseExcelParser:
             output_path = os.path.join(self.output_dir, f"{safe_subject}.csv")
 
             group_df.to_csv(output_path, index=False)
-            print(f"📁 Saved: {output_path} ({len(group_df)} rows)")
+            print(f"[SAVE] Saved: {output_path} ({len(group_df)} rows)")
 
     def run_full_pipeline(self) -> pd.DataFrame:
         """

@@ -57,7 +57,7 @@ class TranscriptParser:
         """Save the extracted courses to a CSV file."""
         df = self.to_dataframe()
         df.to_csv(output_path, index=False)
-        print(f"✅ Saved to {output_path}")
+        print(f"[SAVE] Saved to {output_path}")
 
 # --- Example usage ---
 if __name__ == "__main__":

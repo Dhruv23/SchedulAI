@@ -25,11 +25,11 @@ class MajorCourseScraper:
         Fetch the HTML page for the provided major URL.
         Returns the HTML text.
         """
-        print(f"🌐 Fetching: {self.url}")
+        print(f"[FETCH] Fetching: {self.url}")
         response = requests.get(self.url)
         response.raise_for_status()
         self.html = response.text
-        print("✅ HTML fetched successfully.")
+        print("[INFO] HTML fetched successfully.")
         return self.html
 
     def parse_html(self) -> pd.DataFrame:
@@ -73,7 +73,7 @@ class MajorCourseScraper:
             })
 
         self.df = pd.DataFrame(courses)
-        print(f"📘 Extracted {len(self.df)} courses.")
+        print(f"[INFO] Extracted {len(self.df)} courses.")
         return self.df
 
     def save_to_csv(self, filename: str = "major_courses.csv") -> None:
@@ -84,9 +84,9 @@ class MajorCourseScraper:
             filename (str): The CSV file path to save the data.
         """
         if self.df is None:
-            raise ValueError("❌ No data to save. Run parse_html() first.")
+            raise ValueError("[ERROR] No data to save. Run parse_html() first.")
         self.df.to_csv(filename, index=False)
-        print(f"💾 Saved courses to {filename}")
+        print(f"[SAVE] Saved courses to {filename}")
 
     def run_full_pipeline(self, output_csv: str = "major_courses.csv") -> pd.DataFrame:
         """

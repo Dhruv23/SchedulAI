@@ -49,7 +49,7 @@ class CourseSearchEngine:
     def filter_by_units(self, min_units: int = None, max_units: int = None) -> pd.DataFrame:
         """Filter by number of course units."""
         if "Units" not in self.df.columns:
-            raise ValueError("❌ DataFrame must include a 'Units' column.")
+            raise ValueError("[ERROR] DataFrame must include a 'Units' column.")
         df = self.df.copy()
         if min_units is not None:
             df = df[df["Units"] >= min_units]
@@ -65,7 +65,7 @@ class CourseSearchEngine:
         'graduate' → 200+
         """
         if "Course Number" not in self.df.columns:
-            raise ValueError("❌ Missing 'Course Number' column.")
+            raise ValueError("[ERROR] Missing 'Course Number' column.")
 
         def level_of(num):
             try:
@@ -88,4 +88,4 @@ class CourseSearchEngine:
     def export_results(self, df: pd.DataFrame, filename: str):
         """Save a filtered or search result DataFrame to CSV."""
         df.to_csv(filename, index=False)
-        print(f"💾 Saved results to {filename}")
+        print(f"[SAVE] Saved results to {filename}")
