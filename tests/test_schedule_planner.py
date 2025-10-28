@@ -15,23 +15,31 @@ class TestSchedulePlanner(unittest.TestCase):
         })
         self.planner = SchedulePlanner(self.data)
 
-    # 1️⃣ Normal case — time parsing
+    # [NORMAL CASE] - time parsing
     def test_parse_time_valid(self):
-        """Normal case: correctly parses AM/PM time strings."""
+        """[NORMAL CASE] - correctly parses AM/PM time strings."""
         t = self.planner._parse_time("2:30 PM")
         self.assertEqual(t.hour, 14)
         self.assertEqual(t.minute, 30)
 
-    # 2️⃣ Normal case — time overlap detection
+    # [NORMAL CASE] - time overlap detection
     def test_times_overlap_true(self):
-        """Normal case: overlapping times should return True."""
+        """[NORMAL CASE] - overlapping times should return True."""
         row1 = {"Day": "Mon", "Start Time": "9:00 AM", "End Time": "10:00 AM"}
         row2 = {"Day": "Mon", "Start Time": "9:30 AM", "End Time": "10:30 AM"}
         self.assertTrue(self.planner._times_overlap(row1, row2))
 
-    # 3️⃣ Edge case — detect_conflicts no overlap
+    # [NORMAL CASE] - generate valid schedules
+    def test_generate_schedules_normal(self):
+        """[NORMAL CASE] - should generate at least one valid schedule."""
+        schedules = self.planner.generate_schedules(["CSEN", "MATH"], max_results=5)
+        self.assertIsInstance(schedules, list)
+        self.assertGreaterEqual(len(schedules), 1)
+        self.assertTrue(all(isinstance(s, pd.DataFrame) for s in schedules))
+
+    # [EDGE CASE] - detect_conflicts no overlap
     def test_detect_conflicts_edge(self):
-        """Edge case: no overlap should return False."""
+        """[EDGE CASE] - no overlap should return False."""
         no_conflict_df = pd.DataFrame({
             "Course": ["CSEN 10", "MATH 11"],
             "Day": ["Mon", "Tue"],  # different days
@@ -41,17 +49,9 @@ class TestSchedulePlanner(unittest.TestCase):
         })
         self.assertFalse(self.planner.detect_conflicts(no_conflict_df))
 
-    # 4️⃣ Normal case — generate valid schedules
-    def test_generate_schedules_normal(self):
-        """Normal case: should generate at least one valid schedule."""
-        schedules = self.planner.generate_schedules(["CSEN", "MATH"], max_results=5)
-        self.assertIsInstance(schedules, list)
-        self.assertGreaterEqual(len(schedules), 1)
-        self.assertTrue(all(isinstance(s, pd.DataFrame) for s in schedules))
-
-    # 5️⃣ Invalid case — malformed time filter
+    # [INVALID CASE] - malformed time filter
     def test_filter_preferred_time_invalid(self):
-        """Invalid case: should handle malformed time inputs gracefully."""
+        """[INVALID CASE] - should handle malformed time inputs gracefully."""
         df = self.data.copy()
         df.loc[0, "Start Time"] = "badtime"  # corrupt one entry
         result = self.planner.filter_preferred_time(df, earliest="8:00 AM")

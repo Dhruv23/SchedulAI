@@ -10,10 +10,10 @@ class TestCourseExcelParser(unittest.TestCase):
         """Set up a parser with dummy file path."""
         self.parser = CourseExcelParser("dummy.xlsx", output_dir="test_output_dir")
 
-    # 1️⃣ Normal case — parse_courses
+    # [NORMAL CASE] - course parsing
     @patch("pandas.read_excel")
     def test_parse_courses_normal(self, mock_read_excel):
-        """Normal case: should combine all sheets and save to CSV."""
+        """[NORMAL CASE] - should combine all sheets and save to CSV."""
         mock_df1 = pd.DataFrame({"Course Subject": ["CSEN"], "Course": ["CSEN 10"]})
         mock_df2 = pd.DataFrame({"Course Subject": ["MATH"], "Course": ["MATH 11"]})
         mock_read_excel.return_value = {"Sheet1": mock_df1, "Sheet2": mock_df2}
@@ -24,19 +24,19 @@ class TestCourseExcelParser(unittest.TestCase):
         self.assertTrue(os.path.exists("test_combined.csv"))
         os.remove("test_combined.csv")
 
-    # 2️⃣ Edge case — split_by_course_subject single subject
+    # [EDGE CASE] - split_by_course_subject single subject
     @patch("os.makedirs")
     def test_split_by_course_subject_edge_single(self, mock_makedirs):
-        """Edge case: single subject DataFrame should still create one CSV."""
+        """[EDGE CASE] - single subject DataFrame should still create one CSV."""
         df = pd.DataFrame({"Course Subject": ["CSEN", "CSEN"], "Course": ["CSEN 10", "CSEN 11"]})
         self.parser.df = df
         with patch.object(pd.DataFrame, "to_csv") as mock_to_csv:
             self.parser.split_by_course_subject()
             mock_to_csv.assert_called_once()
 
-    # 3️⃣ Invalid case — split_by_course_subject missing data
+    # [INVALID CASE] - split_by_course_subject missing data
     def test_split_by_course_subject_invalid(self):
-        """Invalid case: should raise errors for missing or uninitialized DataFrame."""
+        """[INVALID CASE] - should raise errors for missing or uninitialized DataFrame."""
         # Case 1: df is None
         with self.assertRaises(ValueError):
             self.parser.split_by_course_subject()
@@ -46,11 +46,18 @@ class TestCourseExcelParser(unittest.TestCase):
         with self.assertRaises(ValueError):
             self.parser.split_by_course_subject()
 
-    # 4️⃣ Utility — run_full_pipeline integrates all steps
+    # [INVALID CASE] - file not found or unreadable Excel
+    @patch("pandas.read_excel", side_effect=FileNotFoundError)
+    def test_parse_courses_invalid_file(self, mock_read_excel):
+        """[INVALID CASE] - should raise FileNotFoundError gracefully."""
+        with self.assertRaises(FileNotFoundError):
+            self.parser.parse_courses("nonexistent.csv")
+
+    # [UTILITY] - run_full_pipeline integrates all steps
     @patch.object(CourseExcelParser, "parse_courses")
     @patch.object(CourseExcelParser, "split_by_course_subject")
     def test_run_full_pipeline(self, mock_split, mock_parse):
-        """Utility: ensures both parse and split are called."""
+        """[UTILITY] - ensures both parse and split are called."""
         mock_df = pd.DataFrame({"Course Subject": ["CSEN"], "Course": ["CSEN 10"]})
         mock_parse.return_value = mock_df
         self.parser.df = mock_df
@@ -59,13 +66,6 @@ class TestCourseExcelParser(unittest.TestCase):
         mock_parse.assert_called_once()
         mock_split.assert_called_once()
         self.assertIsInstance(result, pd.DataFrame)
-
-    # 5️⃣ Invalid case — file not found or unreadable Excel
-    @patch("pandas.read_excel", side_effect=FileNotFoundError)
-    def test_parse_courses_invalid_file(self, mock_read_excel):
-        """Invalid case: should raise FileNotFoundError gracefully."""
-        with self.assertRaises(FileNotFoundError):
-            self.parser.parse_courses("nonexistent.csv")
 
 
 if __name__ == "__main__":

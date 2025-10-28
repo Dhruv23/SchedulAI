@@ -11,9 +11,7 @@ class CourseSearchEngine:
         self.df = course_df.copy()
         self.df.columns = [c.strip() for c in self.df.columns]
 
-    # ----------------------------------------------------------
-    # 🔍 SEARCH METHODS
-    # ----------------------------------------------------------
+    # SEARCH METHODS
     def search_keyword(self, query: str) -> pd.DataFrame:
         """
         Returns all courses where the query appears in either
@@ -37,9 +35,7 @@ class CourseSearchEngine:
         results["Match Score"] = [m[1] for m in matches if m[0] in results["Course Name"].values]
         return results.sort_values("Match Score", ascending=False).reset_index(drop=True)
 
-    # ----------------------------------------------------------
-    # 🎯 FILTERING METHODS
-    # ----------------------------------------------------------
+    # FILTERING METHODS
     def filter_by_subject(self, subject: str) -> pd.DataFrame:
         """Filter by course subject prefix (e.g., 'CSEN', 'MATH')."""
         subject = subject.upper().strip()
@@ -60,8 +56,8 @@ class CourseSearchEngine:
     def filter_by_level(self, level: str) -> pd.DataFrame:
         """
         Filter by course level:
-        'lower' → 1–99
-        'upper' → 100–199
+        'lower' → 1-99
+        'upper' → 100-199
         'graduate' → 200+
         """
         if "Course Number" not in self.df.columns:
@@ -82,9 +78,7 @@ class CourseSearchEngine:
         self.df["Level"] = self.df["Course Number"].apply(level_of)
         return self.df[self.df["Level"] == level.lower()].reset_index(drop=True)
 
-    # ----------------------------------------------------------
-    # 💾 UTILITY
-    # ----------------------------------------------------------
+    # UTILITY
     def export_results(self, df: pd.DataFrame, filename: str):
         """Save a filtered or search result DataFrame to CSV."""
         df.to_csv(filename, index=False)

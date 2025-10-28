@@ -11,9 +11,7 @@ class SchedulePlanner:
     def __init__(self, sections_df: pd.DataFrame):
         self.sections_df = sections_df.copy()
 
-    # ----------------------------------------------------------
-    # ⏰ TIME HANDLING
-    # ----------------------------------------------------------
+    # TIME HANDLING
     @staticmethod
     def _parse_time(t: str):
         """Convert 'HH:MM AM/PM' → datetime.time"""
@@ -35,9 +33,7 @@ class SchedulePlanner:
 
         return not (end1 <= start2 or end2 <= start1)
 
-    # ----------------------------------------------------------
-    # ⚖️ CONFLICT DETECTION
-    # ----------------------------------------------------------
+    # CONFLICT DETECTION
     def detect_conflicts(self, schedule_df: pd.DataFrame) -> bool:
         """Return True if any two sections overlap."""
         for (_, a), (_, b) in itertools.combinations(schedule_df.iterrows(), 2):
@@ -45,9 +41,7 @@ class SchedulePlanner:
                 return True
         return False
 
-    # ----------------------------------------------------------
-    # 🧩 SCHEDULE GENERATION
-    # ----------------------------------------------------------
+    # SCHEDULE GENERATION
     def generate_schedules(self, course_codes: list[str], max_results: int = 10):
         """
         Generate all valid schedules (no time conflicts) given a list of course codes.
@@ -57,7 +51,7 @@ class SchedulePlanner:
         for code in course_codes:
             matches = self.sections_df[self.sections_df["Course"].str.contains(code, na=False)]
             if not matches.empty:
-                # ✅ wrap in list so itertools.product sees a list, not a DataFrame
+                # wrap in list so itertools.product sees a list, not a DataFrame
                 grouped.append([matches])
             else:
                 print(f"[WARN] No matches found for course code: {code}")
@@ -78,9 +72,7 @@ class SchedulePlanner:
         print(f"[INFO] Generated {len(schedules)} valid schedules.")
         return schedules
 
-    # ----------------------------------------------------------
-    # ⭐ PREFERENCES
-    # ----------------------------------------------------------
+    # PREFERENCES
     def filter_preferred_professor(self, df: pd.DataFrame, professor_name: str):
         """Filter sections taught by a preferred professor."""
         return df[df["Instructor"].str.contains(professor_name, case=False, na=False)]
@@ -95,9 +87,7 @@ class SchedulePlanner:
             df = df[df["End Time"].apply(lambda t: (self._parse_time(t) or latest_time) <= latest_time)]
         return df
 
-    # ----------------------------------------------------------
-    # 📤 EXPORT
-    # ----------------------------------------------------------
+    # EXPORT
     def export_schedule(self, schedule_df: pd.DataFrame, filename: str):
         """Export a chosen schedule to CSV."""
         schedule_df.to_csv(filename, index=False)
