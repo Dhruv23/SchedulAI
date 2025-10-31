@@ -1,0 +1,10 @@
+POST http://127.0.0.1:5000/student/register
+Content-Type: application/json
+
+{
+  "full_name": "max verstappen",
+  "email": "maxverstappen1@gmail.com",
+  "password": "SimplyLovely4!",
+  "major": "Divebombing",
+  "grad_year": 2026
+}
