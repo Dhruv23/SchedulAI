@@ -8,8 +8,13 @@ class SchedulePlanner:
     detecting time conflicts and optimizing for user preferences.
     """
 
-    def __init__(self, sections_df: pd.DataFrame):
-        self.sections_df = sections_df.copy()
+    def __init__(self, sections_df=None):
+        """
+        Initialize SchedulePlanner.
+        sections_df: optional DataFrame of course sections.
+        """
+        import pandas as pd
+        self.sections_df = sections_df if sections_df is not None else pd.DataFrame()
 
     # TIME HANDLING
     @staticmethod
@@ -92,3 +97,49 @@ class SchedulePlanner:
         """Export a chosen schedule to CSV."""
         schedule_df.to_csv(filename, index=False)
         print(f"[SAVE] Saved schedule to {filename}")
+
+    # ADMIN-RELATED AND AI SUGGESTION HELPERS
+    def add_advisor_comment(self, student_id: int, comment: str):
+        """Stub: Add an advisor comment for a student."""
+        print(f"[ADMIN] Added advisor comment for student {student_id}: {comment}")
+
+    def get_advisor_comments(self, student_id: int):
+        """Stub: Retrieve advisor comments for a student."""
+        print(f"[ADMIN] Retrieved advisor comments for student {student_id}")
+        return []
+
+    def suggest_plan(self, student_id: int = None):
+        """Stub: Suggest a plan based on student ID or general preferences."""
+        suggestion = "Suggest balanced course load with morning classes preferred."
+        print(f"[AI] Suggestion for student {student_id if student_id else 'N/A'}: {suggestion}")
+        return suggestion
+
+    def analyze_schedule(self, schedule_df: pd.DataFrame):
+        """Analyze a schedule and return summary analytics."""
+        num_courses = schedule_df["Course"].nunique()
+        total_hours = 0
+        earliest_start = None
+        latest_end = None
+
+        for _, row in schedule_df.iterrows():
+            start = self._parse_time(row["Start Time"])
+            end = self._parse_time(row["End Time"])
+            if start and end:
+                duration = (datetime.combine(datetime.min, end) - datetime.combine(datetime.min, start)).seconds / 3600
+                total_hours += duration
+                if earliest_start is None or start < earliest_start:
+                    earliest_start = start
+                if latest_end is None or end > latest_end:
+                    latest_end = end
+
+        analysis = {
+            "num_courses": num_courses,
+            "total_hours": total_hours,
+            "earliest_start": earliest_start.strftime("%I:%M %p") if earliest_start else None,
+            "latest_end": latest_end.strftime("%I:%M %p") if latest_end else None,
+        }
+        print(f"[ANALYSIS] {analysis}")
+        return analysis
+
+    def __repr__(self):
+        return f"<SchedulePlanner with {len(self.sections_df)} sections>"

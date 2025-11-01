@@ -2,6 +2,7 @@
 
 from sqlalchemy import func
 from db import db
+from werkzeug.security import generate_password_hash, check_password_hash
 
 # model -> SQLite table named 'students'
 class Student(db.Model):
@@ -46,3 +47,26 @@ class Student(db.Model):
             "created_at": self.created_at.isoformat() if self.created_at else None,
             "updated_at": self.updated_at.isoformat() if self.updated_at else None,
         }
+    
+    def set_password(self, password):
+        """Hash and set the user's password."""
+        self.password_hash = generate_password_hash(password)
+    
+    def check_password(self, password):
+        """Check the user's password against the stored hash."""
+        return check_password_hash(self.password_hash, password)
+    
+    def update_profile(self, **kwargs):
+        """Update allowed profile fields safely."""
+        allowed_fields = {'full_name', 'major', 'grad_year', 'bio', 'pronouns'}
+        for field, value in kwargs.items():
+            if field in allowed_fields:
+                setattr(self, field, value)
+    
+    def assign_role(self, role):
+        """Assign a role only if current role is admin or assigning to student."""
+        if self.role == 'admin' or role == 'student':
+            self.role = role
+    
+    def __repr__(self):
+        return f"<Student id={self.id} full_name={self.full_name} email={self.email} role={self.role}>"

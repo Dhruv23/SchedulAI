@@ -7,9 +7,13 @@ class CourseSearchEngine:
     Supports keyword and fuzzy search, subject filtering, and ranking.
     """
 
-    def __init__(self, course_df: pd.DataFrame):
-        self.df = course_df.copy()
-        self.df.columns = [c.strip() for c in self.df.columns]
+    def __init__(self, course_df=None):
+        """
+        Initialize CourseSearchEngine.
+        course_df: optional DataFrame of available courses.
+        """
+        import pandas as pd
+        self.df = course_df if course_df is not None else pd.DataFrame()
 
     # SEARCH METHODS
     def search_keyword(self, query: str) -> pd.DataFrame:
@@ -83,3 +87,43 @@ class CourseSearchEngine:
         """Save a filtered or search result DataFrame to CSV."""
         df.to_csv(filename, index=False)
         print(f"[SAVE] Saved results to {filename}")
+
+    # ADMIN-LEVEL CRUD METHODS
+    def add_course(self, course_data: dict):
+        """Add a new course to the DataFrame."""
+        new_row = pd.DataFrame([course_data])
+        self.df = pd.concat([self.df, new_row], ignore_index=True)
+        print(f"[ADD] Course '{course_data.get('Course Name', 'Unknown')}' added.")
+
+    def update_course(self, course_name: str, updates: dict):
+        """Update existing course(s) matching course_name with provided updates."""
+        mask = self.df["Course Name"] == course_name
+        if not mask.any():
+            print(f"[UPDATE] No course found with name '{course_name}'.")
+            return
+        for col, val in updates.items():
+            if col in self.df.columns:
+                self.df.loc[mask, col] = val
+            else:
+                print(f"[UPDATE] Warning: Column '{col}' does not exist.")
+        print(f"[UPDATE] Course(s) named '{course_name}' updated.")
+
+    def delete_course(self, course_name: str):
+        """Delete course(s) matching the course_name."""
+        initial_count = len(self.df)
+        self.df = self.df[self.df["Course Name"] != course_name].reset_index(drop=True)
+        final_count = len(self.df)
+        deleted = initial_count - final_count
+        if deleted > 0:
+            print(f"[DELETE] Deleted {deleted} course(s) named '{course_name}'.")
+        else:
+            print(f"[DELETE] No course found with name '{course_name}'.")
+
+    def refresh_dataframe(self, new_df: pd.DataFrame):
+        """Replace the current DataFrame with a new one."""
+        self.df = new_df.copy()
+        self.df.columns = [c.strip() for c in self.df.columns]
+        print("[REFRESH] DataFrame refreshed with new data.")
+
+    def __repr__(self):
+        return f"<CourseSearchEngine: {len(self.df)} courses loaded>"
