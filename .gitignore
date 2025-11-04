@@ -11,12 +11,9 @@ __pycache__/
 # transcript files
 *.pdf
 
-# development files
-CSEN.txt
-test_results.txt
-# student_register_test.http
-# password_reset_test.http
-# password_reset_confirmation_test.http
+# result/output files
+*_results.*
+*_output.*
 
 # logs and temp files
 *.log
