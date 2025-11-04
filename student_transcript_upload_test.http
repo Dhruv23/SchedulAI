@@ -1,0 +1,9 @@
+POST http://127.0.0.1:5000/student/transcript/upload
+Content-Type: multipart/form-data; boundary=WebAppBoundary
+
+--WebAppBoundary
+Content-Disposition: form-data; name="file"; filename="insert_transcript_name_here.pdf"
+Content-Type: application/pdf
+
+< ./insert_transcript_name_here.pdf
+--WebAppBoundary--

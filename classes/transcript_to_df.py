@@ -1,3 +1,4 @@
+from pydoc import text
 import re
 import pandas as pd
 import pdfplumber
@@ -22,11 +23,15 @@ class TranscriptParser:
         using regex patterns that match transcript formatting.
         """
         # Pattern for lines like: "CSEN 140 - Machine Learning and Data Mining"
-        course_pattern = re.compile(r"([A-Z]{2,4}\s\d{1,3}[A-Z]?)\s*-\s*(.+)")
-        grade_pattern = re.compile(r"([A-F][+-]?)\s+([\d.]+)\s+(\d+)\s+([\d.]+)")
+        # course_pattern = re.compile(r"([A-Z]{2,4}\s\d{1,3}[A-Z]?)\s*-\s*(.+)")
+        # grade_pattern = re.compile(r"([A-F][+-]?)\s+([\d.]+)\s+(\d+)\s+([\d.]+)")
+        
+        course_pattern = re.compile(r"([A-Z]{2,4}\s\d{1,3}[A-Z]?)\s*-\s*([A-Za-z0-9 &,:'-]+)")
+        grade_pattern = re.compile(r"([A-FP][+-]?)\s+([\d.]+)\s+(\d+)\s+([\d.]+)")
 
         courses = []
         lines = self.text.splitlines()
+        
         for i, line in enumerate(lines):
             match_course = course_pattern.search(line)
             if match_course:
@@ -48,20 +53,31 @@ class TranscriptParser:
         return courses
 
     def to_dataframe(self) -> pd.DataFrame:
-        """Convert parsed courses to a Pandas DataFrame."""
+        """convert extracted course data to dataframe"""
         courses = self._extract_courses()
+        if not courses:
+            print("[WARN] no valid courses extracted")
+            return pd.DataFrame(columns=["Course Code", "Course Name", "Grade", "Grade Points", "Units", "Total Points"])
+        
         df = pd.DataFrame(courses)
+        if "Course Name" in df.columns:
+            df = df[df["Course Name"].str.len() > 3]
         return df
-
+    
     def save_to_csv(self, output_path="transcript_courses.csv"):
-        """Save the extracted courses to a CSV file."""
+        """Save extracted courses to a CSV file (legacy)."""
         df = self.to_dataframe()
+        if df.empty:
+            print("[WARN] no valid courses extracted; CSV not saved")
+            return None
         df.to_csv(output_path, index=False)
         print(f"[SAVE] Saved to {output_path}")
+        return output_path
 
-# --- Example usage ---
-if __name__ == "__main__":
-    parser = TranscriptParser("Transcript - Dhruv Patel - 2025.pdf")
-    df = parser.to_dataframe()
-    print(df.head())  # Preview the first few rows
-    parser.save_to_csv()
+    def to_json(self) -> list:
+        """convert extracted courses to json list of dicts"""
+        df = self.to_dataframe()
+        if df.empty:
+            print("[WARN] no valid courses extracted -> return empty json")
+            return []
+        return df.to_dict(orient="records")

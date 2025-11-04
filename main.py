@@ -1,25 +1,33 @@
 # main.py
 import os
 from flask import Flask, jsonify
+
+# password hashing and token verification
 from flask import request, url_for
 from werkzeug.security import generate_password_hash
 import re
 from itsdangerous import BadSignature, SignatureExpired
 
+# transcript utilities
+from werkzeug.utils import secure_filename
+
+# CORS for frontend-backend communication
 from flask_cors import CORS
 from db import db # because we only have one instance of SQLAlchemy
 from dotenv import load_dotenv
 
+# import classes
+from classes.student_model import Student
 from classes.auth_manager import AuthManager
 from classes.admin_user_manager import AdminUserManager
 from classes.schedule_planner import SchedulePlanner
 from classes.course_search_engine import CourseSearchEngine
+from classes.transcript_to_df import TranscriptParser
+from classes.transcript_course_model import TranscriptCourse
 from flask import session
 
 # load environment variables
 load_dotenv()
-
-# print("[DEBUG] MAIL_PASSWORD:", os.environ.get("MAIL_PASSWORD"))
 
 # initialize flask
 app = Flask(__name__)
@@ -39,7 +47,9 @@ app.config["MAIL_DEFAULT_SENDER"] = ("SchedulAI Support", "scu.schedulai@gmail.c
 mail = Mail(app)
 
 # set secret key and initialize
-app.secret_key = "testsecretkey"
+app.secret_key = os.environ.get("SECRET_KEY")
+if not app.secret_key:
+    raise ValueError("[ERROR] secret key not set. please configure in .env file")
 
 # token serializer for password reset link
 serializer = URLSafeTimedSerializer(app.secret_key)
@@ -80,16 +90,14 @@ admin_manager = AdminUserManager()
 planner = SchedulePlanner()
 course_engine = CourseSearchEngine()
 
+# configure upload folder
+UPLOAD_FOLDER = os.path.join(os.getcwd(), "uploads")
+os.makedirs(UPLOAD_FOLDER, exist_ok=True)
+
 # import health check route (to confirm server is running)
 @app.route("/health", methods=["GET"])
 def health_check():
     return jsonify({"status": "HEALTHY", "message": "[INFO] flask backend is running"}), 200
-
-from flask import request
-from werkzeug.security import generate_password_hash
-import re
-from classes.student_model import Student # ensure student model is imported
-from db import db
 
 # student registration endpoint
 @app.post("/student/register")
@@ -308,6 +316,102 @@ def user_password_reset_confirm():
     db.session.commit()
     
     return {"status": "SUCCESS", "message": "[INFO] password successfully reset"}, 200
+
+@app.post("/student/transcript/upload")
+def upload_transcript():
+    """
+    [POST] upload and parse transcript PDF
+    body: multipart/form-data
+    accepts: file (.pdf)
+    returns: json data extracted from transcript
+    """
+    if "file" not in request.files:
+        return {"status": "ERROR", "message": "no file part in request"}, 400
+    
+    file = request.files["file"]
+    if file.filename == "":
+        return {"status": "ERROR", "message": "no file selected"}, 400
+    
+    if not file.filename.lower().endswith(".pdf"):
+        return {"status": "ERROR", "message": "invalid file type. please upload a PDF file"}, 400
+    
+    # save uploaded file securely
+    filename = secure_filename(file.filename)
+    filepath = os.path.join(UPLOAD_FOLDER, filename)
+    file.save(filepath)
+    
+    try:
+        parser = TranscriptParser(filepath)
+        transcript_data = parser.to_json()
+        
+        if not transcript_data:
+            return {"status": "ERROR", "message": "no valid course data extracted from transcript"}, 400
+
+        # check user sesssion
+        student_id = session.get("user_id")
+        if not student_id:
+            return {"status": "ERROR", "message": "unauthorized access. please log in."}, 401
+        
+        # clear previous transcript data if reuploaded
+        TranscriptCourse.query.filter_by(student_id=student_id).delete()
+        
+        # store parsed course into db
+        for course in transcript_data:
+            new_entry = TranscriptCourse(
+                student_id=student_id,
+                course_code=course.get("Course Code"),
+                course_name=course.get("Course Name"),
+                grade=course.get("Grade"),
+                grade_points=course.get("Grade Points"),
+                units=course.get("Units"),
+                total_points=course.get("Total Points"),
+            )
+            db.session.add(new_entry)
+        db.session.commit()
+        
+        return {
+            "status": "SUCCESS",
+            "message": "transcript parsed successfully",
+            "courses": transcript_data
+        }, 200
+        
+    except Exception as e:
+        db.session.rollback()
+        print(f"[ERROR] transcript parsing failed: {e}")
+        return {"status": "ERROR", "message": f"failed to parse transcript: {str(e)}"}, 500
+    
+    # always clean up the temporary file
+    finally:
+        if os.path.exists(filepath):
+            os.remove(filepath)
+
+@app.get("/student/transcript")
+def get_transcript():
+    """
+    [GET] fetch parsed transcript data for the logged-in student
+    """
+    student_id = session.get("user_id")
+    if not student_id:
+        return {"status": "ERROR", "message": "unauthorized access. please log in."}, 401
+    
+    try:
+        records = TranscriptCourse.query.filter_by(student_id=student_id).all()
+        if not records:
+            return {
+                "status": "SUCCESS",
+                "message": "[INFO] no transcript data found for this student",
+                "courses": []
+            }, 200
+            
+        return {
+            "status": "SUCCESS",
+            "message": "[INFO] transcript data retrieved successfully",
+            "courses": [record.to_dict() for record in records]
+        }, 200
+
+    except Exception as e:
+        print(f"[ERROR] fetching transcript data failed: {e}")
+        return {"status": "ERROR", "message": f"failed to fetch transcript data: {e}"}, 500
 
 @app.post("/admin/user/manage")
 def admin_manage_user():
