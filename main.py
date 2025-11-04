@@ -1,9 +1,9 @@
 # main.py
+import os
 from flask import Flask, jsonify
 from flask_cors import CORS
-# from flask_sqlalchemy import SQLAlchemy
 from db import db # because we only have one instance of SQLAlchemy
-import os
+from dotenv import load_dotenv
 
 from classes.auth_manager import AuthManager
 from classes.admin_user_manager import AdminUserManager
@@ -11,9 +11,33 @@ from classes.schedule_planner import SchedulePlanner
 from classes.course_search_engine import CourseSearchEngine
 from flask import session
 
+# load environment variables
+load_dotenv()
+
+# print("[DEBUG] MAIL_PASSWORD:", os.environ.get("MAIL_PASSWORD"))
+
 # initialize flask
 app = Flask(__name__)
 CORS(app) # to enable communication with frontend
+
+# configure flask mail and token serializer
+from flask_mail import Mail, Message
+from itsdangerous import URLSafeTimedSerializer
+
+app.config["MAIL_SERVER"] = "smtp.gmail.com"
+app.config["MAIL_PORT"] = 587
+app.config["MAIL_USE_TLS"] = True
+app.config["MAIL_USERNAME"] = "scu.schedulai@gmail.com"
+app.config["MAIL_PASSWORD"] = os.environ.get("MAIL_PASSWORD") # environment-stored app password
+app.config["MAIL_DEFAULT_SENDER"] = ("SchedulAI Support", "scu.schedulai@gmail.com")
+
+mail = Mail(app)
+
+# set secret key and initialize
+app.secret_key = "testsecretkey"
+
+# token serializer for password reset link
+serializer = URLSafeTimedSerializer(app.secret_key)
 
 # configure database
 BASE_DIR = os.path.abspath(os.path.dirname(__file__))
@@ -21,10 +45,6 @@ db_path = os.path.join(BASE_DIR, "schedulai.db")
 
 app.config["SQLALCHEMY_DATABASE_URI"] = f"sqlite:///{db_path}"
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
-app.secret_key = 'supersecretkey'  # Needed for session management
-
-# # initialize SQLAlchemy
-# db = SQLAlchemy(app)
 
 # attach db to app
 db.init_app(app)
@@ -61,7 +81,7 @@ def register_student():
     if missing:
         return {
             "status": "ERROR",
-            "message": f"missing required fields: {', '.join(missing)}"
+            "message": f"missing required fields: {", ".join(missing)}"
         }, 400
         
     full_name = data["full_name"].strip()
@@ -130,8 +150,8 @@ def login():
     if not user:
         return {"status": "ERROR", "message": "Invalid email or password."}, 401
     
-    session['user_id'] = user.id
-    session['user_type'] = user.__class__.__name__  # assuming user class name identifies type
+    session["user_id"] = user.id
+    session["user_type"] = user.__class__.__name__  # assuming user class name identifies type
     return {"status": "SUCCESS", "message": "Login successful.", "user": user.to_safe_dict()}, 200
 
 @app.post("/logout")
@@ -148,11 +168,11 @@ def update_student_profile():
     [POST] update student profile fields
     requires user to be logged in as student
     """
-    if 'user_id' not in session or session.get('user_type') != "Student":
+    if "user_id" not in session or session.get("user_type") != "Student":
         return {"status": "ERROR", "message": "Unauthorized access."}, 401
     
     data = request.get_json()
-    user_id = session['user_id']
+    user_id = session["user_id"]
     student = Student.query.get(user_id)
     if not student:
         return {"status": "ERROR", "message": "Student not found."}, 404
@@ -189,7 +209,7 @@ def admin_manage_user():
     [POST] admin create/update/delete user
     accepts: action (create/update/delete), data (user info)
     """
-    if 'user_id' not in session or session.get('user_type') != "AdminUser":
+    if "user_id" not in session or session.get("user_type") != "AdminUser":
         return {"status": "ERROR", "message": "Unauthorized access."}, 401
     
     data = request.get_json()
@@ -209,7 +229,7 @@ def admin_manage_course():
     [POST] admin manage courses
     accepts: action (add/update/delete), course data
     """
-    if 'user_id' not in session or session.get('user_type') != "AdminUser":
+    if "user_id" not in session or session.get("user_type") != "AdminUser":
         return {"status": "ERROR", "message": "Unauthorized access."}, 401
     
     data = request.get_json()
@@ -229,6 +249,13 @@ def admin_manage_course():
         return {"status": "SUCCESS", "message": f"Course {action} successful.", "data": result}, 200
     except Exception as e:
         return {"status": "ERROR", "message": f"Failed to {action} course: {str(e)}"}, 400
+
+# @app.route("/test_email")
+# def test_email():
+#     msg = Message("sdiybt <3", recipients=["ddpatel@scu.edu"])
+#     msg.body = "if you see this message, it means two things:\n\n1. the test worked\n2. start diggin' in yo butt twin <3"
+#     mail.send(msg)
+#     return {"status": "[INFO]", "message": "test email sent successfully"}
 
 if __name__ == "__main__":
     # create tables inside app context
@@ -270,7 +297,7 @@ if __name__ == "__main__":
         # Insert admin user directly into DB for testing admin endpoints
         admin_email = "admin@example.com"
         admin_password = "AdminPass1!"
-        existing_admin = Student.query.filter_by(email=admin_email, role='admin').first()
+        existing_admin = Student.query.filter_by(email=admin_email, role="admin").first()
         if not existing_admin:
             admin_user = Student(
                 full_name="Admin User",
@@ -279,7 +306,7 @@ if __name__ == "__main__":
                 major="Administration",
                 grad_year=2025,
                 bio="System Administrator account for testing.",
-                role='admin'
+                role="admin"
             )
             db.session.add(admin_user)
             db.session.commit()
@@ -321,4 +348,4 @@ if __name__ == "__main__":
 
         print("\n[TEST] All feature tests completed successfully.")
 
-    # app.run(debug=True)
+    app.run(debug=True)
