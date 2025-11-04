@@ -1,1 +1,21 @@
+# environment variables
+.env
+
+# python
+__pycache__/
+*.py[cod]
+
+# database (uncomment line below when switching to a cloud db)
+# *.db
+
+# transcript files
 *.pdf
+
+# development files
+CSEN.txt
+student_register_test.http
+test_results.txt
+
+# logs and temp files
+*.log
+*.tmp
