@@ -13,8 +13,10 @@ __pycache__/
 
 # development files
 CSEN.txt
-student_register_test.http
 test_results.txt
+# student_register_test.http
+# password_reset_test.http
+# password_reset_confirmation_test.http
 
 # logs and temp files
 *.log

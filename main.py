@@ -1,6 +1,11 @@
 # main.py
 import os
 from flask import Flask, jsonify
+from flask import request, url_for
+from werkzeug.security import generate_password_hash
+import re
+from itsdangerous import BadSignature, SignatureExpired
+
 from flask_cors import CORS
 from db import db # because we only have one instance of SQLAlchemy
 from dotenv import load_dotenv
@@ -38,6 +43,27 @@ app.secret_key = "testsecretkey"
 
 # token serializer for password reset link
 serializer = URLSafeTimedSerializer(app.secret_key)
+
+# password reset helper functions
+RESET_SALT = "schedulai-password-reset" # extra security exclusive to password reset tokens
+
+def generate_reset_token(email: str) -> str:
+    """
+    create a signed, url-safe token (encodes user email)
+    stateless token, and no db rows are written
+    """
+    return serializer.dumps(email, salt=RESET_SALT)
+
+def verify_reset_token(token: str, max_age_seconds: int = 600) -> str | None:
+    """
+    verify token signature and age
+    return embedded email if valid, else return none
+    """
+    try:
+        email = serializer.loads(token, salt=RESET_SALT, max_age=max_age_seconds)
+        return email
+    except (BadSignature, SignatureExpired):
+        return None
 
 # configure database
 BASE_DIR = os.path.abspath(os.path.dirname(__file__))
@@ -162,6 +188,13 @@ def logout():
     session.clear()
     return {"status": "SUCCESS", "message": "Logout successful."}, 200
 
+# @app.route("/test_email")
+# def test_email():
+#     msg = Message("sdiybt <3", recipients=["ddpatel@scu.edu"])
+#     msg.body = "if you see this message, it means two things:\n\n1. the test worked\n2. start diggin' in yo butt twin <3"
+#     mail.send(msg)
+#     return {"status": "[INFO]", "message": "test email sent successfully"}
+
 @app.post("/student/profile/update")
 def update_student_profile():
     """
@@ -186,22 +219,95 @@ def update_student_profile():
         db.session.rollback()
         return {"status": "ERROR", "message": f"Failed to update profile: {str(e)}"}, 400
 
-@app.post("/student/password/recover")
+@app.post("/user/password/reset")
 def recover_password():
     """
-    [POST] recover student password
-    accepts: email
+    [POST] request password reset link
+    body: { "email": "user@example.com" }
     """
-    data = request.get_json()
-    email = data.get("email", "").strip().lower()
+    data = request.get_json(silent=True) or {}
+    email = (data.get("email") or "").strip().lower()
     if not email:
         return {"status": "ERROR", "message": "Email is required."}, 400
+
+    user = Student.query.filter_by(email=email).first()
+    if user:
+        token = generate_reset_token(email)
+        reset_link = url_for("user_password_reset_landing", token=token, _external=True)
+        
+        subject = "[SchedulAI] Password Reset Request"
+        body = (
+            "Hello,\n\nA password reset has been initiated for your SchedulAI account.\n\n"
+            "Please follow the instructions at the link below.\nThis link will expire in 10 minutes.\n\n"
+            f"{reset_link}\n\n"
+            "If you didn't request a password reset, you can safely ignore this email.\n\n"
+            "Best,\nThe SchedulAI Team"
+        )
+        
+        try:
+            msg = Message(subject=subject, recipients=[email], body=body)
+            mail.send(msg)
+        except Exception as e:
+            print(f"[ERROR] mail sending failure: {e}")
+            
+    return {
+        "status": "SUCCESS",
+        "message": "[INFO] if the email is registered, a password reset link has been sent"
+    }, 200
     
-    success, message = auth_manager.recover_password(email)
-    if success:
-        return {"status": "SUCCESS", "message": message}, 200
-    else:
-        return {"status": "ERROR", "message": message}, 400
+@app.get("/user/password/reset/<token>")
+def user_password_reset_landing(token):
+    """
+    [GET] validate password reset token from email
+    """
+    email = verify_reset_token(token, max_age_seconds=600)
+    if not email:
+        return {"status": "ERROR", "message": "invalid or expired link"}, 400
+    
+    return {
+        "status": "SUCCESS",
+        "message": "[INFO] token is valid. you may now reset your password",
+        # "email_embedded": email # for frontend testing only, please hide for release
+    }, 200
+    
+PASSWORD_REGEX = r"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$"
+
+@app.post("/user/password/reset/confirm")
+def user_password_reset_confirm():
+    """
+    [POST] finalize password reset
+    body: { "token": "<token>", "new_password": "ExamplePassword1!"}
+    """
+    data = request.get_json(silent=True) or {}
+    token = data.get("token", "")
+    new_password = data.get("new_password", "")
+    
+    if not token or not new_password:
+        return {"status": "ERROR", "message": "token and new password are required"}, 400
+    
+    # verify token
+    email = verify_reset_token(token, max_age_seconds=600)
+    if not email:
+        return {"status": "ERROR", "message": "invalid or expired link"}, 400
+    
+    # validate new password
+    if not re.match(PASSWORD_REGEX, new_password):
+        return {
+            "status": "ERROR",
+            "message": ("password must be at least 8 characters long and include "
+                        "one uppercase, one lowercase, one number, and one special character")
+        }, 400
+
+    # find user (both student and admin)
+    user = Student.query.filter_by(email=email).first()
+    if not user:
+        return {"status": "ERROR", "message": "user not found"}, 404
+    
+    # hash and update password
+    user.password_hash = generate_password_hash(new_password)
+    db.session.commit()
+    
+    return {"status": "SUCCESS", "message": "[INFO] password successfully reset"}, 200
 
 @app.post("/admin/user/manage")
 def admin_manage_user():
@@ -249,13 +355,6 @@ def admin_manage_course():
         return {"status": "SUCCESS", "message": f"Course {action} successful.", "data": result}, 200
     except Exception as e:
         return {"status": "ERROR", "message": f"Failed to {action} course: {str(e)}"}, 400
-
-# @app.route("/test_email")
-# def test_email():
-#     msg = Message("sdiybt <3", recipients=["ddpatel@scu.edu"])
-#     msg.body = "if you see this message, it means two things:\n\n1. the test worked\n2. start diggin' in yo butt twin <3"
-#     mail.send(msg)
-#     return {"status": "[INFO]", "message": "test email sent successfully"}
 
 if __name__ == "__main__":
     # create tables inside app context
