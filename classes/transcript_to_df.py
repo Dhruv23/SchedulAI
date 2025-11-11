@@ -19,38 +19,36 @@ class TranscriptParser:
 
     def _extract_courses(self) -> list:
         """
-        Extract course information (course code, name, grade, units, grade points)
-        using regex patterns that match transcript formatting.
+        Extract course information for SCU-style transcripts.
+        Matches lines like:
+        'COEN 10 Introduction to Programming 4.000 4.000 B+ 0.000'
         """
-        # Pattern for lines like: "CSEN 140 - Machine Learning and Data Mining"
-        # course_pattern = re.compile(r"([A-Z]{2,4}\s\d{1,3}[A-Z]?)\s*-\s*(.+)")
-        # grade_pattern = re.compile(r"([A-F][+-]?)\s+([\d.]+)\s+(\d+)\s+([\d.]+)")
-        
-        course_pattern = re.compile(r"([A-Z]{2,4}\s\d{1,3}[A-Z]?)\s*-\s*([A-Za-z0-9 &,:'-]+)")
-        grade_pattern = re.compile(r"([A-FP][+-]?)\s+([\d.]+)\s+(\d+)\s+([\d.]+)")
+        # Pattern: CourseCode (e.g., COEN 10), CourseName (text), 4 numbers/grades at end
+        course_pattern = re.compile(
+            r"^([A-Z]{2,4}\s\d{1,3}[A-Z]?)\s+(.+?)\s+([\d.]+)\s+([\d.]+)\s+([A-FP][+-]?)\s+([\d.]+)$"
+        )
 
         courses = []
         lines = self.text.splitlines()
-        
-        for i, line in enumerate(lines):
-            match_course = course_pattern.search(line)
-            if match_course:
-                course_code, course_name = match_course.groups()
-                # Look ahead in following lines for grade info
-                for j in range(i + 1, min(i + 4, len(lines))):
-                    match_grade = grade_pattern.search(lines[j])
-                    if match_grade:
-                        grade, grade_points, units, total_points = match_grade.groups()
-                        courses.append({
-                            "Course Code": course_code.strip(),
-                            "Course Name": course_name.strip(),
-                            "Grade": grade.strip(),
-                            "Grade Points": float(grade_points),
-                            "Units": int(units),
-                            "Total Points": float(total_points)
-                        })
-                        break
+
+        for line in lines:
+            match = course_pattern.search(line.strip())
+            if match:
+                course_code, course_name, attempted, earned, grade, points = match.groups()
+                try:
+                    courses.append({
+                        "Course Code": course_code,
+                        "Course Name": course_name.strip(),
+                        "Grade": grade.strip(),
+                        "Grade Points": 0.0 if grade in ["P", "CR", "In Progress", "W"] else float(points),
+                        "Units": float(earned),
+                        "Total Points": float(points)
+                    })
+                except Exception:
+                    continue
+
         return courses
+
 
     def to_dataframe(self) -> pd.DataFrame:
         """convert extracted course data to dataframe"""

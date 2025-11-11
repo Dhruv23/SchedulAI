@@ -1,20 +1,41 @@
-# environment variables
+# --- Environment & secrets ---
 .env
+*.env
+.env.*
 
-# python
+# --- Python build artifacts ---
 __pycache__/
 *.py[cod]
+*.so
+*.egg
+*.egg-info/
+dist/
+build/
 
-# database (uncomment line below when switching to a cloud db)
-# *.db
+# --- Database & uploads ---
+*.db
+uploads/
+instance/
 
-# transcript files
-*.pdf
+# --- Node / React frontend ---
+frontend/node_modules/
+frontend/build/
+frontend/.env
 
-# result/output files
+# --- IDE / system junk ---
+.DS_Store
+.vscode/
+.idea/
+
+# --- Logs & temp files ---
+*.log
+*.tmp
+*.bak
+*.swp
+
+# --- Result/output files (keep your rules) ---
 *_results.*
 *_output.*
 
-# logs and temp files
-*.log
-*.tmp
+# --- Transcript PDFs (from uploads or tests) ---
+*.pdf

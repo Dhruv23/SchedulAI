@@ -31,7 +31,7 @@ load_dotenv()
 
 # initialize flask
 app = Flask(__name__)
-CORS(app) # to enable communication with frontend
+CORS(app, supports_credentials=True, origins=["http://localhost:3000"]) # to enable communication with frontend
 
 # configure flask mail and token serializer
 from flask_mail import Mail, Message
@@ -115,7 +115,7 @@ def register_student():
     if missing:
         return {
             "status": "ERROR",
-            "message": f"missing required fields: {", ".join(missing)}"
+            "message": f"missing required fields: {', '.join(missing)}"
         }, 400
         
     full_name = data["full_name"].strip()
