@@ -1,21 +1,22 @@
 # classes/student_progress_tracker.py
 
+import os
 import pandas as pd
-from typing import Dict, List, Any
+from typing import Dict, Any
 from db import db
 from classes.student_model import Student
-from classes.transcript_to_df import TranscriptParser  # assumed existing
-from classes.course_search_engine import CourseSearchEngine
+from classes.transcript_to_df import TranscriptParser
+from classes.transcript_course_model import TranscriptCourse
 
 
 class StudentProgressTracker:
     """
-    Tracks student progress by comparing completed courses
-    against program requirements.
+    Simplified tracker: computes progress by comparing total completed units
+    vs. total required units for the student's major.
     """
 
     def __init__(self):
-        self.course_engine = CourseSearchEngine()
+        self.requirements_path = os.path.join(os.getcwd(), "majors_csvs", "degree_requirements.csv")
 
     # -----------------------------------------------------------
     # 🔍 LOAD STUDENT PROGRESS
@@ -29,79 +30,78 @@ class StudentProgressTracker:
         if not student:
             raise ValueError(f"No student found with id {student_id}.")
 
-        # Load transcript into a DataFrame
-        transcript_parser = TranscriptParser()
-        transcript_df = transcript_parser.load_transcript_for_student(student.email)
+        major = student.major.strip()
+        total_required = self._get_total_units_for_major(major)
 
-        if transcript_df.empty:
+        # Load transcript from DB instead of PDF
+        from classes.transcript_course_model import TranscriptCourse
+        records = TranscriptCourse.query.filter_by(student_id=student_id).all()
+
+        if not records:
             return {
                 "status": "SUCCESS",
                 "message": "No transcript data found.",
-                "progress": None,
+                "progress": {
+                    "major": major,
+                    "completed_units": 0,
+                    "total_units": total_required,
+                    "remaining_units": total_required,
+                    "completion_ratio": 0.0,
+                },
             }
 
-        return self._analyze_progress(student, transcript_df)
+        import pandas as pd
+        transcript_df = pd.DataFrame([
+            {
+                "Course Code": r.course_code,
+                "Course Name": r.course_name,
+                "Units": r.units,
+                "Grade": r.grade,
+                "Total Points": r.total_points
+            }
+            for r in records
+        ])
 
-    # -----------------------------------------------------------
-    # 📊 ANALYZE PROGRESS
-    # -----------------------------------------------------------
-    def _analyze_progress(
-        self, student: Student, transcript_df: pd.DataFrame
-    ) -> Dict[str, Any]:
-        """
-        Compare transcript vs. degree requirements.
-        """
-        completed_courses = set(transcript_df["Course ID"].tolist())
-        required_courses = self._get_required_courses(student.major)
-
-        completed = completed_courses.intersection(required_courses)
-        missing = required_courses.difference(completed)
-        completion_ratio = round(len(completed) / len(required_courses), 2) if required_courses else 0
+        completed_units = transcript_df["Units"].sum()
+        remaining_units = max(total_required - completed_units, 0)
+        completion_ratio = round(completed_units / total_required, 2) if total_required else 0
 
         summary = {
             "student": student.to_safe_dict(),
-            "major": student.major,
-            "completed_courses": list(completed),
-            "missing_courses": list(missing),
+            "major": major,
+            "completed_units": completed_units,
+            "total_units": total_required,
+            "remaining_units": remaining_units,
             "completion_ratio": completion_ratio,
         }
 
-        print(f"[PROGRESS] {student.full_name}: {len(completed)} / {len(required_courses)} complete")
-        return summary
+        print(f"[PROGRESS] {student.full_name}: {completed_units}/{total_required} units complete ({completion_ratio*100:.1f}%)")
+        return {"status": "SUCCESS", "progress": summary}
 
     # -----------------------------------------------------------
-    # 🎓 GET REQUIRED COURSES
+    # 🎓 GET REQUIRED UNITS FOR MAJOR
     # -----------------------------------------------------------
-    def _get_required_courses(self, major: str) -> set:
-        """
-        Placeholder: get the list of required courses for a given major.
-        This could come from a CSV or the course engine.
-        """
-        try:
-            df = pd.read_csv(f"majors_csvs/{major.lower()}_requirements.csv")
-            return set(df["Course ID"].tolist())
-        except FileNotFoundError:
-            print(f"[WARN] No requirement file for major '{major}'.")
-            return set()
+    def _get_total_units_for_major(self, major: str) -> int:
+        """Load total required units for a given major from degree_requirements.csv"""
+        print(f"[DEBUG] Reading degree requirements for major: '{major}'")
 
-    # -----------------------------------------------------------
-    # 🧮 SUMMARY REPORT
-    # -----------------------------------------------------------
-    def generate_summary_report(self, student_id: int) -> str:
-        """
-        Returns a formatted text summary of the student's progress.
-        """
-        progress = self.load_student_progress(student_id)
-        if not progress.get("progress"):
-            return "No transcript data available."
+        if not os.path.exists(self.requirements_path):
+            print("[WARN] degree_requirements.csv not found")
+            return 175  # fallback default
 
-        return (
-            f"Progress Report for {progress['student']['full_name']}:\n"
-            f"Major: {progress['major']}\n"
-            f"Completed: {len(progress['completed_courses'])} courses\n"
-            f"Missing: {len(progress['missing_courses'])} courses\n"
-            f"Completion Ratio: {progress['completion_ratio'] * 100:.0f}%\n"
-        )
+        df = pd.read_csv(self.requirements_path, quotechar='"', skipinitialspace=True)
+        print(f"[DEBUG] Loaded {len(df)} majors from CSV")
+        print("[DEBUG] CSV majors:", list(df["Major"][:5]))  # show first few
+
+        row = df[df["Major"].str.lower() == major.lower()]
+        if row.empty:
+            print(f"[WARN] Major '{major}' not found in CSV, falling back to 180")
+            return 175
+
+        total_units = int(row["Total Units Required"].values[0])
+        print(f"[DEBUG] Found major '{major}' → {total_units} units required")
+        return total_units
+
 
     def __repr__(self):
         return "<StudentProgressTracker>"
