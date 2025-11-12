@@ -2,6 +2,9 @@ from pydoc import text
 import re
 import pandas as pd
 import pdfplumber
+from classes.transcript_course_model import TranscriptCourse
+from classes.student_model import Student
+from db import db
 
 class TranscriptParser:
     def __init__(self, pdf_path: str):
@@ -79,3 +82,25 @@ class TranscriptParser:
             print("[WARN] no valid courses extracted -> return empty json")
             return []
         return df.to_dict(orient="records")
+    
+    def load_transcript_for_student(self, email: str) -> pd.DataFrame:
+        """
+        Loads transcript data for a student by email.
+        Pulls from the TranscriptCourse table (not from PDF).
+        Returns a DataFrame with all course info.
+        """
+        # 1. Find the student by email
+        student = Student.query.filter_by(email=email).first()
+        if not student:
+            print(f"[WARN] No student found with email {email}")
+            return pd.DataFrame()
+
+        # 2. Get all transcript records linked to that student
+        records = TranscriptCourse.query.filter_by(student_id=student.id).all()
+        if not records:
+            print(f"[WARN] No transcript records found for {email}")
+            return pd.DataFrame()
+
+        # 3. Convert each record to a dict and build a DataFrame
+        df = pd.DataFrame([r.to_dict() for r in records])
+        return df

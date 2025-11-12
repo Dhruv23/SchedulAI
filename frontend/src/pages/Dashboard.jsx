@@ -1,37 +1,74 @@
 import { useEffect, useState } from "react";
 import TranscriptUpload from "../components/TranscriptUpload";
 import ProgressBar from "../components/ProgressBar";
+import ChatbotWidget from "../components/ChatbotWidget";
 
-function Dashboard() {
+function Dashboard({ user, onLogout }) {
   const [courses, setCourses] = useState([]);
   const [completedUnits, setCompletedUnits] = useState(0);
-  const [totalUnits, setTotalUnits] = useState(180); // example for SCU 180-unit requirement
+  const [totalUnits, setTotalUnits] = useState(180);
+  const [major, setMajor] = useState("");
 
+  // Fetch progress from backend
   useEffect(() => {
-    // Fetch any saved transcript data when the dashboard loads
+    fetch("/student/progress", { credentials: "include" })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.status === "SUCCESS" && data.progress) {
+          const prog = data.progress;
+          setCompletedUnits(prog.completed_units || 0);
+          setTotalUnits(prog.total_units || 180);
+          setMajor(prog.major || "");
+        }
+      })
+      .catch((err) => console.error("Progress fetch failed:", err));
+  }, []);
+
+  // Fetch transcript for table display
+  useEffect(() => {
     fetch("/student/transcript", { credentials: "include" })
       .then((res) => res.json())
       .then((data) => {
         if (data.status === "SUCCESS") {
-          setCourses(data.courses);
-          const sum = data.courses.reduce((acc, c) => acc + (c.Units || 0), 0);
-          setCompletedUnits(sum);
+          setCourses(data.courses || []);
         }
-      });
+      })
+      .catch((err) => console.error("Transcript fetch failed:", err));
   }, []);
 
+  // Handle successful transcript upload
   const handleUploadSuccess = (parsedCourses) => {
     setCourses(parsedCourses);
     const sum = parsedCourses.reduce((acc, c) => acc + (c.Units || 0), 0);
     setCompletedUnits(sum);
   };
 
+  const percentComplete =
+    totalUnits > 0 ? ((completedUnits / totalUnits) * 100).toFixed(1) : 0;
+
   return (
     <div style={{ padding: "2rem", fontFamily: "sans-serif" }}>
-      <h1>Student Dashboard</h1>
+      {/* Header with logout */}
+      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+        <h1>Student Dashboard</h1>
+        <button onClick={onLogout}>Logout</button>
+
+      </div>
+
+      {/* Major info */}
+      {major && <h3 style={{ color: "#444" }}>Major: {major}</h3>}
+
+      {/* Progress bar */}
       <ProgressBar completedUnits={completedUnits} totalUnits={totalUnits} />
+
+      <p style={{ marginTop: "0.5rem" }}>
+        {completedUnits} of {totalUnits} units completed ({percentComplete}%)
+      </p>
+
+      {/* Transcript upload */}
       <TranscriptUpload onUploadSuccess={handleUploadSuccess} />
 
+      {/* Transcript table */}
       <h2 style={{ marginTop: "2rem" }}>Transcript Courses</h2>
       {courses.length === 0 ? (
         <p>No transcript data uploaded yet.</p>
@@ -59,6 +96,9 @@ function Dashboard() {
           </tbody>
         </table>
       )}
+
+      {/* Chatbot floating widget */}
+      <ChatbotWidget />
     </div>
   );
 }

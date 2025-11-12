@@ -24,6 +24,8 @@ from classes.schedule_planner import SchedulePlanner
 from classes.course_search_engine import CourseSearchEngine
 from classes.transcript_to_df import TranscriptParser
 from classes.transcript_course_model import TranscriptCourse
+from classes.student_progress_tracker import StudentProgressTracker
+from classes.chatbot_interface import ChatbotInterface
 from flask import session
 
 # load environment variables
@@ -187,6 +189,37 @@ def login():
     session["user_id"] = user.id
     session["user_type"] = user.__class__.__name__  # assuming user class name identifies type
     return {"status": "SUCCESS", "message": "Login successful.", "user": user.to_safe_dict()}, 200
+
+@app.get("/session")
+def check_session():
+    """
+    [GET] Check if a user session is still active.
+    Returns basic user info if logged in.
+    """
+    user_id = session.get("user_id")
+    user_type = session.get("user_type")
+
+    if not user_id or not user_type:
+        return {"status": "UNAUTHORIZED", "message": "No active session"}, 401
+
+    try:
+        if user_type == "Student":
+            user = Student.query.get(user_id)
+        else:
+            user = None  # Extend later if you have AdminUser, etc.
+
+        if not user:
+            return {"status": "UNAUTHORIZED", "message": "User not found"}, 401
+
+        return {
+            "status": "SUCCESS",
+            "message": "Session active",
+            "user": user.to_safe_dict()
+        }, 200
+
+    except Exception as e:
+        print(f"[ERROR] session check failed: {e}")
+        return {"status": "ERROR", "message": "Internal server error"}, 500
 
 @app.post("/logout")
 def logout():
@@ -459,6 +492,40 @@ def admin_manage_course():
         return {"status": "SUCCESS", "message": f"Course {action} successful.", "data": result}, 200
     except Exception as e:
         return {"status": "ERROR", "message": f"Failed to {action} course: {str(e)}"}, 400
+
+@app.get("/student/progress")
+def get_student_progress():
+    """
+    [GET] Return student's degree progress (completed, missing, ratio)
+    """
+    student_id = session.get("user_id")
+    if not student_id:
+        return {"status": "ERROR", "message": "unauthorized access"}, 401
+
+    tracker = StudentProgressTracker()
+    try:
+        summary = tracker.load_student_progress(student_id)
+        return {"status": "SUCCESS", "progress": summary}, 200
+    except Exception as e:
+        print(f"[ERROR] student progress failed: {e}")
+        return {"status": "ERROR", "message": str(e)}, 500
+    
+chatbot = ChatbotInterface()
+
+@app.post("/chat")
+def chat_with_bot():
+    """
+    [POST] Send a message to the chatbot.
+    Request body: {"message": "find course data mining"}
+    """
+    data = request.get_json(silent=True) or {}
+    user_input = data.get("message", "").strip()
+    if not user_input:
+        return {"status": "ERROR", "message": "Message is required."}, 400
+
+    student_id = session.get("user_id")
+    result = chatbot.handle_query(user_input, student_id)
+    return {"status": "SUCCESS", "response": result}, 200
 
 if __name__ == "__main__":
     # create tables inside app context

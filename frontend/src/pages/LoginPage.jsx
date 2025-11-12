@@ -13,7 +13,7 @@ function LoginPage({ onLogin }) {
       const res = await fetch("/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        credentials: "include", // 🔑 ensures session cookie is saved
+        credentials: "include", // ensures session cookie is saved
         body: JSON.stringify({ email, password }),
       });
 
