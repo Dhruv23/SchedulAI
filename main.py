@@ -526,6 +526,126 @@ def chat_with_bot():
     student_id = session.get("user_id")
     result = chatbot.handle_query(user_input, student_id)
     return {"status": "SUCCESS", "response": result}, 200
+# ============================================
+#   SCHEDULE PLANNER — CSV LOADING + ENDPOINTS
+# ============================================
+
+import re
+import pandas as pd
+
+CSV_PATH = "major_csvs/Computer Science and Engineering.csv"
+
+def load_and_transform_sections(csv_path):
+    df = pd.read_csv(csv_path)
+
+    # Clean duplicated header lines (your CSV includes header twice)
+    df = df[df["Course Section"] != "Course Section"]
+
+    # Extract "Course" short code
+    # Example: "CSEN 10-1 - Introduction to Programming" → "CSEN 10-1"
+    df["Course"] = df["Course Section"].apply(
+        lambda x: re.split(r"\s+-\s+", str(x))[0]
+    )
+
+    # Instructor column cleanup
+    df["Instructor"] = df["All Instructors"].fillna("TBA")
+
+    # Parse meeting patterns such as:
+    #   "M W F | 11:45 AM - 12:50 PM"
+    def parse_meeting(m):
+        if pd.isna(m):
+            return ("", "", "")
+        parts = m.split("|")
+        if len(parts) != 2:
+            return ("", "", "")
+
+        # Convert "M W F" -> "MWF"
+        days = parts[0].strip().replace(" ", "")
+
+        times = parts[1].strip()
+        if "-" not in times:
+            return (days, "", "")
+        start, end = times.split(" - ")
+        return (days, start.strip(), end.strip())
+
+    parsed = df["Meeting Patterns"].apply(parse_meeting)
+    df["Day"] = parsed.apply(lambda x: x[0])
+    df["Start Time"] = parsed.apply(lambda x: x[1])
+    df["End Time"] = parsed.apply(lambda x: x[2])
+
+    # Select only the columns required by SchedulePlanner
+    df_clean = df[["Course", "Day", "Start Time", "End Time", "Instructor"]]
+
+    return df_clean
+
+# Load transformed CSV into SchedulePlanner
+try:
+    transformed_df = load_and_transform_sections(CSV_PATH)
+    planner = SchedulePlanner(transformed_df)
+    print(f"[INFO] Loaded {len(transformed_df)} section rows for SchedulePlanner.")
+except Exception as e:
+    print(f"[ERROR] Failed loading schedule planner CSV: {e}")
+    planner = SchedulePlanner(pd.DataFrame())
+
+
+
+# ============================================
+#       /planner/schedules  (POST)
+# ============================================
+
+@app.post("/planner/schedules")
+def planner_generate_schedules():
+    """
+    Generate valid schedules from remaining requirements + preferences.
+    Called by React SchedulePlanner.jsx
+    """
+    if "user_id" not in session:
+        return {"status": "ERROR", "message": "Unauthorized access."}, 401
+
+    data = request.get_json(silent=True) or {}
+
+    remaining = data.get("remaining_requirements", [])
+    preferred_professor = data.get("preferred_professor", "")
+    earliest = data.get("earliest", "")
+    latest = data.get("latest", "")
+
+    if not remaining:
+        return {"status": "ERROR", "message": "No remaining requirements provided."}, 400
+
+    # Step 1: generate all non-conflicting schedules
+    raw_schedules = planner.generate_schedules(
+        course_codes=remaining,
+        max_results=10
+    )
+
+    final_schedules = []
+
+    for schedule_df in raw_schedules:
+        df = schedule_df.copy()
+
+        # Filter by professor preference
+        if preferred_professor:
+            df = planner.filter_preferred_professor(df, preferred_professor)
+
+        # Filter by time window preference
+        if earliest or latest:
+            df = planner.filter_preferred_time(df, earliest, latest)
+
+        # Ensure schedule still has all required courses
+        # (after filtering)
+        if df["Course"].nunique() == len(remaining):
+            final_schedules.append(df.to_dict(orient="records"))
+
+    if not final_schedules:
+        return {
+            "status": "ERROR",
+            "message": "No schedules matched your filters."
+        }, 200
+
+    return {
+        "status": "SUCCESS",
+        "schedules": final_schedules
+    }, 200
 
 if __name__ == "__main__":
     # create tables inside app context
