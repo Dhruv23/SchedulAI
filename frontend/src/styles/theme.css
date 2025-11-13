@@ -227,6 +227,112 @@ tr:nth-child(even) {
   color: var(--scu-dark);
 }
 
+/* ====== SCHEDULE PLANNER PAGE ====== */
+
+.planner-container {
+  max-width: 1300px;
+  margin: 2rem auto;
+  padding: 0 1.5rem;
+}
+
+.planner-welcome {
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin: 0;
+}
+
+.planner-subinfo {
+  margin: 0.2rem 0 1.2rem;
+  color: #555;
+}
+
+.planner-input-card {
+  background-color: var(--scu-white);
+  padding: 1.8rem;
+  border-radius: 12px;
+  box-shadow: 0 10px 28px rgba(0,0,0,0.06);
+  border: 1px solid rgba(148,163,184,0.15);
+  margin-bottom: 2rem;
+}
+
+.requirements-list {
+  list-style: none;
+  padding-left: 0;
+  margin-top: 0.6rem;
+}
+
+.requirements-list li {
+  background: var(--scu-gray);
+  padding: 0.5rem 0.75rem;
+  border-radius: 6px;
+  margin-bottom: 0.4rem;
+  font-weight: 500;
+}
+
+.planner-grid {
+  display: grid;
+  grid-template-columns: 1.3fr 1fr;
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.schedule-list-scroll {
+  max-height: 550px;
+  overflow-y: auto;
+  padding-right: 0.5rem;
+}
+
+.schedule-card {
+  background-color: var(--scu-white);
+  padding: 1rem;
+  margin-bottom: 1.2rem;
+  border-radius: 12px;
+  border: 1px solid #ddd;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+  cursor: pointer;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.schedule-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 14px rgba(0,0,0,0.12);
+}
+
+.schedule-card-selected {
+  border: 2px solid var(--scu-red);
+  box-shadow: 0 6px 16px rgba(163,31,54,0.25);
+}
+
+.schedule-card-title {
+  font-size: 1.05rem;
+  font-weight: 600;
+  margin-bottom: 0.8rem;
+  color: var(--scu-red);
+}
+
+.details-card {
+  background-color: var(--scu-white);
+  padding: 1.8rem;
+  border-radius: 12px;
+  border: 1px solid #ddd;
+  box-shadow: 0 10px 28px rgba(0,0,0,0.06);
+}
+
+.details-placeholder {
+  color: #666;
+  margin-top: 1rem;
+}
+
+.export-button {
+  margin-bottom: 1.2rem;
+}
+
+@media (max-width: 900px) {
+  .planner-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
 /* ====== PROFILE PAGE ====== */
 
 .profile-page {
