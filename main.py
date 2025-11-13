@@ -27,7 +27,9 @@ from classes.transcript_course_model import TranscriptCourse
 from classes.student_progress_tracker import StudentProgressTracker
 from classes.chatbot_interface import ChatbotInterface
 from flask import session
-
+import pandas as pd
+import re
+from classes.transcript_to_df import TranscriptParser
 # load environment variables
 load_dotenv()
 
@@ -596,15 +598,15 @@ except Exception as e:
 @app.post("/planner/schedules")
 def planner_generate_schedules():
     """
-    Generate valid schedules from remaining requirements + preferences.
-    Called by React SchedulePlanner.jsx
+    Generate valid schedules from remaining major requirements + preferences.
+    Core requirements removed.
     """
     if "user_id" not in session:
         return {"status": "ERROR", "message": "Unauthorized access."}, 401
 
     data = request.get_json(silent=True) or {}
 
-    remaining = data.get("remaining_requirements", [])
+    remaining = data.get("remaining_requirements", [])  # now just course codes
     preferred_professor = data.get("preferred_professor", "")
     earliest = data.get("earliest", "")
     latest = data.get("latest", "")
@@ -612,7 +614,7 @@ def planner_generate_schedules():
     if not remaining:
         return {"status": "ERROR", "message": "No remaining requirements provided."}, 400
 
-    # Step 1: generate all non-conflicting schedules
+    # Step 1 — generate non-conflicting schedules
     raw_schedules = planner.generate_schedules(
         course_codes=remaining,
         max_results=10
@@ -623,29 +625,107 @@ def planner_generate_schedules():
     for schedule_df in raw_schedules:
         df = schedule_df.copy()
 
-        # Filter by professor preference
         if preferred_professor:
             df = planner.filter_preferred_professor(df, preferred_professor)
 
-        # Filter by time window preference
         if earliest or latest:
             df = planner.filter_preferred_time(df, earliest, latest)
 
-        # Ensure schedule still has all required courses
-        # (after filtering)
+        # Must still include all requested courses
         if df["Course"].nunique() == len(remaining):
             final_schedules.append(df.to_dict(orient="records"))
 
     if not final_schedules:
-        return {
-            "status": "ERROR",
-            "message": "No schedules matched your filters."
-        }, 200
+        return {"status": "ERROR", "message": "No schedules matched your filters."}, 200
 
+    return {"status": "SUCCESS", "schedules": final_schedules}, 200
+
+@app.get("/student/progress/detailed")
+def get_detailed_progress():
+    if "user_id" not in session:
+        return {"status": "ERROR", "message": "Unauthorized."}, 401
+
+    student_id = session["user_id"]
+    result = evaluate_student_progress(student_id)
+    return result, 200
+
+
+
+def evaluate_student_progress(student_id: int):
+    """
+    Compare a student's transcript against ONLY:
+      - CSEN major requirements (course-based)
+
+    Core requirements removed from system.
+    """
+
+    # ------------------------------------------------------------
+    # 1. Load student transcript
+    # ------------------------------------------------------------
+    student = Student.query.get(student_id)
+    if not student:
+        return {"status": "ERROR", "message": "Student not found."}
+
+    parser = TranscriptParser(pdf_path=None)
+    transcript_df = parser.load_transcript_for_student(student.email)
+
+    if transcript_df.empty:
+        return {
+            "status": "SUCCESS",
+            "major_completed": [],
+            "major_missing": []
+        }
+
+    # Normalize
+    transcript_df["Course Code"] = transcript_df["Course Code"].str.strip()
+    transcript_df["DEPT"] = transcript_df["Course Code"].str.extract(r"^([A-Z]+)")
+    transcript_df["NUM"] = transcript_df["Course Code"].str.extract(r"(\d+)")
+    transcript_df["NUM"] = transcript_df["NUM"].astype(str)
+
+    completed_course_codes = set(transcript_df["Course Code"].tolist())
+    completed_numbers = set(transcript_df["NUM"].tolist())
+
+    # ------------------------------------------------------------
+    # 2. Load CSEN major requirements
+    # ------------------------------------------------------------
+    req_df = pd.read_csv("major_csvs/csen_requirements.csv")
+
+    # Only major requirements remain — no CORE department anymore
+    major_reqs = req_df.copy()
+    major_reqs["COURSE_NUMBER"] = major_reqs["COURSE_NUMBER"].astype(str)
+
+    # ------------------------------------------------------------
+    # 3. Determine completed vs missing major requirements
+    # ------------------------------------------------------------
+    major_completed = []
+    major_missing = []
+
+    for _, row in major_reqs.iterrows():
+        dept = str(row["DEPARTMENT"])
+        num = str(row["COURSE_NUMBER"])
+        code_full = f"{dept} {num}"
+
+        if code_full in completed_course_codes or num in completed_numbers:
+            major_completed.append({
+                "requirement": code_full,
+                "category": row.get("CATEGORY", ""),
+                "name": row["REQUIREMENT_NAME"]
+            })
+        else:
+            major_missing.append({
+                "requirement": code_full,
+                "category": row.get("CATEGORY", ""),
+                "name": row["REQUIREMENT_NAME"]
+            })
+
+    # ------------------------------------------------------------
+    # 4. Return ONLY major progress
+    # ------------------------------------------------------------
     return {
         "status": "SUCCESS",
-        "schedules": final_schedules
-    }, 200
+        "major_completed": major_completed,
+        "major_missing": major_missing
+    }
 
 if __name__ == "__main__":
     # create tables inside app context

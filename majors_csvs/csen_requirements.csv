@@ -1,0 +1,71 @@
+DEPARTMENT,COURSE_NUMBER,CATEGORY,REQUIREMENT_NAME
+ENGL,181,English,Engineering Communications
+MATH,11,Mathematics and Natural Science,Calculus I
+MATH,12,Mathematics and Natural Science,Calculus II
+MATH,13,Mathematics and Natural Science,Calculus III
+MATH,14,Mathematics and Natural Science,Calculus IV
+AMTH,106,Mathematics and Natural Science,Differential Equations
+AMTH,108,Mathematics and Natural Science,Probability and Statistics
+MATH,53,Mathematics and Natural Science,Linear Algebra
+CSCI,166,Mathematics and Natural Science,Numerical Analysis
+AMTH,118,Mathematics and Natural Science,Numerical Methods
+CHEM,11,Mathematics and Natural Science,General Chemistry I
+PHYS,31,Mathematics and Natural Science,Physics I
+PHYS,32,Mathematics and Natural Science,Physics II
+PHYS,33,Mathematics and Natural Science,Physics III
+ENGR,1,Engineering,Introduction to Engineering
+ENGR,1L,Engineering,Engineering Lab
+ECEN,21,Engineering,Intro to Logic Design
+CSEN,21,Engineering,Intro to Logic Design
+ECEN,50,Engineering,Electric Circuits I
+ECEN,153,Engineering,Digital Integrated Circuit Design
+CSEN,10,Engineering,Introduction to Programming
+CSEN,11,Engineering,Advanced Programming
+CSEN,12,Engineering,Abstract Data Types and Data Structures
+CSEN,19,Engineering,Discrete Mathematics
+CSEN,20,Engineering,Embedded Systems
+CSEN,79,Engineering,Object-Oriented Programming and Advanced Data Structures
+CSEN,122,Engineering,Computer Architecture
+CSEN,146,Engineering,Computer Networks
+CSEN,171,Engineering,Programming Languages
+CSEN,174,Engineering,Software Engineering
+CSEN,175,Engineering,Formal Language Theory and Compiler Construction
+CSEN,177,Engineering,Operating Systems
+CSEN,179,Engineering,Theory of Algorithms
+CSEN,192,Engineering,Introduction to Senior Design
+CSEN,194,Engineering,Design Project I
+CSEN,195,Engineering,Design Project II
+CSEN,196,Engineering,Design Project III
+CSEN,101,Upper Division Elective,Research Seminar
+CSEN,120,Upper Division Elective,Real-Time Systems
+CSEN,123,Upper Division Elective,Mechatronics
+CSEN,127,Upper Division Elective,Advanced Logic Design
+CSEN,129,Upper Division Elective,Current Topics in CSE
+CSEN,140,Upper Division Elective,Machine Learning and Data Mining
+CSEN,143,Upper Division Elective,Internet of Things
+CSEN,145,Upper Division Elective,Parallel Computing
+CSEN,148,Upper Division Elective,Computer Graphics Systems
+CSEN,150,Upper Division Elective,Information Security
+CSEN,152,Upper Division Elective,Computer Forensics
+CSEN,160,Upper Division Elective,Object-Oriented Analysis and Design
+CSEN,161,Upper Division Elective,Web Development
+CSEN,162,Upper Division Elective,Web Infrastructure
+CSEN,163,Upper Division Elective,Web Usability
+CSEN,164,Upper Division Elective,Advanced Web Development
+CSEN,165,Upper Division Elective,3D Animation & Modeling / Rigid Body Dynamics
+CSEN,166,Upper Division Elective,Artificial Intelligence
+CSEN,168,Upper Division Elective,Mobile Application Development
+CSEN,169,Upper Division Elective,Web Search and Information Retrieval
+CSEN,174,Upper Division Elective,Software Engineering
+CSEN,175,Upper Division Elective,Compiler Construction
+CSEN,177,Upper Division Elective,Operating Systems
+CSEN,178,Upper Division Elective,Database Systems
+CSEN,179,Upper Division Elective,Theory of Algorithms
+CSEN,180,Upper Division Elective,Information Storage
+ECEN,115,Upper Division Elective,Approved Elective
+ECEN,133,Upper Division Elective,Approved Elective
+ECEN,134,Upper Division Elective,Approved Elective
+CSEN,193,Educational Enrichment,Undergraduate Research
+CSEN,199,Educational Enrichment,Directed Research/Reading
+
+
