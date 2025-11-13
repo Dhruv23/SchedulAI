@@ -1,17 +1,20 @@
+// components/Navbar.jsx
 import { Link } from "react-router-dom";
-import "../styles/theme.css";
 
-function Navbar({ onLogout }) {
+function Navbar() {
   return (
     <nav className="navbar">
-      <div className="navbar-left">
-        <strong>SchedulAI</strong>
+      {/* Logo / App Name */}
+      <div style={{ fontWeight: "bold", fontSize: "1.25rem" }}>
+        SchedulAI
       </div>
 
-      <div className="navbar-right">
-        <Link to="/dashboard">Dashboard</Link>
-        <Link to="/planner">Schedule Planner</Link>
-      </div>
+    {/* Navigation Links */}
+<div style={{ display: "flex", gap: "1.5rem", alignItems: "center" }}>
+  <Link to="/dashboard">Dashboard</Link>
+  <Link to="/profile">My Profile</Link>
+</div>
+
     </nav>
   );
 }

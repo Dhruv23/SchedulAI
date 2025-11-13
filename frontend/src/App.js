@@ -18,7 +18,8 @@ function App() {
 
   // ✅ Check session when app loads
   useEffect(() => {
-    fetch("/session", { credentials: "include" })
+    fetch("http://127.0.0.1:5000/session", { credentials: "include" })
+
       .then((res) => (res.ok ? res.json() : Promise.reject()))
       .then((data) => {
         if (data.status === "SUCCESS" && data.user) {
@@ -35,7 +36,10 @@ function App() {
 
   // ✅ Logout handler
   const handleLogout = () => {
-    fetch("/logout", { method: "POST", credentials: "include" })
+    fetch("http://127.0.0.1:5000/logout", {
+  method: "POST",
+  credentials: "include",
+})
       .then(() => setUser(null))
       .catch(() => setUser(null));
   };
