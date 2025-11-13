@@ -226,3 +226,110 @@ tr:nth-child(even) {
   background-color: var(--scu-yellow);
   color: var(--scu-dark);
 }
+
+/* ====== SCHEDULE PLANNER LAYOUT ====== */
+
+.planner-container {
+  padding: 1.5rem;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.planner-welcome {
+  margin-top: -0.5rem;
+  font-size: 0.95rem;
+}
+
+.planner-input-card {
+  background-color: var(--scu-white);
+  padding: 1rem 1.25rem;
+  border-radius: 6px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+  margin-bottom: 1.25rem;
+}
+
+.planner-textarea {
+  width: 100%;
+  padding: 0.75rem;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  font-family: inherit;
+  font-size: 0.95rem;
+  resize: vertical;
+}
+
+.planner-input-row {
+  margin-top: 0.75rem;
+  display: flex;
+  gap: 0.5rem;
+}
+
+.planner-error {
+  color: crimson;
+  margin-top: 0.5rem;
+  font-size: 0.9rem;
+}
+
+.planner-grid {
+  display: grid;
+  grid-template-columns: 1.7fr 1.2fr;
+  gap: 1rem;
+}
+
+.schedule-list-scroll {
+  max-height: 460px;
+  overflow-y: auto;
+}
+
+.schedule-card {
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  padding: 0.75rem;
+  background-color: var(--scu-white);
+  cursor: pointer;
+  margin-bottom: 0.75rem;
+  transition: border 0.2s ease;
+}
+
+.schedule-card-selected {
+  border: 2px solid var(--scu-red);
+}
+
+.schedule-card-title {
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+.details-card {
+  background-color: var(--scu-white);
+  padding: 1rem;
+  border-radius: 6px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.details-placeholder {
+  font-size: 0.9rem;
+}
+
+.no-schedules-message {
+  font-size: 0.9rem;
+  margin-top: 0.5rem;
+}
+
+/* ====== SCHEDULE EXPORT ====== */
+
+.export-button {
+  background-color: var(--scu-red);
+  color: var(--scu-white);
+  border: none;
+  border-radius: 4px;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  font-size: 0.9rem;
+  margin-bottom: 1rem;
+}
+
+.export-button:hover {
+  background-color: var(--scu-yellow);
+  color: var(--scu-dark);
+}

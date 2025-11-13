@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Routes, Route, Navigate, useNavigate } from "r
 import Navbar from "./components/Navbar";
 import LoginPage from "./pages/LoginPage";
 import Dashboard from "./pages/Dashboard";
+import SchedulePlanner from "./pages/SchedulePlanner";
 import "./styles/theme.css";
 
 function App() {
@@ -52,6 +53,10 @@ function App() {
           element={
             user ? <Navigate to="/dashboard" replace /> : <Navigate to="/login" replace />
           }
+        />
+        <Route
+          path="/planner"
+          element={user ? <SchedulePlanner user={user} /> : <Navigate to="/login" replace />}
         />
       </Routes>
     </Router>
