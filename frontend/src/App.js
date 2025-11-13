@@ -6,20 +6,22 @@ import {
   Route,
   Navigate,
 } from "react-router-dom";
+
 import Navbar from "./components/Navbar";
 import LoginPage from "./pages/LoginPage";
 import Dashboard from "./pages/Dashboard";
 import ProfilePage from "./pages/ProfilePage";
+import SchedulePlanner from "./pages/SchedulePlanner";
+
 import "./styles/theme.css";
 
 function App() {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  // ✅ Check session when app loads
+  // Check session on page load
   useEffect(() => {
     fetch("http://127.0.0.1:5000/session", { credentials: "include" })
-
       .then((res) => (res.ok ? res.json() : Promise.reject()))
       .then((data) => {
         if (data.status === "SUCCESS" && data.user) {
@@ -28,29 +30,26 @@ function App() {
           setUser(null);
         }
       })
-      .catch(() => {
-        setUser(null);
-      })
+      .catch(() => setUser(null))
       .finally(() => setLoading(false));
   }, []);
 
-  // ✅ Logout handler
+  // Logout handler
   const handleLogout = () => {
     fetch("http://127.0.0.1:5000/logout", {
-  method: "POST",
-  credentials: "include",
-})
+      method: "POST",
+      credentials: "include",
+    })
       .then(() => setUser(null))
       .catch(() => setUser(null));
   };
 
-  // ✅ Allow ProfilePage to update user info
+  // Allows ProfilePage to update user info
   const handleUserUpdate = (updatedUser) => {
     setUser(updatedUser);
   };
 
   if (loading) {
-    // Simple loading state while we check the session
     return (
       <div className="page-container">
         <p>Loading...</p>
@@ -63,7 +62,7 @@ function App() {
       <Navbar />
 
       <Routes>
-        {/* Login route */}
+        {/* LOGIN */}
         <Route
           path="/login"
           element={
@@ -75,7 +74,7 @@ function App() {
           }
         />
 
-        {/* Dashboard route */}
+        {/* DASHBOARD */}
         <Route
           path="/dashboard"
           element={
@@ -87,7 +86,19 @@ function App() {
           }
         />
 
-        {/* ✅ New Profile route */}
+        {/* SCHEDULE PLANNER */}
+        <Route
+          path="/planner"
+          element={
+            user ? (
+              <SchedulePlanner user={user} />
+            ) : (
+              <Navigate to="/login" replace />
+            )
+          }
+        />
+
+        {/* PROFILE */}
         <Route
           path="/profile"
           element={
@@ -103,7 +114,7 @@ function App() {
           }
         />
 
-        {/* Default route – send to dashboard or login */}
+        {/* DEFAULT ROUTE */}
         <Route
           path="/"
           element={
@@ -119,4 +130,4 @@ function App() {
   );
 }
 
-export default App; 
+export default App;

@@ -2,9 +2,9 @@ import { useEffect, useState } from "react";
 import "../styles/theme.css";
 
 /* DELETE FOR REAL BACKEND
-   TEMPORARY MOCK DATA FLAG — REMOVE WHEN BACKEND READY */
-const USE_MOCK_DATA = true;
-/* END DELETE FOR REAL BACKEND */
+   TEMPORARY MOCK DATA FLAG — REMOVE WHEN BACKEND READY
+  const USE_MOCK_DATA = true;
+  END DELETE FOR REAL BACKEND */
 
 function SchedulePlanner({ user }) {
   const [requirements, setRequirements] = useState(null);
@@ -45,7 +45,7 @@ function SchedulePlanner({ user }) {
     async function fetchRequirements() {
 
       /* DELETE FOR REAL BACKEND
-         MOCK REQUIREMENTS LOADING */
+         MOCK REQUIREMENTS LOADING 
       if (USE_MOCK_DATA) {
         setTimeout(() => {
           setRequirements(["COEN 146", "COEN 174", "COEN 122"]);
@@ -53,7 +53,7 @@ function SchedulePlanner({ user }) {
         }, 500);
         return;
       }
-      /* END DELETE FOR REAL BACKEND */
+      END DELETE FOR REAL BACKEND */
 
       // REAL BACKEND ENDPOINT
       try {
@@ -78,7 +78,7 @@ function SchedulePlanner({ user }) {
   }, []);
 
   /* DELETE FOR REAL BACKEND
-     MOCK FILTERING HELPERS */
+     MOCK FILTERING HELPERS 
   function mockFilterSchedule(schedule) {
     return schedule.filter((row) => {
       const profMatch =
@@ -103,7 +103,7 @@ function SchedulePlanner({ user }) {
     if (period === "AM" && h === 12) h = 0;
     return h * 60 + m;
   }
-  /* END DELETE FOR REAL BACKEND */
+   END DELETE FOR REAL BACKEND */
 
   /* GENERATE SCHEDULES */
   const handleGenerate = async () => {
@@ -119,7 +119,7 @@ function SchedulePlanner({ user }) {
     setLoadingSchedules(true);
 
     /* DELETE FOR REAL BACKEND
-       MOCK SCHEDULE GENERATION */
+       MOCK SCHEDULE GENERATION 
     if (USE_MOCK_DATA) {
       setTimeout(() => {
         const baseSchedules = [
@@ -166,7 +166,7 @@ function SchedulePlanner({ user }) {
       }, 700);
       return;
     }
-    /* END DELETE FOR REAL BACKEND */
+     END DELETE FOR REAL BACKEND */
 
     // REAL BACKEND ENDPOINT
     try {

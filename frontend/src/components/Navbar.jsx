@@ -10,10 +10,11 @@ function Navbar() {
       </div>
 
     {/* Navigation Links */}
-<div style={{ display: "flex", gap: "1.5rem", alignItems: "center" }}>
-  <Link to="/dashboard">Dashboard</Link>
-  <Link to="/profile">My Profile</Link>
-</div>
+      <div style={{ display: "flex", gap: "1.5rem", alignItems: "center" }}>
+        <Link to="/dashboard">Dashboard</Link>
+        <Link to="/planner">Schedule Planner</Link>
+        <Link to="/profile">My Profile</Link>
+      </div>
 
     </nav>
   );
