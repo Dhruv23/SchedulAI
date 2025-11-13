@@ -18,6 +18,7 @@ from dotenv import load_dotenv
 
 # import classes
 from classes.student_model import Student
+from classes.course_model import Course
 from classes.auth_manager import AuthManager
 from classes.admin_user_manager import AdminUserManager
 from classes.schedule_planner import SchedulePlanner

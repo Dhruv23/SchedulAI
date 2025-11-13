@@ -5,7 +5,7 @@ from flask_sqlalchemy import SQLAlchemy
 db = SQLAlchemy()
 
 from classes.student_model import Student
-# from classes.course_model import Course
+from classes.course_model import Course
 # from classes.advisor_comment_model import AdvisorComment
 # from classes.analytics_model import AnalyticsRecord
 
