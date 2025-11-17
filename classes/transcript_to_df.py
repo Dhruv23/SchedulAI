@@ -2,6 +2,7 @@ from pydoc import text
 import re
 import pandas as pd
 import pdfplumber
+import os
 from classes.transcript_course_model import TranscriptCourse
 from classes.student_model import Student
 from db import db
@@ -11,6 +12,27 @@ class TranscriptParser:
         """Initialize the parser with a transcript PDF file."""
         self.pdf_path = pdf_path
         self.text = self._extract_text()
+        self.course_names_map = self._load_course_names()
+
+    def _load_course_names(self) -> dict:
+        """load course names from course_names.txt file"""
+        course_map = {}
+        course_names_path = os.path.join(os.path.dirname(os.path.dirname(__file__)), 'course_names.txt')
+        
+        try:
+            with open(course_names_path, 'r', encoding='utf-8') as f:
+                for line in f:
+                    line = line.strip()
+                    if line and ' - ' in line:
+                        parts = line.split(' - ', 1)
+                        if len(parts) == 2:
+                            course_code = parts[0].strip()
+                            course_name = parts[1].strip()
+                            course_map[course_code] = course_name
+        except Exception as e:
+            print(f"warning: could not load course names file: {e}")
+        
+        return course_map
 
     def _extract_text(self) -> str:
         """Extract raw text from the PDF."""
@@ -20,34 +42,40 @@ class TranscriptParser:
                 text += page.extract_text() + "\n"
         return text
 
+    # holy shit someone just kill me already please this parser and i have become sworn enemies
     def _extract_courses(self) -> list:
         """
-        Extract course information for SCU-style transcripts.
-        Matches lines like:
-        'COEN 10 Introduction to Programming 4.000 4.000 B+ 0.000'
+        extract course information from any SCU transcript, using course_names.txt for course code -> course name mapping
         """
-        # Pattern: CourseCode (e.g., COEN 10), CourseName (text), 4 numbers/grades at end
-        course_pattern = re.compile(
-            r"^([A-Z]{2,4}\s\d{1,3}[A-Z]?)\s+(.+?)\s+([\d.]+)\s+([\d.]+)\s+([A-FP][+-]?)\s+([\d.]+)$"
+        main_course_pattern = re.compile(
+            r".+ - .+ and ([A-Z]{2,4}\s\d{1,3}[A-Z]?)\s*-\s*.+?\s+([A-FP][+-]?)\s+([\d.]+)\s+(\d+)\s+([\d.]+)$"
         )
-
+        
         courses = []
         lines = self.text.splitlines()
-
+        
         for line in lines:
-            match = course_pattern.search(line.strip())
+            line = line.strip()
+            
+            # look for course lines
+            match = main_course_pattern.match(line)
             if match:
-                course_code, course_name, attempted, earned, grade, points = match.groups()
+                course_code, grade, grade_points, units, total_points = match.groups()
+                
+                # get course name from lookup table
+                course_name = self.course_names_map.get(course_code, f"Unknown Course ({course_code})")
+                
                 try:
                     courses.append({
                         "Course Code": course_code,
-                        "Course Name": course_name.strip(),
+                        "Course Name": course_name,
                         "Grade": grade.strip(),
-                        "Grade Points": 0.0 if grade in ["P", "CR", "In Progress", "W"] else float(points),
-                        "Units": float(earned),
-                        "Total Points": float(points)
+                        "Grade Points": 0.0 if grade in ["P", "CR", "In Progress", "W"] else float(grade_points),
+                        "Units": float(units),
+                        "Total Points": float(total_points)
                     })
-                except Exception:
+                except Exception as e:
+                    print(f"error processing course {course_code}: {e}")
                     continue
 
         return courses

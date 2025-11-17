@@ -57,7 +57,7 @@ function ProfilePage({ user, onUserUpdate, onLogout }) {
   useEffect(() => {
     setLoadingProgress(true);
 
-    fetch("http://127.0.0.1:5000/student/progress", {
+    fetch("/student/progress", {
       credentials: "include",
     })
       .then(async (res) => {
@@ -98,7 +98,7 @@ function ProfilePage({ user, onUserUpdate, onLogout }) {
       };
 
       const res = await fetch(
-        "http://127.0.0.1:5000/student/profile/update",
+        "/student/profile/update",
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },

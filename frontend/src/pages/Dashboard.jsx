@@ -76,21 +76,21 @@ function Dashboard({ user, onLogout }) {
         <table style={{ width: "100%", borderCollapse: "collapse" }}>
           <thead>
             <tr>
-              <th style={{ borderBottom: "2px solid #ccc", textAlign: "left" }}>Code</th>
-              <th style={{ borderBottom: "2px solid #ccc", textAlign: "left" }}>Name</th>
-              <th style={{ borderBottom: "2px solid #ccc" }}>Grade</th>
-              <th style={{ borderBottom: "2px solid #ccc" }}>Units</th>
-              <th style={{ borderBottom: "2px solid #ccc" }}>Points</th>
+              <th style={{ borderBottom: "2px solid #ccc", textAlign: "left", padding: "8px" }}>Code</th>
+              <th style={{ borderBottom: "2px solid #ccc", textAlign: "left", padding: "8px" }}>Name</th>
+              <th style={{ borderBottom: "2px solid #ccc", textAlign: "center", padding: "8px" }}>Grade</th>
+              <th style={{ borderBottom: "2px solid #ccc", textAlign: "center", padding: "8px" }}>Units</th>
+              <th style={{ borderBottom: "2px solid #ccc", textAlign: "center", padding: "8px" }}>Points</th>
             </tr>
           </thead>
           <tbody>
             {courses.map((c, i) => (
               <tr key={i}>
-                <td>{c["Course Code"]}</td>
-                <td>{c["Course Name"]}</td>
-                <td style={{ textAlign: "center" }}>{c["Grade"]}</td>
-                <td style={{ textAlign: "center" }}>{c["Units"]}</td>
-                <td style={{ textAlign: "center" }}>{c["Total Points"]}</td>
+                <td style={{ padding: "8px", borderBottom: "1px solid #eee" }}>{c["Course Code"]}</td>
+                <td style={{ padding: "8px", borderBottom: "1px solid #eee" }}>{c["Course Name"]}</td>
+                <td style={{ padding: "8px", textAlign: "center", borderBottom: "1px solid #eee" }}>{c["Grade"]}</td>
+                <td style={{ padding: "8px", textAlign: "center", borderBottom: "1px solid #eee" }}>{c["Units"]}</td>
+                <td style={{ padding: "8px", textAlign: "center", borderBottom: "1px solid #eee" }}>{c["Total Points"]}</td>
               </tr>
             ))}
           </tbody>
