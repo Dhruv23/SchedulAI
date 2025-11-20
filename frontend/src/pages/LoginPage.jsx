@@ -7,6 +7,18 @@ function LoginPage({ onLogin }) {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
 
+  // const handleSubmit = (e) => {
+  //   e.preventDefault();
+
+  //   const fakeUser = {
+  //     email,
+  //     name: "Temporary User",
+  //     id: "temp",
+  //   };
+
+  //   onLogin(fakeUser);
+  // };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError("");

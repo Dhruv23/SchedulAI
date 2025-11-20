@@ -217,3 +217,82 @@ class TranscriptParser:
         # 3. Convert each record to a dict and build a DataFrame
         df = pd.DataFrame([r.to_dict() for r in records])
         return df
+        # -----------------------------------------------------------
+    # SAVE PARSED TRANSCRIPT TO DATABASE
+    # -----------------------------------------------------------
+    def save_transcript_to_db(self, student_email: str) -> bool:
+        """
+        Parse the PDF, then save the transcript rows to the database.
+        Ensures: ONE transcript per student (old rows removed).
+        """
+        # 1. Load student
+        student = Student.query.filter_by(email=student_email).first()
+        if not student:
+            print(f"[ERROR] No student found with email {student_email}")
+            return False
+
+        # 2. Extract courses to DataFrame
+        df = self.to_dataframe()
+        if df.empty:
+            print("[WARN] No transcript data extracted; nothing saved.")
+            return False
+
+        # 3. Delete existing transcript rows for this student
+        TranscriptCourse.query.filter_by(student_id=student.id).delete()
+        db.session.commit()
+
+        # 4. Insert each course row
+        for _, row in df.iterrows():
+            new_entry = TranscriptCourse(
+                student_id=student.id,
+                course_code=row["Course Code"],
+                course_name=row["Course Name"],
+                units=row["Units"],
+                grade=row["Grade"],
+                grade_points=row["Grade Points"],
+                total_points=row["Total Points"]
+            )
+            db.session.add(new_entry)
+
+        db.session.commit()
+        print(f"[SAVE] Stored {len(df)} transcript courses for {student_email}")
+        return True
+
+
+    # -----------------------------------------------------------
+    # LOAD TRANSCRIPT FROM DATABASE (IF ALREADY PARSED)
+    # -----------------------------------------------------------
+    def load_transcript_from_db(self, student_email: str) -> pd.DataFrame:
+        """
+        Returns the student's transcript from 'schedulai.db' if it already exists.
+        Does NOT parse the PDF again.
+        """
+        # 1. Locate student
+        student = Student.query.filter_by(email=student_email).first()
+        if not student:
+            print(f"[WARN] No student found with email {student_email}")
+            return pd.DataFrame()
+
+        # 2. Query transcript rows
+        rows = TranscriptCourse.query.filter_by(student_id=student.id).all()
+        if not rows:
+            print(f"[INFO] No stored transcript for {student_email}")
+            return pd.DataFrame()
+
+        # 3. Convert to DataFrame
+        df = pd.DataFrame([
+            r.to_dict() for r in rows
+        ])
+
+        print(f"[INFO] Loaded {len(df)} transcript entries from DB for {student_email}")
+        return df
+    
+    # to use: 
+    # parser = TranscriptParser("path/to/transcript.pdf")
+    # parser.save_transcript_to_db("dhruv@scu.edu")
+
+    # to use later without parsing (get from db): 
+    # parser = TranscriptParser("doesnt_matter.pdf")  # PDF won't be parsed
+    # df = parser.load_transcript_from_db("dhruv@scu.edu")
+    # print(df)
+
