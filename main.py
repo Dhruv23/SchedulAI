@@ -104,6 +104,67 @@ os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 def health_check():
     return jsonify({"status": "HEALTHY", "message": "[INFO] flask backend is running"}), 200
 
+# Debug endpoint for troubleshooting
+@app.route("/debug", methods=["GET"])
+def debug_info():
+    """Provide debug information for troubleshooting"""
+    try:
+        import sys
+        import platform
+        return jsonify({
+            "status": "SUCCESS",
+            "debug_info": {
+                "python_version": sys.version,
+                "platform": platform.platform(),
+                "flask_running": True,
+                "database_file_exists": os.path.exists("schedulai.db"),
+                "env_file_exists": os.path.exists(".env"),
+                "upload_folder_exists": os.path.exists(UPLOAD_FOLDER),
+                "cors_origins": ["http://localhost:3000", "http://localhost:3001", "http://localhost:3002"]
+            }
+        }), 200
+    except Exception as e:
+        return jsonify({
+            "status": "ERROR",
+            "message": f"Debug info error: {str(e)}"
+        }), 500
+
+# Global error handlers for better debugging
+@app.errorhandler(500)
+def internal_error(error):
+    print(f"[ERROR] Internal server error: {error}")
+    return jsonify({
+        "status": "ERROR", 
+        "message": "Internal server error. Check server logs for details.",
+        "error_type": "INTERNAL_ERROR"
+    }), 500
+
+@app.errorhandler(404)
+def not_found(error):
+    return jsonify({
+        "status": "ERROR", 
+        "message": "Endpoint not found",
+        "error_type": "NOT_FOUND"
+    }), 404
+
+@app.errorhandler(400)
+def bad_request(error):
+    return jsonify({
+        "status": "ERROR", 
+        "message": "Bad request. Check your request format.",
+        "error_type": "BAD_REQUEST"
+    }), 400
+
+# CORS preflight handler
+@app.before_request
+def handle_preflight():
+    if request.method == "OPTIONS":
+        response = jsonify()
+        response.headers.add("Access-Control-Allow-Origin", "*")
+        response.headers.add('Access-Control-Allow-Headers', "*")
+        response.headers.add('Access-Control-Allow-Methods', "*")
+        return response
+
 # student registration endpoint
 @app.post("/student/register")
 def register_student():

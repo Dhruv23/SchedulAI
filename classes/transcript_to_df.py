@@ -13,6 +13,7 @@ class TranscriptParser:
         self.pdf_path = pdf_path
         self.text = self._extract_text()
         self.course_names_map = self._load_course_names()
+        self.transcript_type = self._detect_transcript_type()
 
     def _load_course_names(self) -> dict:
         """load course names from course_names.txt file"""
@@ -42,11 +43,25 @@ class TranscriptParser:
                 text += page.extract_text() + "\n"
         return text
 
+    def _detect_transcript_type(self) -> str:
+        """detect whether this is an 'unofficial' or 'official' transcript format."""
+        if "Unofficial Transcript" in self.text or "unofficial transcript" in self.text.lower():
+            return "unofficial"
+        else:
+            return "official"  # default to original format
+
     # holy shit someone just kill me already please this parser and i have become sworn enemies
     def _extract_courses(self) -> list:
         """
         extract course information from any SCU transcript, using course_names.txt for course code -> course name mapping
         """
+        if self.transcript_type == "unofficial":
+            return self._extract_courses_unofficial()
+        else:
+            return self._extract_courses_official()
+
+    def _extract_courses_official(self) -> list:
+        """extract courses from the original 'official' transcript format."""
         main_course_pattern = re.compile(
             r".+ - .+ and ([A-Z]{2,4}\s\d{1,3}[A-Z]?)\s*-\s*.+?\s+([A-FP][+-]?)\s+([\d.]+)\s+(\d+)\s+([\d.]+)$"
         )
@@ -70,9 +85,9 @@ class TranscriptParser:
                         "Course Code": course_code,
                         "Course Name": course_name,
                         "Grade": grade.strip(),
-                        "Grade Points": 0.0 if grade in ["P", "CR", "In Progress", "W"] else float(grade_points),
-                        "Units": float(units),
-                        "Total Points": float(total_points)
+                        "Grade Points": round(0.0 if grade in ["P", "CR", "In Progress", "W"] else float(grade_points), 1),
+                        "Units": round(float(units), 1),
+                        "Total Points": round(float(total_points), 1)
                     })
                 except Exception as e:
                     print(f"error processing course {course_code}: {e}")
@@ -80,14 +95,84 @@ class TranscriptParser:
 
         return courses
 
+    def _extract_courses_unofficial(self) -> list:
+        """extract courses from the 'unofficial' transcript format (cleaner format)."""
+        courses = []
+        lines = self.text.splitlines()
+        
+        # pattern for unofficial transcript course lines:
+        course_pattern = re.compile(
+            r"^([A-Z]{2,4}\s\d{1,3}[A-Z]?)\s+(.+?)\s+([\d.]+)\s+([\d.]+)\s+([A-FP][+-]?|W|CR|P|I)\s+([\d.]+)$"
+        )
+        
+        # grade point mapping for SCU grading scale
+        grade_scale = {
+            'A': 4.0, 'A-': 3.7, 'B+': 3.3, 'B': 3.0, 'B-': 2.7,
+            'C+': 2.3, 'C': 2.0, 'C-': 1.7, 'D+': 1.3, 'D': 1.0, 'D-': 0.7,
+            'F': 0.0, 'P': 0.0, 'CR': 0.0, 'W': 0.0, 'I': 0.0
+        }
+        
+        for line in lines:
+            line = line.strip()
+            
+            # skip header lines and other non-course lines
+            skip_keywords = [
+                "Course Transcript", "Term GPA", "Cum GPA", "Quarter", "Student Name", "Page",
+                "Unofficial Transcript", "Santa Clara University", "Prepared On", "Date of Birth",
+                "Academic Programs", "Total Transfer Credit", "External Test Credit", 
+                "Attempted Earned Grade Units Points", "Term Totals", "Cumulated Totals"
+            ]
+            
+            if any(keyword in line for keyword in skip_keywords):
+                continue
+            
+            # skip lines that are too short or don't look like course lines
+            if len(line) < 20:
+                continue
+            
+            match = course_pattern.match(line)
+            if match:
+                course_code, course_title, attempted, earned, grade, points = match.groups()
+                
+                # clean up course title and validate
+                course_title = course_title.strip()
+                if len(course_title) < 3: 
+                    continue
+                
+                try:
+                    # get grade points from our scale
+                    grade_points = grade_scale.get(grade, 0.0)
+                    units = float(earned)
+                    total_points = grade_points * units if grade not in ['P', 'CR', 'W', 'I'] else 0.0
+                    
+                    # validate that units make sense (between 0.5 and 10)
+                    if units < 0.5 or units > 10:
+                        print(f"[WARN] Unusual unit count for {course_code}: {units}")
+                    
+                    courses.append({
+                        "Course Code": course_code,
+                        "Course Name": course_title,
+                        "Grade": grade.strip(),
+                        "Grade Points": round(grade_points, 1),
+                        "Units": round(units, 1),
+                        "Total Points": round(total_points, 1)
+                    })
+                except Exception as e:
+                    print(f"error processing unofficial course {course_code}: {e}")
+                    continue
+
+        return courses
+
 
     def to_dataframe(self) -> pd.DataFrame:
         """convert extracted course data to dataframe"""
+        print(f"[INFO] detected transcript type: {self.transcript_type}")
         courses = self._extract_courses()
         if not courses:
-            print("[WARN] no valid courses extracted")
+            print(f"[WARN] no valid courses extracted from {self.transcript_type} transcript")
             return pd.DataFrame(columns=["Course Code", "Course Name", "Grade", "Grade Points", "Units", "Total Points"])
         
+        print(f"[INFO] extracted {len(courses)} courses from {self.transcript_type} transcript")
         df = pd.DataFrame(courses)
         if "Course Name" in df.columns:
             df = df[df["Course Name"].str.len() > 3]
