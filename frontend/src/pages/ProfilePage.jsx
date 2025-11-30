@@ -20,16 +20,40 @@ function safeParseJson(text) {
   }
 }
 
+function splitFullName(fullName) {
+  if (!fullName) return { first: "", last: "" };
+  const parts = fullName.trim().split(" ");
+  if (parts.length <= 1) return { first: parts[0] || "", last: "" };
+  return { first: parts[0], last: parts.slice(1).join(" ") };
+}
+
 function ProfilePage({ user, onUserUpdate, onLogout }) {
   const navigate = useNavigate();
+  
+  // Initialize first and last name from full name
+  const initialName = splitFullName(user?.full_name || "");
+  
   const [profile, setProfile] = useState({
-    full_name: user?.full_name || "",
+    first_name: initialName.first,
+    last_name: initialName.last,
     major: user?.major || "",
     grad_year: user?.grad_year || "",
+    grad_quarter: user?.grad_quarter || "Spring",
     pronouns: user?.pronouns || "",
     bio: user?.bio || "",
     email: user?.email || "",
   });
+
+  // Password change state
+  const [passwordData, setPasswordData] = useState({
+    newPassword: "",
+    confirmPassword: ""
+  });
+
+  const validatePassword = (password) => {
+    const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+    return regex.test(password);
+  };
 
   const [completedUnits, setCompletedUnits] = useState(0);
   const [totalUnits, setTotalUnits] = useState(0);
@@ -42,10 +66,13 @@ function ProfilePage({ user, onUserUpdate, onLogout }) {
   // keep local profile synced with user
   useEffect(() => {
     if (user) {
+      const nameData = splitFullName(user.full_name || "");
       setProfile({
-        full_name: user.full_name || "",
+        first_name: nameData.first,
+        last_name: nameData.last,
         major: user.major || "",
         grad_year: user.grad_year || "",
+        grad_quarter: user.grad_quarter || "Spring",
         pronouns: user.pronouns || "",
         bio: user.bio || "",
         email: user.email || "",
@@ -57,6 +84,7 @@ function ProfilePage({ user, onUserUpdate, onLogout }) {
   useEffect(() => {
     setLoadingProgress(true);
 
+    // First try to fetch progress from backend
     fetch("/student/progress", {
       credentials: "include",
     })
@@ -70,11 +98,46 @@ function ProfilePage({ user, onUserUpdate, onLogout }) {
         if (!data || data.status !== "SUCCESS" || !data.progress) {
           return;
         }
-        setCompletedUnits(data.progress.completed_units || 0);
-        setTotalUnits(data.progress.total_units || 0);
+        setTotalUnits(data.progress.total_units || 180);
       })
       .catch((err) => {
         console.error("Progress fetch error:", err);
+      });
+
+    // Also fetch transcript to calculate completed units
+    fetch("/student/transcript", { credentials: "include" })
+      .then(async (res) => {
+        if (!res.ok) {
+          console.error("Transcript fetch failed with status", res.status);
+          return;
+        }
+        const text = await res.text();
+        const data = safeParseJson(text);
+        if (!data || data.status !== "SUCCESS") {
+          return;
+        }
+        
+        const fetchedCourses = data.courses || [];
+        
+        // Calculate completed units from fetched courses
+        const sum = fetchedCourses.reduce((acc, c) => {
+          const units =
+            c["Units"] ??
+            c.units ??
+            c.Units ??
+            0;
+          return acc + (Number(units) || 0);
+        }, 0);
+        
+        if (sum > 0) {
+          setCompletedUnits(sum);
+        }
+        
+        // If no totalUnits was set from progress, use default
+        setTotalUnits(prev => prev > 0 ? prev : 180);
+      })
+      .catch((err) => {
+        console.error("Transcript fetch error:", err);
       })
       .finally(() => setLoadingProgress(false));
   }, []);
@@ -83,19 +146,55 @@ function ProfilePage({ user, onUserUpdate, onLogout }) {
     setProfile((prev) => ({ ...prev, [field]: value }));
   };
 
+  const handlePasswordChange = (field, value) => {
+    setPasswordData((prev) => ({ ...prev, [field]: value }));
+  };
+
   const handleSave = async () => {
     setSaving(true);
     setError("");
     setSuccess("");
 
     try {
+      // Combine first and last name for backend
+      const fullName = `${profile.first_name} ${profile.last_name}`.trim();
+      
       const payload = {
-        full_name: profile.full_name,
+        full_name: fullName,
         major: profile.major,
         grad_year: profile.grad_year,
+        grad_quarter: profile.grad_quarter,
         pronouns: profile.pronouns,
         bio: profile.bio,
       };
+
+      // Handle password change if provided
+      if (passwordData.newPassword) {
+        if (passwordData.newPassword !== passwordData.confirmPassword) {
+          throw new Error("New passwords do not match.");
+        }
+        
+        if (!validatePassword(passwordData.newPassword)) {
+          throw new Error("Password must be at least 8 characters long and include one uppercase letter, one lowercase letter, one number, and one special character (@$!%*?&).");
+        }
+        
+        // First update password
+        const passwordRes = await fetch("/user/password/change", {
+          method: "PUT",
+          headers: { "Content-Type": "application/json" },
+          credentials: "include",
+          body: JSON.stringify({
+            newPassword: passwordData.newPassword
+          }),
+        });
+        
+        const passwordResult = await passwordRes.text();
+        const passwordResponseData = passwordResult ? JSON.parse(passwordResult) : {};
+        
+        if (!passwordRes.ok || passwordResponseData.status !== "SUCCESS") {
+          throw new Error(passwordResponseData.message || "Failed to update password.");
+        }
+      }
 
       const res = await fetch(
         "/student/profile/update",
@@ -120,6 +219,14 @@ function ProfilePage({ user, onUserUpdate, onLogout }) {
         onUserUpdate(data.student);
       }
 
+      // Reset password fields if password was changed
+      if (passwordData.newPassword) {
+        setPasswordData({
+          newPassword: "",
+          confirmPassword: ""
+        });
+      }
+
       setSuccess("Profile updated successfully.");
       setIsEditing(false);
     } catch (err) {
@@ -132,15 +239,23 @@ function ProfilePage({ user, onUserUpdate, onLogout }) {
 
   const handleCancel = () => {
     if (user) {
+      const nameData = splitFullName(user.full_name || "");
       setProfile({
-        full_name: user.full_name || "",
+        first_name: nameData.first,
+        last_name: nameData.last,
         major: user.major || "",
         grad_year: user.grad_year || "",
+        grad_quarter: user.grad_quarter || "Spring",
         pronouns: user.pronouns || "",
         bio: user.bio || "",
         email: user.email || "",
       });
     }
+    // Reset password data
+    setPasswordData({
+      newPassword: "",
+      confirmPassword: ""
+    });
     setIsEditing(false);
     setError("");
     setSuccess("");
@@ -152,14 +267,14 @@ function ProfilePage({ user, onUserUpdate, onLogout }) {
       : 0;
 
   const expectedGradLabel = profile.grad_year
-    ? `June ${profile.grad_year}`
+    ? `${profile.grad_quarter || "Spring"} ${profile.grad_year}`
     : "—";
 
   return (
     <div className="page-container profile-page">
       <div className="page-header">
         <h1 className="page-title">My Profile</h1>
-        <button className="secondary-button" onClick={onLogout}>
+        <button onClick={onLogout}>
           Logout
         </button>
       </div>
@@ -169,7 +284,7 @@ function ProfilePage({ user, onUserUpdate, onLogout }) {
         <div className="profile-left-card">
           <div className="profile-avatar-wrapper">
             <div className="profile-avatar-circle">
-              {getInitials(profile.full_name)}
+              {getInitials(`${profile.first_name} ${profile.last_name}`.trim())}
             </div>
           </div>
 
@@ -177,19 +292,66 @@ function ProfilePage({ user, onUserUpdate, onLogout }) {
             <div className="profile-detail-row">
               <span className="profile-label">Name</span>
               {isEditing ? (
-                <input
-                  type="text"
-                  value={profile.full_name}
-                  onChange={(e) => handleChange("full_name", e.target.value)}
-                />
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', width: '100%' }}>
+                  <input
+                    type="text"
+                    placeholder="First name"
+                    value={profile.first_name}
+                    onChange={(e) => handleChange("first_name", e.target.value)}
+                  />
+                  <input
+                    type="text"
+                    placeholder="Last name"
+                    value={profile.last_name}
+                    onChange={(e) => handleChange("last_name", e.target.value)}
+                  />
+                </div>
               ) : (
-                <span className="profile-value">{profile.full_name}</span>
+                <span className="profile-value">
+                  {`${profile.first_name} ${profile.last_name}`.trim() || "—"}
+                </span>
               )}
             </div>
 
             <div className="profile-detail-row">
               <span className="profile-label">Email</span>
               <span className="profile-value">{profile.email}</span>
+            </div>
+
+            <div className="profile-detail-row">
+              <span className="profile-label">Password</span>
+              {isEditing ? (
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', width: '100%' }}>
+                  <div style={{ 
+                    padding: '0.6rem 0.85rem',
+                    borderRadius: '12px',
+                    border: '1px solid #e5e7eb',
+                    backgroundColor: '#f3f4f6',
+                    color: '#6b7280',
+                    fontSize: '1rem',
+                    fontFamily: 'inherit'
+                  }}>
+                    ••••••••••••
+                  </div>
+                  <input
+                    type="password"
+                    placeholder="New password"
+                    value={passwordData.newPassword}
+                    onChange={(e) => handlePasswordChange("newPassword", e.target.value)}
+                  />
+                  <input
+                    type="password"
+                    placeholder="Confirm new password"
+                    value={passwordData.confirmPassword}
+                    onChange={(e) => handlePasswordChange("confirmPassword", e.target.value)}
+                  />
+                  <div style={{ fontSize: "0.8rem", color: "#666", marginTop: "0.25rem" }}>
+                    Enter new password to change it. Must be at least 8 characters with uppercase, lowercase, number, and special character.
+                  </div>
+                </div>
+              ) : (
+                <span className="profile-value">••••••••</span>
+              )}
             </div>
 
             <div className="profile-detail-row">
@@ -208,11 +370,31 @@ function ProfilePage({ user, onUserUpdate, onLogout }) {
             <div className="profile-detail-row">
               <span className="profile-label">Expected Graduation</span>
               {isEditing ? (
-                <input
-                  type="number"
-                  value={profile.grad_year || ""}
-                  onChange={(e) => handleChange("grad_year", e.target.value)}
-                />
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', width: '100%' }}>
+                  <select
+                    value={profile.grad_quarter || "Spring"}
+                    onChange={(e) => handleChange("grad_quarter", e.target.value)}
+                    style={{ 
+                      width: '100%',
+                      padding: '0.6rem 0.85rem', 
+                      borderRadius: '12px', 
+                      border: '1px solid #e5e7eb', 
+                      fontSize: '1rem', 
+                      backgroundColor: '#f9fafb',
+                      fontFamily: 'inherit',
+                      transition: 'border-color 0.15s ease, box-shadow 0.15s ease, background-color 0.15s ease'
+                    }}
+                  >
+                    <option value="Spring">Spring</option>
+                    <option value="Fall">Fall</option>
+                  </select>
+                  <input
+                    type="number"
+                    placeholder="Year"
+                    value={profile.grad_year || ""}
+                    onChange={(e) => handleChange("grad_year", e.target.value)}
+                  />
+                </div>
               ) : (
                 <span className="profile-value">{expectedGradLabel}</span>
               )}
@@ -320,7 +502,39 @@ function ProfilePage({ user, onUserUpdate, onLogout }) {
             <button
               type="button"
               className="link-button"
-              onClick={() => navigate("/dashboard")}
+              onClick={async () => {
+                try {
+                  // First check if user has transcript data
+                  const transcriptResponse = await fetch("/student/transcript", { credentials: "include" });
+                  const transcriptData = await transcriptResponse.json();
+                  
+                  if (transcriptData.status === "SUCCESS" && transcriptData.courses && transcriptData.courses.length > 0) {
+                    // User has transcript data, now fetch the PDF
+                    const pdfResponse = await fetch("/student/transcript/pdf", { 
+                      credentials: "include",
+                      method: "GET"
+                    });
+                    
+                    if (pdfResponse.ok) {
+                      // Convert response to blob and open in new tab
+                      const blob = await pdfResponse.blob();
+                      const url = window.URL.createObjectURL(blob);
+                      window.open(url, "_blank");
+                      // Clean up the blob URL after opening
+                      setTimeout(() => window.URL.revokeObjectURL(url), 1000);
+                    } else if (pdfResponse.status === 404) {
+                      alert("Transcript PDF file not found on server. Please re-upload your transcript.");
+                    } else {
+                      alert(`Error loading PDF: ${pdfResponse.status} ${pdfResponse.statusText}`);
+                    }
+                  } else {
+                    alert("No transcript found. Please upload a transcript first on the Dashboard.");
+                  }
+                } catch (error) {
+                  console.error("PDF access error:", error);
+                  alert("Error accessing transcript. Please check your connection and try again.");
+                }
+              }}
             >
               View Unofficial Transcript
             </button>
@@ -334,7 +548,7 @@ function ProfilePage({ user, onUserUpdate, onLogout }) {
             <button
               type="button"
               className="link-button"
-              onClick={() => navigate("/dashboard")}
+              onClick={() => window.open("https://www.ratemyprofessors.com/school/882", "_blank")}
             >
               Rate Professors & Classes
             </button>
