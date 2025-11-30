@@ -9,31 +9,52 @@ function Dashboard({ user, onLogout }) {
   const [totalUnits, setTotalUnits] = useState(180);
   const [major, setMajor] = useState("");
 
-  // Fetch progress from backend
+  // Fetch progress and transcript data
   useEffect(() => {
-    fetch("/student/progress", { credentials: "include" })
+    let transcriptUnits = 0;
+    let progressTotal = 180;
+    let progressMajor = "";
+
+    // Fetch progress from backend for total units and major
+    const fetchProgress = fetch("/student/progress", { credentials: "include" })
       .then((res) => res.json())
       .then((data) => {
         if (data.status === "SUCCESS" && data.progress) {
           const prog = data.progress;
-          setCompletedUnits(prog.completed_units || 0);
-          setTotalUnits(prog.total_units || 180);
-          setMajor(prog.major || "");
+          progressTotal = prog.total_units || 180;
+          progressMajor = prog.major || "";
         }
       })
       .catch((err) => console.error("Progress fetch failed:", err));
-  }, []);
 
-  // Fetch transcript for table display
-  useEffect(() => {
-    fetch("/student/transcript", { credentials: "include" })
+    // Fetch transcript for courses and calculate completed units
+    const fetchTranscript = fetch("/student/transcript", { credentials: "include" })
       .then((res) => res.json())
       .then((data) => {
         if (data.status === "SUCCESS") {
-          setCourses(data.courses || []);
+          const fetchedCourses = data.courses || [];
+          setCourses(fetchedCourses);
+          
+          // Calculate completed units from fetched courses
+          transcriptUnits = fetchedCourses.reduce((acc, c) => {
+            const units =
+              c["Units"] ??
+              c.units ??
+              c.Units ??
+              0;
+            return acc + (Number(units) || 0);
+          }, 0);
         }
       })
       .catch((err) => console.error("Transcript fetch failed:", err));
+
+    // Wait for both to complete, then set state
+    Promise.all([fetchProgress, fetchTranscript]).then(() => {
+      setTotalUnits(progressTotal);
+      setMajor(progressMajor);
+      // Always use transcript-calculated units if available
+      setCompletedUnits(transcriptUnits);
+    });
   }, []);
 
   // Handle successful transcript upload
@@ -51,6 +72,34 @@ function Dashboard({ user, onLogout }) {
     }, 0);
 
     setCompletedUnits(sum);
+  };
+
+  // Handle clearing transcript data
+  const handleClearTranscript = async () => {
+    if (!window.confirm("Are you sure you want to clear all transcript data? This action cannot be undone.")) {
+      return;
+    }
+    
+    try {
+      const response = await fetch("/student/transcript/clear", {
+        method: "DELETE",
+        credentials: "include"
+      });
+      
+      const data = await response.json();
+      
+      if (data.status === "SUCCESS") {
+        // Clear local state
+        setCourses([]);
+        setCompletedUnits(0);
+        alert("Transcript data cleared successfully.");
+      } else {
+        alert(data.message || "Failed to clear transcript data.");
+      }
+    } catch (error) {
+      console.error("Clear transcript error:", error);
+      alert("Error clearing transcript data. Please try again.");
+    }
   };
 
   const percentComplete =
@@ -74,8 +123,29 @@ function Dashboard({ user, onLogout }) {
         {completedUnits} of {totalUnits} units completed ({percentComplete}%)
       </p>
 
-      {/* Transcript upload */}
-      <TranscriptUpload onUploadSuccess={handleUploadSuccess} />
+      {/* Transcript upload and clear */}
+      <div style={{ display: "flex", gap: "1rem", alignItems: "center", flexWrap: "wrap" }}>
+        <div style={{ flex: 1, minWidth: "300px" }}>
+          <TranscriptUpload onUploadSuccess={handleUploadSuccess} />
+        </div>
+        <button 
+          onClick={handleClearTranscript}
+          style={{
+            padding: "0.75rem 1rem",
+            backgroundColor: "#dc3545",
+            color: "white",
+            border: "none",
+            borderRadius: "4px",
+            cursor: "pointer",
+            fontSize: "14px",
+            fontWeight: "500"
+          }}
+          onMouseOver={(e) => e.target.style.backgroundColor = "#c82333"}
+          onMouseOut={(e) => e.target.style.backgroundColor = "#dc3545"}
+        >
+          Clear Transcript
+        </button>
+      </div>
 
       {/* Transcript table */}
       <h2 style={{ marginTop: "2rem" }}>Transcript Courses</h2>

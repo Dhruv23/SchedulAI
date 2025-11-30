@@ -1,10 +1,10 @@
 # main.py
 import os
-from flask import Flask, jsonify
+from flask import Flask, jsonify, send_file
 
 # password hashing and token verification
-from flask import request, url_for
-from werkzeug.security import generate_password_hash
+from flask import request, url_for, redirect
+from werkzeug.security import generate_password_hash, check_password_hash
 import re
 from itsdangerous import BadSignature, SignatureExpired
 
@@ -170,7 +170,7 @@ def handle_preflight():
 def register_student():
     """
     [POST] register a new student account
-    accepts: full_name, email, password, major, grad_year, bio (optional), pronouns (optional)
+    accepts: full_name, email, password, major, grad_year, grad_quarter (optional), bio (optional), pronouns (optional)
     """
     
     data = request.get_json()
@@ -189,6 +189,7 @@ def register_student():
     password = data["password"]
     major = data["major"].strip()
     grad_year = data["grad_year"]
+    grad_quarter = data.get("grad_quarter", "Spring")
     bio = data.get("bio")
     pronouns = data.get("pronouns")
     
@@ -219,6 +220,7 @@ def register_student():
         password_hash=password_hash,
         major=major,
         grad_year=grad_year,
+        grad_quarter=grad_quarter,
         bio=bio,
         pronouns=pronouns
     )
@@ -363,17 +365,15 @@ def recover_password():
 @app.get("/user/password/reset/<token>")
 def user_password_reset_landing(token):
     """
-    [GET] validate password reset token from email
+    [GET] validate password reset token from email and redirect to frontend
     """
     email = verify_reset_token(token, max_age_seconds=600)
     if not email:
-        return {"status": "ERROR", "message": "invalid or expired link"}, 400
+        # Redirect to login with error parameter or show error page
+        return redirect(f"http://localhost:3000/login?error=invalid_reset_link")
     
-    return {
-        "status": "SUCCESS",
-        "message": "[INFO] token is valid. you may now reset your password",
-        # "email_embedded": email # for frontend testing only, please hide for release
-    }, 200
+    # Redirect to frontend password reset page with token
+    return redirect(f"http://localhost:3000/password-reset/{token}")
     
 PASSWORD_REGEX = r"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$"
 
@@ -414,6 +414,81 @@ def user_password_reset_confirm():
     
     return {"status": "SUCCESS", "message": "[INFO] password successfully reset"}, 200
 
+@app.post("/user/password/change")
+def change_password():
+    """
+    [POST] change password for logged-in user
+    body: { "current_password": "current", "new_password": "new" }
+    """
+    if "user_id" not in session:
+        return {"status": "ERROR", "message": "unauthorized access. please log in."}, 401
+    
+    data = request.get_json(silent=True) or {}
+    current_password = data.get("current_password", "")
+    new_password = data.get("new_password", "")
+    
+    if not current_password or not new_password:
+        return {"status": "ERROR", "message": "current password and new password are required"}, 400
+    
+    # validate new password
+    if not re.match(PASSWORD_REGEX, new_password):
+        return {
+            "status": "ERROR",
+            "message": ("password must be at least 8 characters long and include "
+                        "one uppercase, one lowercase, one number, and one special character")
+        }, 400
+    
+    # find user
+    user_id = session["user_id"]
+    user = Student.query.get(user_id)
+    if not user:
+        return {"status": "ERROR", "message": "user not found"}, 404
+    
+    # verify current password
+    if not check_password_hash(user.password_hash, current_password):
+        return {"status": "ERROR", "message": "current password is incorrect"}, 400
+    
+    # hash and update password
+    user.password_hash = generate_password_hash(new_password)
+    db.session.commit()
+    
+    return {"status": "SUCCESS", "message": "password successfully changed"}, 200
+
+@app.route("/user/password/change", methods=["PUT"])
+def change_password_put():
+    """
+    [PUT] change password for logged-in user (alternative endpoint)
+    body: { "newPassword": "new" }
+    """
+    if "user_id" not in session:
+        return {"status": "ERROR", "message": "unauthorized access. please log in."}, 401
+    
+    data = request.get_json(silent=True) or {}
+    new_password = data.get("newPassword", "")
+    
+    if not new_password:
+        return {"status": "ERROR", "message": "new password is required"}, 400
+    
+    # validate new password
+    if not re.match(PASSWORD_REGEX, new_password):
+        return {
+            "status": "ERROR",
+            "message": ("password must be at least 8 characters long and include "
+                        "one uppercase, one lowercase, one number, and one special character")
+        }, 400
+    
+    # find user
+    user_id = session["user_id"]
+    user = Student.query.get(user_id)
+    if not user:
+        return {"status": "ERROR", "message": "user not found"}, 404
+    
+    # hash and update password
+    user.password_hash = generate_password_hash(new_password)
+    db.session.commit()
+    
+    return {"status": "SUCCESS", "message": "password successfully changed"}, 200
+
 @app.post("/student/transcript/upload")
 def upload_transcript():
     """
@@ -432,27 +507,48 @@ def upload_transcript():
     if not file.filename.lower().endswith(".pdf"):
         return {"status": "ERROR", "message": "invalid file type. please upload a PDF file"}, 400
     
-    # save uploaded file securely
-    filename = secure_filename(file.filename)
-    filepath = os.path.join(UPLOAD_FOLDER, filename)
-    file.save(filepath)
+    student_id = session.get("user_id")
+    if not student_id:
+        return {"status": "ERROR", "message": "unauthorized access. please log in."}, 401
     
     try:
-        parser = TranscriptParser(filepath)
+        # Read PDF content into memory
+        pdf_content = file.read()
+        original_filename = secure_filename(file.filename)
+        
+        print(f"[DEBUG] Received PDF file: {original_filename}, Size: {len(pdf_content)} bytes")
+        
+        # Save to temporary file for parsing
+        import tempfile
+        with tempfile.NamedTemporaryFile(suffix='.pdf', delete=False) as temp_file:
+            temp_file.write(pdf_content)
+            temp_file_path = temp_file.name
+        
+        print(f"[DEBUG] Created temporary file: {temp_file_path}")
+        
+        # Parse the PDF from temporary file
+        parser = TranscriptParser(temp_file_path)
         transcript_data = parser.to_json()
+        
+        # Clean up temporary file
+        import os
+        os.unlink(temp_file_path)
+        print(f"[DEBUG] Cleaned up temporary file")
         
         if not transcript_data:
             return {"status": "ERROR", "message": "no valid course data extracted from transcript"}, 400
 
-        # check user sesssion
-        student_id = session.get("user_id")
-        if not student_id:
-            return {"status": "ERROR", "message": "unauthorized access. please log in."}, 401
-        
-        # clear previous transcript data if reuploaded
+        # Clear previous transcript data if reuploaded
         TranscriptCourse.query.filter_by(student_id=student_id).delete()
         
-        # store parsed course into db
+        # Store PDF content directly in database
+        student = Student.query.get(student_id)
+        if student:
+            student.transcript_pdf_content = pdf_content
+            student.transcript_pdf_filename = original_filename
+            print(f"[DEBUG] Stored PDF content in database for student {student_id}")
+        
+        # Store parsed courses in database
         for course in transcript_data:
             new_entry = TranscriptCourse(
                 student_id=student_id,
@@ -466,6 +562,8 @@ def upload_transcript():
             db.session.add(new_entry)
         db.session.commit()
         
+        print(f"[DEBUG] Successfully processed transcript for student {student_id}")
+        
         return {
             "status": "SUCCESS",
             "message": "transcript parsed successfully",
@@ -476,11 +574,6 @@ def upload_transcript():
         db.session.rollback()
         print(f"[ERROR] transcript parsing failed: {e}")
         return {"status": "ERROR", "message": f"failed to parse transcript: {str(e)}"}, 500
-    
-    # always clean up the temporary file
-    finally:
-        if os.path.exists(filepath):
-            os.remove(filepath)
 
 @app.get("/student/transcript")
 def get_transcript():
@@ -509,6 +602,70 @@ def get_transcript():
     except Exception as e:
         print(f"[ERROR] fetching transcript data failed: {e}")
         return {"status": "ERROR", "message": f"failed to fetch transcript data: {e}"}, 500
+
+@app.get("/student/transcript/pdf")
+def get_transcript_pdf():
+    """
+    [GET] serve the uploaded transcript PDF content from database for the logged-in student
+    """
+    student_id = session.get("user_id")
+    if not student_id:
+        return {"status": "ERROR", "message": "unauthorized access. please log in."}, 401
+    
+    try:
+        student = Student.query.get(student_id)
+        if not student or not student.transcript_pdf_content:
+            return {"status": "ERROR", "message": "no transcript PDF found for this student"}, 404
+        
+        # Create response with PDF content from database
+        from flask import Response
+        
+        filename = student.transcript_pdf_filename or "transcript.pdf"
+        
+        response = Response(
+            student.transcript_pdf_content,
+            mimetype="application/pdf",
+            headers={
+                "Content-Disposition": f"inline; filename={filename}",
+                "Content-Type": "application/pdf"
+            }
+        )
+        
+        print(f"[DEBUG] Serving PDF from database for student {student_id}, filename: {filename}")
+        return response
+        
+    except Exception as e:
+        print(f"[ERROR] serving transcript PDF failed: {e}")
+        return {"status": "ERROR", "message": f"failed to serve transcript PDF: {e}"}, 500
+
+@app.delete("/student/transcript/clear")
+def clear_transcript():
+    """
+    [DELETE] clear all transcript data for the logged-in student
+    """
+    student_id = session.get("user_id")
+    if not student_id:
+        return {"status": "ERROR", "message": "unauthorized access. please log in."}, 401
+    
+    try:
+        # Clear transcript courses
+        TranscriptCourse.query.filter_by(student_id=student_id).delete()
+        
+        # Clear PDF content from student record
+        student = Student.query.get(student_id)
+        if student:
+            student.transcript_pdf_content = None
+            student.transcript_pdf_filename = None
+        
+        db.session.commit()
+        
+        print(f"[DEBUG] Cleared transcript data for student {student_id}")
+        return {"status": "SUCCESS", "message": "transcript data cleared successfully"}, 200
+        
+    except Exception as e:
+        db.session.rollback()
+        print(f"[ERROR] clearing transcript failed: {e}")
+        return {"status": "ERROR", "message": f"failed to clear transcript: {e}"}, 500
 
 @app.post("/admin/user/manage")
 def admin_manage_user():
@@ -794,90 +951,5 @@ if __name__ == "__main__":
     with app.app_context():
         db.create_all()
         print("[INFO] database connection successful. if model exists, tables created")
-
-        client = app.test_client()
-        print("\n[TEST] Starting feature tests")
-
-        # Test data
-        test_student = {
-            "full_name": "Test User",
-            "email": "testuser@example.com",
-            "password": "Password1!",
-            "major": "Computer Science",
-            "grad_year": 2025,
-            "bio": "I am a test user.",
-            "pronouns": "they/them"
-        }
-
-        # 1. Register student
-        resp = client.post("/student/register", json=test_student)
-        print("[TEST] /student/register response:", resp.json)
-
-        # 2. Login student
-        resp = client.post("/login", json={"email": test_student["email"], "password": test_student["password"]})
-        print("[TEST] /login (student) response:", resp.json)
-
-        # 3. Update student profile
-        update_data = {"bio": "Updated bio for test user.", "pronouns": "she/her"}
-        resp = client.post("/student/profile/update", json=update_data)
-        print("[TEST] /student/profile/update response:", resp.json)
-
-        # 4. Recover password
-        resp = client.post("/student/password/recover", json={"email": test_student["email"]})
-        print("[TEST] /student/password/recover response:", resp.json)
-
-        # Insert admin user directly into DB for testing admin endpoints
-        admin_email = "admin@example.com"
-        admin_password = "AdminPass1!"
-        existing_admin = Student.query.filter_by(email=admin_email, role="admin").first()
-        if not existing_admin:
-            admin_user = Student(
-                full_name="Admin User",
-                email=admin_email,
-                password_hash=generate_password_hash(admin_password),
-                major="Administration",
-                grad_year=2025,
-                bio="System Administrator account for testing.",
-                role="admin"
-            )
-            db.session.add(admin_user)
-            db.session.commit()
-        else:
-            admin_user = existing_admin
-
-        # Login as admin
-        resp = client.post("/login", json={"email": admin_email, "password": admin_password})
-        print("[TEST] /login (admin) response:", resp.json)
-
-        # 5. Admin create another student user
-        new_student_data = {
-            "full_name": "New Student",
-            "email": "newstudent@example.com",
-            "password": "Password1!",
-            "major": "Mathematics",
-            "grad_year": 2026
-        }
-        resp = client.post("/admin/user/manage", json={"action": "create", "data": new_student_data})
-        print("[TEST] /admin/user/manage (create student) response:", resp.json)
-
-        # 6. Admin add a course
-        new_course_data = {
-            "course_code": "CS101",
-            "course_name": "Introduction to Computer Science",
-            "credits": 4,
-            "description": "Basic concepts of computer science."
-        }
-        resp = client.post("/admin/course/manage", json={"action": "add", "data": new_course_data})
-        print("[TEST] /admin/course/manage (add course) response:", resp.json)
-
-        # 7. Health check
-        resp = client.get("/health")
-        print("[TEST] /health response:", resp.json)
-
-        # 8. Logout
-        resp = client.post("/logout")
-        print("[TEST] /logout response:", resp.json)
-
-        print("\n[TEST] All feature tests completed successfully.")
 
     app.run(debug=True)

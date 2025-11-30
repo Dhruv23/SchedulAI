@@ -21,6 +21,7 @@ class Student(db.Model):
     # additional student info
     major = db.Column(db.String(100), nullable=False)
     grad_year = db.Column(db.Integer, nullable=False)
+    grad_quarter = db.Column(db.String(20), default="Spring", nullable=True)
     
     # optional fields
     bio = db.Column(db.Text, nullable=True)
@@ -28,6 +29,13 @@ class Student(db.Model):
     
     # security: new users are always "student." New users cannot self-assign admin roles
     role = db.Column(db.String(32), default="student", nullable=False)
+    
+    # transcript PDF file path (relative to uploads folder) - DEPRECATED
+    transcript_pdf_path = db.Column(db.String(255), nullable=True)
+    
+    # transcript PDF content stored directly in database
+    transcript_pdf_content = db.Column(db.LargeBinary, nullable=True)
+    transcript_pdf_filename = db.Column(db.String(255), nullable=True)
     
     # timestamps
     created_at = db.Column(db.DateTime, default=func.now())
@@ -41,6 +49,7 @@ class Student(db.Model):
             "email": self.email,
             "major": self.major,
             "grad_year": self.grad_year,
+            "grad_quarter": self.grad_quarter,
             "bio": self.bio,
             "pronouns": self.pronouns,
             "role": self.role,
@@ -58,7 +67,7 @@ class Student(db.Model):
     
     def update_profile(self, **kwargs):
         """Update allowed profile fields safely."""
-        allowed_fields = {'full_name', 'major', 'grad_year', 'bio', 'pronouns'}
+        allowed_fields = {'full_name', 'major', 'grad_year', 'grad_quarter', 'bio', 'pronouns'}
         for field, value in kwargs.items():
             if field in allowed_fields:
                 setattr(self, field, value)

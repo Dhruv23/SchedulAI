@@ -9,11 +9,11 @@ import {
 
 import Navbar from "./components/Navbar";
 import LoginPage from "./pages/LoginPage";
+import RegisterPage from "./pages/RegisterPage";
 import Dashboard from "./pages/Dashboard";
 import ProfilePage from "./pages/ProfilePage";
 import SchedulePlanner from "./pages/SchedulePlanner";
 import AdminPage from "./pages/AdminPage";
-
 
 import "./styles/theme.css";
 
@@ -67,13 +67,13 @@ function App() {
         {/* LOGIN */}
         <Route
           path="/login"
-          element={
-            user ? (
-              <Navigate to="/dashboard" replace />
-            ) : (
-              <LoginPage onLogin={setUser} />
-            )
-          }
+          element={<LoginPage onLogin={setUser} user={user} />}
+        />
+
+        {/* REGISTER */}
+        <Route
+          path="/register"
+          element={<RegisterPage onLogin={setUser} />}
         />
 
         {/* DASHBOARD */}
@@ -115,26 +115,23 @@ function App() {
             )
           }
         />
-<Route
-  path="/admin"
-  element={
-    user && user.role === "admin" ? (
-      <AdminPage />
-    ) : (
-      <Navigate to="/login" replace />
-    )
-  }
-/>
-        {/* DEFAULT ROUTE */}
+
+        {/* ADMIN PAGE (Protected) */}
         <Route
-          path="/"
+          path="/admin"
           element={
-            user ? (
-              <Navigate to="/dashboard" replace />
+            user && user.role === "admin" ? (
+              <AdminPage />
             ) : (
               <Navigate to="/login" replace />
             )
           }
+        />
+
+        {/* DEFAULT ROUTE */}
+        <Route
+          path="/"
+          element={<Navigate to="/login" replace />}
         />
       </Routes>
     </Router>
