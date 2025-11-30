@@ -39,7 +39,17 @@ function Dashboard({ user, onLogout }) {
   // Handle successful transcript upload
   const handleUploadSuccess = (parsedCourses) => {
     setCourses(parsedCourses);
-    const sum = parsedCourses.reduce((acc, c) => acc + (c.Units || 0), 0);
+
+    // support "Units", units, or Units property
+    const sum = parsedCourses.reduce((acc, c) => {
+      const units =
+        c["Units"] ??
+        c.units ??
+        c.Units ??
+        0;
+      return acc + (Number(units) || 0);
+    }, 0);
+
     setCompletedUnits(sum);
   };
 
@@ -52,7 +62,6 @@ function Dashboard({ user, onLogout }) {
       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
         <h1>Student Dashboard</h1>
         <button onClick={onLogout}>Logout</button>
-
       </div>
 
       {/* Major info */}
@@ -86,11 +95,21 @@ function Dashboard({ user, onLogout }) {
           <tbody>
             {courses.map((c, i) => (
               <tr key={i}>
-                <td style={{ padding: "8px", borderBottom: "1px solid #eee" }}>{c["Course Code"]}</td>
-                <td style={{ padding: "8px", borderBottom: "1px solid #eee" }}>{c["Course Name"]}</td>
-                <td style={{ padding: "8px", textAlign: "center", borderBottom: "1px solid #eee" }}>{c["Grade"]}</td>
-                <td style={{ padding: "8px", textAlign: "center", borderBottom: "1px solid #eee" }}>{c["Units"]}</td>
-                <td style={{ padding: "8px", textAlign: "center", borderBottom: "1px solid #eee" }}>{c["Total Points"]}</td>
+                <td style={{ padding: "8px", borderBottom: "1px solid #eee" }}>
+                  {c["Course Code"] || c.course_code}
+                </td>
+                <td style={{ padding: "8px", borderBottom: "1px solid #eee" }}>
+                  {c["Course Name"] || c.course_name}
+                </td>
+                <td style={{ padding: "8px", textAlign: "center", borderBottom: "1px solid #eee" }}>
+                  {c["Grade"] || c.grade}
+                </td>
+                <td style={{ padding: "8px", textAlign: "center", borderBottom: "1px solid #eee" }}>
+                  {c["Units"] ?? c.units}
+                </td>
+                <td style={{ padding: "8px", textAlign: "center", borderBottom: "1px solid #eee" }}>
+                  {c["Total Points"] ?? c.total_points}
+                </td>
               </tr>
             ))}
           </tbody>

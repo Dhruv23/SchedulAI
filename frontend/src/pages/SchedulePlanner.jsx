@@ -57,7 +57,10 @@ function SchedulePlanner({ user }) {
 
       // REAL BACKEND ENDPOINT
       try {
-        const res = await fetch("/student/progress", { credentials: "include" });
+        // ✅ use detailed major-only progress endpoint
+        const res = await fetch("/student/progress/detailed", {
+          credentials: "include",
+        });
         const data = await res.json();
 
         if (data.status !== "SUCCESS") {
@@ -66,7 +69,12 @@ function SchedulePlanner({ user }) {
           return;
         }
 
-        setRequirements(data.progress?.missing_requirements || []);
+        // ✅ map major_missing -> list of requirement strings (e.g., "COEN 146")
+        const missing = Array.isArray(data.major_missing)
+          ? data.major_missing.map((item) => item.requirement)
+          : [];
+
+        setRequirements(missing);
       } catch (err) {
         setError("Failed to connect to server.");
       } finally {
