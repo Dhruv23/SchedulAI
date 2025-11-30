@@ -12,6 +12,8 @@ import LoginPage from "./pages/LoginPage";
 import Dashboard from "./pages/Dashboard";
 import ProfilePage from "./pages/ProfilePage";
 import SchedulePlanner from "./pages/SchedulePlanner";
+import AdminPage from "./pages/AdminPage";
+
 
 import "./styles/theme.css";
 
@@ -113,7 +115,16 @@ function App() {
             )
           }
         />
-
+<Route
+  path="/admin"
+  element={
+    user && user.role === "admin" ? (
+      <AdminPage />
+    ) : (
+      <Navigate to="/login" replace />
+    )
+  }
+/>
         {/* DEFAULT ROUTE */}
         <Route
           path="/"
