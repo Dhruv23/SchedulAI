@@ -1,7 +1,7 @@
 // components/Navbar.jsx
 import { Link } from "react-router-dom";
 
-function Navbar() {
+function Navbar({ user }) {
   return (
     <nav className="navbar">
       {/* Logo / App Name */}
@@ -9,13 +9,14 @@ function Navbar() {
         SchedulAI
       </div>
 
-    {/* Navigation Links */}
-      <div style={{ display: "flex", gap: "1.5rem", alignItems: "center" }}>
-        <Link to="/dashboard">Dashboard</Link>
-        <Link to="/planner">Schedule Planner</Link>
-        <Link to="/profile">My Profile</Link>
-      </div>
-
+      {/* Navigation Links - Only show when user is logged in */}
+      {user && (
+        <div style={{ display: "flex", gap: "1.5rem", alignItems: "center" }}>
+          <Link to="/dashboard">Dashboard</Link>
+          <Link to="/planner">Schedule Planner</Link>
+          <Link to="/profile">My Profile</Link>
+        </div>
+      )}
     </nav>
   );
 }

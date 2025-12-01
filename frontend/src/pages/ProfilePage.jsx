@@ -50,6 +50,11 @@ function ProfilePage({ user, onUserUpdate, onLogout }) {
     confirmPassword: ""
   });
 
+  // Delete account state
+  const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
+  const [deleteConfirmText, setDeleteConfirmText] = useState("");
+  const [isDeleting, setIsDeleting] = useState(false);
+
   const validatePassword = (password) => {
     const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
     return regex.test(password);
@@ -261,6 +266,46 @@ function ProfilePage({ user, onUserUpdate, onLogout }) {
     setSuccess("");
   };
 
+  const handleDeleteAccount = async () => {
+    if (deleteConfirmText !== "DELETE") {
+      setError("Please type DELETE to confirm account deletion.");
+      return;
+    }
+
+    setIsDeleting(true);
+    setError("");
+
+    try {
+      const res = await fetch("/student/delete", {
+        method: "DELETE",
+        credentials: "include",
+      });
+
+      const data = await res.json();
+
+      if (data.status === "SUCCESS") {
+        // Account deleted successfully, log out and redirect to login
+        onLogout();
+        navigate("/login");
+      } else {
+        setError(data.message || "Failed to delete account.");
+      }
+    } catch (err) {
+      console.error("Delete account error:", err);
+      setError("Server error, please try again.");
+    } finally {
+      setIsDeleting(false);
+      setShowDeleteConfirm(false);
+      setDeleteConfirmText("");
+    }
+  };
+
+  const handleCancelDelete = () => {
+    setShowDeleteConfirm(false);
+    setDeleteConfirmText("");
+    setError("");
+  };
+
   const progressPercent =
     totalUnits && totalUnits > 0
       ? Math.round((completedUnits / totalUnits) * 100)
@@ -447,6 +492,7 @@ function ProfilePage({ user, onUserUpdate, onLogout }) {
                 <>
                   <button
                     className="primary-button"
+                    type="button"
                     onClick={handleSave}
                     disabled={saving}
                   >
@@ -458,6 +504,17 @@ function ProfilePage({ user, onUserUpdate, onLogout }) {
                     onClick={handleCancel}
                   >
                     Cancel
+                  </button>
+                  <button
+                    className="primary-button"
+                    type="button"
+                    onClick={() => setShowDeleteConfirm(true)}
+                    style={{
+                      backgroundColor: "#dc3545",
+                      borderColor: "#dc3545"
+                    }}
+                  >
+                    Delete Account
                   </button>
                 </>
               ) : (
@@ -472,6 +529,78 @@ function ProfilePage({ user, onUserUpdate, onLogout }) {
             </div>
           </div>
         </div>
+
+        {/* Delete Account Confirmation Modal */}
+        {showDeleteConfirm && (
+          <div style={{
+            position: "fixed",
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            backgroundColor: "rgba(0, 0, 0, 0.5)",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            zIndex: 1000
+          }}>
+            <div style={{
+              backgroundColor: "white",
+              padding: "2rem",
+              borderRadius: "12px",
+              maxWidth: "400px",
+              width: "90%",
+              boxShadow: "0 10px 25px rgba(0, 0, 0, 0.2)"
+            }}>
+              <h3 style={{ color: "#dc2626", marginBottom: "1rem" }}>Delete Account</h3>
+              <p style={{ marginBottom: "1rem", color: "#666" }}>
+                This action cannot be undone. This will permanently delete your account and all associated data.
+              </p>
+              <p style={{ marginBottom: "1rem", fontWeight: "bold" }}>
+                Please type <span style={{ color: "#dc2626" }}>DELETE</span> to confirm:
+              </p>
+              <input
+                type="text"
+                value={deleteConfirmText}
+                onChange={(e) => setDeleteConfirmText(e.target.value)}
+                placeholder="Type DELETE here"
+                style={{
+                  width: "100%",
+                  padding: "0.6rem 0.85rem",
+                  borderRadius: "12px",
+                  border: "1px solid #e5e7eb",
+                  fontSize: "1rem",
+                  backgroundColor: "#f9fafb",
+                  marginBottom: "1rem"
+                }}
+              />
+              <div style={{ display: "flex", gap: "1rem", justifyContent: "flex-end" }}>
+                <button
+                  className="secondary-button"
+                  onClick={handleCancelDelete}
+                  disabled={isDeleting}
+                >
+                  Cancel
+                </button>
+                <button
+                  onClick={handleDeleteAccount}
+                  disabled={isDeleting || deleteConfirmText !== "DELETE"}
+                  style={{
+                    backgroundColor: deleteConfirmText === "DELETE" ? "#dc3545" : "#9ca3af",
+                    color: "white",
+                    border: "none",
+                    padding: "0.6rem 1.2rem",
+                    borderRadius: "999px",
+                    cursor: deleteConfirmText === "DELETE" ? "pointer" : "not-allowed",
+                    fontSize: "1rem"
+                  }}
+                >
+                  {isDeleting ? "Deleting..." : "Delete Account"}
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
 
         {/* RIGHT: progress + links */}
         <div className="profile-right-card">

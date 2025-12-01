@@ -1,5 +1,6 @@
 # main.py
 import os
+from datetime import timedelta
 from flask import Flask, jsonify, send_file
 
 # password hashing and token verification
@@ -240,11 +241,13 @@ def register_student():
 def login():
     """
     [POST] user login
-    accepts: email, password
+    accepts: email, password, rememberMe
     """
     data = request.get_json()
     email = data.get("email", "").strip().lower()
     password = data.get("password", "")
+    remember_me = data.get("rememberMe", False)
+    
     if not email or not password:
         return {"status": "ERROR", "message": "Email and password are required."}, 400
     
@@ -252,8 +255,23 @@ def login():
     if not user:
         return {"status": "ERROR", "message": "Invalid email or password."}, 401
     
+    # Clear any existing session first
+    session.clear()
+    
     session["user_id"] = user.id
-    session["user_type"] = user.__class__.__name__  # assuming user class name identifies type
+    session["user_type"] = user.__class__.__name__
+    session["remember_me"] = remember_me
+    
+    # Set session permanence based on remember me
+    if remember_me:
+        session.permanent = True
+        # Set a longer expiration (30 days) for remember me
+        app.permanent_session_lifetime = timedelta(days=30)
+    else:
+        session.permanent = False
+        # Set a very short session timeout (30 minutes) when not remembering
+        app.permanent_session_lifetime = timedelta(minutes=30)
+        
     return {"status": "SUCCESS", "message": "Login successful.", "user": user.to_safe_dict()}, 200
 
 @app.get("/session")
@@ -264,9 +282,15 @@ def check_session():
     """
     user_id = session.get("user_id")
     user_type = session.get("user_type")
+    remember_me = session.get("remember_me", False)
 
     if not user_id or not user_type:
         return {"status": "UNAUTHORIZED", "message": "No active session"}, 401
+
+    # If remember_me was False, clear the session
+    if not remember_me:
+        session.clear()
+        return {"status": "UNAUTHORIZED", "message": "Session expired"}, 401
 
     try:
         if user_type == "Student":
@@ -275,6 +299,7 @@ def check_session():
             user = None  # Extend later if you have AdminUser, etc.
 
         if not user:
+            session.clear()
             return {"status": "UNAUTHORIZED", "message": "User not found"}, 401
 
         return {
@@ -285,6 +310,7 @@ def check_session():
 
     except Exception as e:
         print(f"[ERROR] session check failed: {e}")
+        session.clear()
         return {"status": "ERROR", "message": "Internal server error"}, 500
 
 @app.post("/logout")
@@ -664,8 +690,42 @@ def clear_transcript():
         
     except Exception as e:
         db.session.rollback()
-        print(f"[ERROR] clearing transcript failed: {e}")
+        print(f"[DEBUG] Error clearing transcript: {e}")
         return {"status": "ERROR", "message": f"failed to clear transcript: {e}"}, 500
+
+@app.delete("/student/delete")
+def delete_student_account():
+    """
+    [DELETE] delete the entire student account and all associated data
+    """
+    student_id = session.get("user_id")
+    if not student_id:
+        return {"status": "ERROR", "message": "unauthorized access. please log in."}, 401
+    
+    try:
+        # Get the student to delete
+        student = Student.query.get(student_id)
+        if not student:
+            return {"status": "ERROR", "message": "student not found"}, 404
+        
+        # Delete all associated transcript courses first
+        TranscriptCourse.query.filter_by(student_id=student_id).delete()
+        
+        # Delete the student record
+        db.session.delete(student)
+        
+        # Clear the session
+        session.clear()
+        
+        db.session.commit()
+        
+        print(f"[DEBUG] Deleted student account {student_id}")
+        return {"status": "SUCCESS", "message": "account deleted successfully"}, 200
+        
+    except Exception as e:
+        db.session.rollback()
+        print(f"[DEBUG] Error deleting student account: {e}")
+        return {"status": "ERROR", "message": f"failed to delete account: {e}"}, 500
 
 @app.post("/admin/user/manage")
 def admin_manage_user():
