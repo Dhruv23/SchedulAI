@@ -11,19 +11,18 @@ taskkill /f /im node.exe 2>nul
 timeout /t 2 /nobreak >nul
 
 echo Starting backend server...
-start "SchedulAI Backend" cmd /k "cd /d "%PROJECT_DIR%" && echo Backend starting on port 5000... && python main.py"
+cd /d "%PROJECT_DIR%"
+start /b python main.py
 
 echo Waiting for backend to initialize...
 timeout /t 8 /nobreak >nul
 
 echo Starting frontend server...
-start "SchedulAI Frontend" cmd /k "cd /d "%PROJECT_DIR%frontend" && echo Frontend starting on port 3000... && npm start"
-
-echo Waiting for frontend to start...
-timeout /t 5 /nobreak >nul
+cd /d "%PROJECT_DIR%frontend"
+npm start
 
 echo Opening browser...
-start http://localhost:3000
+start http://localhost:3000/login
 
 echo.
 echo ==========================================

@@ -54,7 +54,8 @@ class SchedulePlanner:
         """
         grouped = []
         for code in course_codes:
-            matches = self.sections_df[self.sections_df["Course"].str.contains(code, na=False)]
+            # Use exact match instead of contains to avoid CSEN 10 matching CSEN 10L
+            matches = self.sections_df[self.sections_df["Course"] == code]
             if not matches.empty:
                 # wrap in list so itertools.product sees a list, not a DataFrame
                 grouped.append([matches])

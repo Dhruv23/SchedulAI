@@ -1,9 +1,11 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import TranscriptUpload from "../components/TranscriptUpload";
 import ProgressBar from "../components/ProgressBar";
 import ChatbotWidget from "../components/ChatbotWidget";
 
 function Dashboard({ user, onLogout }) {
+  const navigate = useNavigate();
   const [courses, setCourses] = useState([]);
   const [completedUnits, setCompletedUnits] = useState(0);
   const [totalUnits, setTotalUnits] = useState(180);

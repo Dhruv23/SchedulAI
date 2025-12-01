@@ -10,75 +10,10 @@ function LoginPage({ onLogin, user }) {
   const [isAdminLogin, setIsAdminLogin] = useState(false);
   const [rememberMe, setRememberMe] = useState(false);
 
-  const handleLogout = async () => {
-    try {
-      await fetch("/logout", {
-        method: "POST",
-        credentials: "include",
-      });
-      // Clear all session data
-      localStorage.removeItem('userSession');
-      sessionStorage.removeItem('userSession');
-      localStorage.removeItem('rememberMe');
-      onLogin(null); // Clear user state
-      window.location.reload(); // Refresh to show login form
-    } catch (err) {
-      console.error("Logout error:", err);
-      localStorage.removeItem('userSession');
-      sessionStorage.removeItem('userSession');
-      localStorage.removeItem('rememberMe');
-      onLogin(null); // Clear user state anyway
-      window.location.reload();
-    }
-  };
-
-  // If user is already logged in, show landing page
+  // If user is already logged in, redirect to landing page
   if (user) {
-    // Extract first name from full name
-    const firstName = user.full_name ? user.full_name.split(" ")[0] : "User";
-    
-    return (
-      <div className="auth-page">
-        <div className="auth-card">
-          <div className="auth-header">
-            <h1 className="auth-title">Welcome Back, {firstName}!</h1>
-            <p className="auth-subtitle">
-              Where would you like to go?
-            </p>
-          </div>
-          
-          <div className="auth-form">
-            <button 
-              onClick={() => navigate("/dashboard")} 
-              className="primary-button auth-submit"
-              style={{ marginBottom: "10px" }}
-            >
-              Dashboard
-            </button>
-            <button 
-              onClick={() => navigate("/planner")} 
-              className="primary-button auth-submit"
-              style={{ marginBottom: "10px" }}
-            >
-              Schedule Planner
-            </button>
-            <button 
-              onClick={() => navigate("/profile")} 
-              className="primary-button auth-submit"
-              style={{ marginBottom: "10px" }}
-            >
-              Profile
-            </button>
-            <button 
-              onClick={handleLogout} 
-              className="primary-button auth-submit"
-            >
-              Logout
-            </button>
-          </div>
-        </div>
-      </div>
-    );
+    navigate("/landing");
+    return null;
   }
 
   const handleSubmit = async (e) => {
@@ -117,15 +52,11 @@ function LoginPage({ onLogin, user }) {
 
         onLogin(userWithRole);
 
-        // Redirect logic based on Remember Me and role
+        // Redirect logic based on role
         if (userWithRole.role === "admin") {
           navigate("/admin");
         } else {
-          if (rememberMe) {
-            navigate("/"); // Go to landing page for Remember Me users
-          } else {
-            navigate("/dashboard"); // Go directly to dashboard for regular login
-          }
+          navigate("/landing"); // Always go to landing page for regular users
         }
 
       } else {

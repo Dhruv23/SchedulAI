@@ -10,6 +10,7 @@ import {
 import Navbar from "./components/Navbar";
 import LoginPage from "./pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
+import LandingPage from "./pages/LandingPage";
 import Dashboard from "./pages/Dashboard";
 import ProfilePage from "./pages/ProfilePage";
 import SchedulePlanner from "./pages/SchedulePlanner";
@@ -23,6 +24,23 @@ function App() {
 
   // Check session on page load
   useEffect(() => {
+    /* DEVELOPMENT MODE - TEMPORARILY DISABLED
+    // For development: Always start fresh (logged out)
+    // Clear any existing sessions and storage
+    localStorage.removeItem('userSession');
+    localStorage.removeItem('rememberMe');
+    sessionStorage.removeItem('userSession');
+    
+    // Clear backend session
+    fetch("/logout", { method: "POST", credentials: "include" })
+      .catch(() => {}) // Ignore errors if already logged out
+      .finally(() => {
+        setUser(null);
+        setLoading(false);
+      });
+    */
+
+    // PRODUCTION CODE - RESTORE WHEN READY FOR PRODUCTION
     // First, try to restore from Remember Me (localStorage)
     const rememberMe = localStorage.getItem('rememberMe');
     const storedUser = rememberMe === 'true' 
@@ -31,7 +49,6 @@ function App() {
 
     if (storedUser && rememberMe === 'true') {
       try {
-        const userData = JSON.parse(storedUser);
         // Verify with backend that session is still valid
         fetch("/session", { credentials: "include" })
           .then((res) => (res.ok ? res.json() : Promise.reject()))
@@ -165,6 +182,18 @@ function App() {
           element={<RegisterPage onLogin={setUser} />}
         />
 
+        {/* LANDING PAGE */}
+        <Route
+          path="/landing"
+          element={
+            user ? (
+              <LandingPage user={user} onLogout={handleLogout} />
+            ) : (
+              <Navigate to="/login" replace />
+            )
+          }
+        />
+
         {/* DASHBOARD */}
         <Route
           path="/dashboard"
@@ -223,7 +252,7 @@ function App() {
           element={
             user ? (
               localStorage.getItem('rememberMe') === 'true' ? (
-                <LoginPage onLogin={setUser} user={user} />
+                <Navigate to="/landing" replace />
               ) : (
                 <Navigate to="/dashboard" replace />
               )

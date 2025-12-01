@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "../styles/theme.css";
 
 /* DELETE FOR REAL BACKEND
@@ -7,7 +8,9 @@ import "../styles/theme.css";
   END DELETE FOR REAL BACKEND */
 
 function SchedulePlanner({ user }) {
+  const navigate = useNavigate();
   const [requirements, setRequirements] = useState(null);
+  const [selectedCourses, setSelectedCourses] = useState([]); // Courses selected for this quarter
   const [schedules, setSchedules] = useState([]);
   const [selectedIndex, setSelectedIndex] = useState(null);
   const [loadingRequirements, setLoadingRequirements] = useState(true);
@@ -61,9 +64,23 @@ function SchedulePlanner({ user }) {
         const res = await fetch("/student/progress/detailed", {
           credentials: "include",
         });
+        
+        if (!res.ok) {
+          console.log("Response not OK. Status:", res.status, "StatusText:", res.statusText);
+          if (res.status === 401) {
+            setError("Please log in to view your requirements.");
+          } else {
+            setError("Could not load remaining requirements.");
+          }
+          setLoadingRequirements(false);
+          return;
+        }
+        
         const data = await res.json();
+        console.log("Backend response:", data);
 
         if (data.status !== "SUCCESS") {
+          console.log("Backend status not SUCCESS:", data.status);
           setError("Could not load remaining requirements.");
           setLoadingRequirements(false);
           return;
@@ -76,6 +93,7 @@ function SchedulePlanner({ user }) {
 
         setRequirements(missing);
       } catch (err) {
+        console.error("Requirements fetch error:", err);
         setError("Failed to connect to server.");
       } finally {
         setLoadingRequirements(false);
@@ -113,14 +131,38 @@ function SchedulePlanner({ user }) {
   }
    END DELETE FOR REAL BACKEND */
 
+  /* COURSE SELECTION FOR CURRENT QUARTER */
+  function toggleCourseSelection(courseCode) {
+    setSelectedCourses(prev => {
+      if (prev.includes(courseCode)) {
+        return prev.filter(c => c !== courseCode);
+      } else {
+        return [...prev, courseCode];
+      }
+    });
+  }
+
+  function selectAllCourses() {
+    setSelectedCourses([...requirements]);
+  }
+
+  function clearAllCourses() {
+    setSelectedCourses([]);
+  }
+
   /* GENERATE SCHEDULES */
   const handleGenerate = async () => {
     setSelectedIndex(null);
     setSchedules([]);
     setError("");
 
-    if (!requirements || requirements.length === 0) {
-      setError("You have no remaining requirements!");
+    if (!selectedCourses || selectedCourses.length === 0) {
+      setError("Please select some courses to schedule for this quarter.");
+      return;
+    }
+
+    if (selectedCourses.length > 6) {
+      setError("Please select 6 or fewer courses for a realistic schedule.");
       return;
     }
 
@@ -178,26 +220,51 @@ function SchedulePlanner({ user }) {
 
     // REAL BACKEND ENDPOINT
     try {
+      console.log("=== DEBUG: Generating schedules ===");
+      console.log("Selected courses:", selectedCourses);
+      console.log("Professor:", preferredProfessor);
+      console.log("Earliest:", earliest);
+      console.log("Latest:", latest);
+
+      const requestBody = {
+        remaining_requirements: selectedCourses,
+        preferred_professor: preferredProfessor,
+        earliest,
+        latest,
+      };
+      
+      console.log("Request body:", requestBody);
+
       const res = await fetch("/planner/schedules", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         credentials: "include",
-        body: JSON.stringify({
-          remaining_requirements: requirements,
-          preferred_professor: preferredProfessor,
-          earliest,
-          latest,
-        }),
+        body: JSON.stringify(requestBody),
       });
 
+      console.log("Response status:", res.status);
+      console.log("Response OK:", res.ok);
+
+      if (!res.ok) {
+        if (res.status === 401) {
+          setError("Please log in to generate schedules.");
+        } else {
+          setError("Could not generate schedules.");
+        }
+        return;
+      }
+
       const data = await res.json();
+      console.log("Response data:", data);
+      
       if (data.status !== "SUCCESS") {
         setError(data.message || "Could not generate schedules.");
         return;
       }
 
       setSchedules(data.schedules || []);
-    } catch {
+    } catch (err) {
+      console.error("Schedule generation error:", err);
       setError("Failed to connect to schedule planner.");
     } finally {
       setLoadingSchedules(false);
@@ -210,7 +277,7 @@ function SchedulePlanner({ user }) {
 
       {/* STUDENT INFO */}
       <div className="planner-student-info">
-        <p className="planner-welcome">Welcome, {user.full_name}!</p>
+        <p className="planner-welcome">Welcome, {user.full_name ? user.full_name.split(' ')[0] : 'Student'}!</p>
         <p className="planner-subinfo">
           Major: <span>{user.major}</span> • Class of <span>{user.grad_year}</span>
         </p>
@@ -218,22 +285,72 @@ function SchedulePlanner({ user }) {
 
       {/* REQUIREMENTS CARD */}
       <div className="planner-input-card">
-        <h2>Your Remaining Requirements</h2>
+        <h2>Select Courses for This Quarter</h2>
 
         {error && <p className="planner-error">{error}</p>}
         {loadingRequirements && <p>Loading remaining requirements…</p>}
 
         {!loadingRequirements && requirements && requirements.length === 0 && (
-          <p>You’re all done! 🎉</p>
+          <p>You're all done! 🎉</p>
         )}
 
         {!loadingRequirements && requirements && requirements.length > 0 && (
           <>
-            <ul className="requirements-list">
+            <p style={{ marginBottom: "1rem", color: "#666" }}>
+              Select 3-6 courses from your remaining requirements to schedule for this quarter:
+            </p>
+            
+            <div style={{ marginBottom: "1rem" }}>
+              <button 
+                onClick={selectAllCourses}
+                style={{ marginRight: "0.5rem", padding: "0.3rem 0.6rem", fontSize: "0.9rem" }}
+              >
+                Select All
+              </button>
+              <button 
+                onClick={clearAllCourses}
+                style={{ padding: "0.3rem 0.6rem", fontSize: "0.9rem" }}
+              >
+                Clear All
+              </button>
+              <span style={{ marginLeft: "1rem", color: "#666" }}>
+                Selected: {selectedCourses.length} courses
+              </span>
+            </div>
+
+            <div className="course-selection-grid" style={{ 
+              display: "grid", 
+              gridTemplateColumns: "repeat(auto-fill, minmax(150px, 1fr))", 
+              gap: "0.5rem",
+              marginBottom: "1.5rem",
+              maxHeight: "300px",
+              overflowY: "auto",
+              border: "1px solid #ddd",
+              padding: "1rem",
+              borderRadius: "4px"
+            }}>
               {requirements.map((req, i) => (
-                <li key={i}>{req}</li>
+                <label 
+                  key={i} 
+                  style={{ 
+                    display: "flex", 
+                    alignItems: "center", 
+                    cursor: "pointer",
+                    padding: "0.3rem",
+                    borderRadius: "4px",
+                    backgroundColor: selectedCourses.includes(req) ? "#e3f2fd" : "transparent"
+                  }}
+                >
+                  <input
+                    type="checkbox"
+                    checked={selectedCourses.includes(req)}
+                    onChange={() => toggleCourseSelection(req)}
+                    style={{ marginRight: "0.5rem" }}
+                  />
+                  <span style={{ fontSize: "0.9rem" }}>{req}</span>
+                </label>
               ))}
-            </ul>
+            </div>
 
             {/* PREFERENCES */}
             <h3 style={{ marginTop: "1.5rem" }}>Preferences (Optional)</h3>

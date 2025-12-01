@@ -5,9 +5,18 @@ function Navbar({ user }) {
   return (
     <nav className="navbar">
       {/* Logo / App Name */}
-      <div style={{ fontWeight: "bold", fontSize: "1.25rem" }}>
+      <Link 
+        to="/landing" 
+        style={{ 
+          fontWeight: "bold", 
+          fontSize: "1.25rem", 
+          textDecoration: "none", 
+          color: "inherit",
+          cursor: "pointer"
+        }}
+      >
         SchedulAI
-      </div>
+      </Link>
 
       {/* Navigation Links - Only show when user is logged in */}
       {user && (
