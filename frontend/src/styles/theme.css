@@ -335,6 +335,75 @@ tr:nth-child(even) {
 
 /* ====== PROFILE PAGE ====== */
 
+/* ====== ADMIN DASHBOARD ====== */
+.stats-card {
+  background-color: var(--scu-white);
+  border: 1px solid #e5e7eb;
+  border-radius: 0.5rem;
+  padding: 1.5rem;
+  text-align: center;
+  transition: box-shadow 0.2s ease;
+}
+
+.stats-card:hover {
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.stats-card h3 {
+  margin: 0 0 0.5rem 0;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #6b7280;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.stats-number {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--scu-red);
+  margin: 0;
+}
+
+/* ====== ADMIN PROFILE ====== */
+.profile-info {
+  margin-bottom: 2rem;
+}
+
+.profile-field {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.75rem 0;
+  border-bottom: 1px solid #f3f4f6;
+}
+
+.profile-field:last-child {
+  border-bottom: none;
+}
+
+.profile-field label {
+  font-weight: 600;
+  color: var(--scu-dark);
+  margin-right: 1rem;
+}
+
+.profile-field span {
+  color: #6b7280;
+}
+
+.profile-actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.auth-actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+/* ====== PROFILE PAGE ====== */
+
 .profile-page {
   background: #f6f7f8; /* soft neutral gray */
   min-height: calc(100vh - 60px); /* account for navbar */

@@ -151,7 +151,7 @@ function LoginPage({ onLogin, user }) {
             
             <button
               type="button"
-              onClick={() => alert("Password reset functionality coming soon!")}
+              onClick={() => navigate("/forgot-password")}
               style={{
                 background: "none",
                 border: "none",
@@ -195,7 +195,9 @@ function LoginPage({ onLogin, user }) {
           </button>
 
           <p className="auth-hint">
-            Demo: <code>testuser@example.com</code> / <code>Password1!</code>
+            Demo (Student): <code>testuser@example.com</code> / <code>Password1!</code>
+            <br />
+            Demo (Admin): <code>testadmin@example.com</code> / <code>Password1!</code>
           </p>
 
         </form>

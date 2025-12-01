@@ -10,11 +10,17 @@ import {
 import Navbar from "./components/Navbar";
 import LoginPage from "./pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
+import ForgotPasswordPage from "./pages/ForgotPasswordPage";
+import PasswordResetPage from "./pages/PasswordResetPage";
 import LandingPage from "./pages/LandingPage";
 import Dashboard from "./pages/Dashboard";
 import ProfilePage from "./pages/ProfilePage";
 import SchedulePlanner from "./pages/SchedulePlanner";
 import AdminPage from "./pages/AdminPage";
+import AdminLandingPage from "./pages/AdminLandingPage";
+import AdminDashboard from "./pages/AdminDashboard";
+import AdminUserManagement from "./pages/AdminUserManagement";
+import AdminProfile from "./pages/AdminProfile";
 
 import "./styles/theme.css";
 
@@ -182,14 +188,26 @@ function App() {
           element={<RegisterPage onLogin={setUser} />}
         />
 
+        {/* FORGOT PASSWORD */}
+        <Route
+          path="/forgot-password"
+          element={<ForgotPasswordPage />}
+        />
+
+        {/* PASSWORD RESET */}
+        <Route
+          path="/password-reset/:token?"
+          element={<PasswordResetPage />}
+        />
+
         {/* LANDING PAGE */}
         <Route
           path="/landing"
           element={
-            user ? (
+            user && user.role !== 'admin' ? (
               <LandingPage user={user} onLogout={handleLogout} />
             ) : (
-              <Navigate to="/login" replace />
+              user?.role === 'admin' ? <Navigate to="/admin/landing" replace /> : <Navigate to="/login" replace />
             )
           }
         />
@@ -198,10 +216,10 @@ function App() {
         <Route
           path="/dashboard"
           element={
-            user ? (
+            user && user.role !== 'admin' ? (
               <Dashboard user={user} onLogout={handleLogout} />
             ) : (
-              <Navigate to="/login" replace />
+              user?.role === 'admin' ? <Navigate to="/admin/dashboard" replace /> : <Navigate to="/login" replace />
             )
           }
         />
@@ -210,10 +228,10 @@ function App() {
         <Route
           path="/planner"
           element={
-            user ? (
+            user && user.role !== 'admin' ? (
               <SchedulePlanner user={user} />
             ) : (
-              <Navigate to="/login" replace />
+              user?.role === 'admin' ? <Navigate to="/admin/dashboard" replace /> : <Navigate to="/login" replace />
             )
           }
         />
@@ -222,14 +240,59 @@ function App() {
         <Route
           path="/profile"
           element={
-            user ? (
+            user && user.role !== 'admin' ? (
               <ProfilePage
                 user={user}
                 onUserUpdate={handleUserUpdate}
                 onLogout={handleLogout}
               />
             ) : (
-              <Navigate to="/login" replace />
+              user?.role === 'admin' ? <Navigate to="/admin/profile" replace /> : <Navigate to="/login" replace />
+            )
+          }
+        />
+
+        {/* ADMIN ROUTES */}
+        <Route
+          path="/admin/landing"
+          element={
+            user?.role === 'admin' ? (
+              <AdminLandingPage user={user} onLogout={handleLogout} />
+            ) : (
+              user ? <Navigate to="/landing" replace /> : <Navigate to="/login" replace />
+            )
+          }
+        />
+        
+        <Route
+          path="/admin/dashboard"
+          element={
+            user?.role === 'admin' ? (
+              <AdminDashboard user={user} onLogout={handleLogout} />
+            ) : (
+              user ? <Navigate to="/landing" replace /> : <Navigate to="/login" replace />
+            )
+          }
+        />
+        
+        <Route
+          path="/admin/users"
+          element={
+            user?.role === 'admin' ? (
+              <AdminUserManagement user={user} onLogout={handleLogout} />
+            ) : (
+              user ? <Navigate to="/landing" replace /> : <Navigate to="/login" replace />
+            )
+          }
+        />
+        
+        <Route
+          path="/admin/profile"
+          element={
+            user?.role === 'admin' ? (
+              <AdminProfile user={user} onUserUpdate={handleUserUpdate} onLogout={handleLogout} />
+            ) : (
+              user ? <Navigate to="/profile" replace /> : <Navigate to="/login" replace />
             )
           }
         />
@@ -251,10 +314,14 @@ function App() {
           path="/"
           element={
             user ? (
-              localStorage.getItem('rememberMe') === 'true' ? (
-                <Navigate to="/landing" replace />
+              user.role === 'admin' ? (
+                <Navigate to="/admin/landing" replace />
               ) : (
-                <Navigate to="/dashboard" replace />
+                localStorage.getItem('rememberMe') === 'true' ? (
+                  <Navigate to="/landing" replace />
+                ) : (
+                  <Navigate to="/dashboard" replace />
+                )
               )
             ) : (
               <Navigate to="/login" replace />

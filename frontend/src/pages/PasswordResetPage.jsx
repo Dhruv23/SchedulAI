@@ -182,7 +182,7 @@ function PasswordResetPage() {
             type="button"
             onClick={() => navigate("/login")}
             className="secondary-button auth-submit"
-            style={{ marginTop: "0.5rem" }}
+            style={{ marginTop: "-0.5rem" }}
           >
             Back to Login
           </button>

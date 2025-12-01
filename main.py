@@ -436,7 +436,7 @@ def recover_password():
             
     return {
         "status": "SUCCESS",
-        "message": "[INFO] if the email is registered, a password reset link has been sent"
+        "message": "If the email is registered, a password reset link has been sent"
     }, 200
     
 @app.get("/user/password/reset/<token>")
@@ -778,25 +778,137 @@ def delete_student_account():
         print(f"[DEBUG] Error deleting student account: {e}")
         return {"status": "ERROR", "message": f"failed to delete account: {e}"}, 500
 
+@app.get("/admin/users")
+def admin_get_users():
+    """
+    [GET] admin get all users
+    returns: list of all users in the system
+    """
+    user_id = session.get("user_id")
+    if not user_id:
+        return {"status": "ERROR", "message": "Unauthorized access."}, 401
+        
+    # Check if user is admin
+    try:
+        connection = sqlite3.connect("schedulai.db")
+        cursor = connection.cursor()
+        cursor.execute("SELECT role FROM students WHERE id = ?", (user_id,))
+        user_role = cursor.fetchone()
+        
+        if not user_role or user_role[0] != "admin":
+            connection.close()
+            return {"status": "ERROR", "message": "Unauthorized access."}, 401
+            
+        # Get all users from the database
+        cursor.execute("SELECT id, email, full_name, role, major, grad_quarter FROM students ORDER BY role, id")
+        users = cursor.fetchall()
+        connection.close()
+        
+        # Convert to list of dictionaries
+        user_list = []
+        for user in users:
+            user_list.append({
+                "id": user[0],
+                "email": user[1],
+                "full_name": user[2],
+                "role": user[3],
+                "major": user[4],
+                "grad_quarter": user[5]
+            })
+        
+        return user_list, 200
+    except Exception as e:
+        print(f"[ERROR] admin_get_users failed: {str(e)}")
+        import traceback
+        traceback.print_exc()
+        return {"status": "ERROR", "message": f"Failed to get users: {str(e)}"}, 400
+
 @app.post("/admin/user/manage")
 def admin_manage_user():
     """
     [POST] admin create/update/delete user
-    accepts: action (create/update/delete), data (user info)
+    accepts: action (create/update/delete), user data directly in request
     """
-    if "user_id" not in session or session.get("user_type") != "AdminUser":
+    user_id = session.get("user_id")
+    if not user_id:
         return {"status": "ERROR", "message": "Unauthorized access."}, 401
+        
+    # Check if user is admin
+    try:
+        connection = sqlite3.connect("schedulai.db")
+        cursor = connection.cursor()
+        cursor.execute("SELECT role FROM students WHERE id = ?", (user_id,))
+        user_role = cursor.fetchone()
+        connection.close()
+        
+        if not user_role or user_role[0] != "admin":
+            return {"status": "ERROR", "message": "Unauthorized access."}, 401
+    except Exception as e:
+        return {"error": f"Database error: {str(e)}"}, 500
     
     data = request.get_json()
     action = data.get("action")
-    user_data = data.get("data")
-    if not action or not user_data:
-        return {"status": "ERROR", "message": "Action and data are required."}, 400
-    try:
-        result = admin_manager.manage_user(action, user_data)
-        return {"status": "SUCCESS", "message": f"User {action} successful.", "data": result}, 200
-    except Exception as e:
-        return {"status": "ERROR", "message": f"Failed to {action} user: {str(e)}"}, 400
+    
+    # Handle different actions
+    if action == "create":
+        email = data.get("email")
+        password = data.get("password")
+        full_name = data.get("full_name")
+        role = data.get("role", "student")
+        
+        if not email or not password:
+            return {"error": "Email and password are required."}, 400
+            
+        try:
+            result = admin_manager.manage_user("create", {
+                "email": email,
+                "password": password,
+                "full_name": full_name,
+                "role": role
+            })
+            return {"status": "SUCCESS", "message": "User created successfully.", "data": result}, 200
+        except Exception as e:
+            return {"error": str(e)}, 400
+            
+    elif action == "update":
+        user_id = data.get("user_id")
+        email = data.get("email")
+        full_name = data.get("full_name")
+        role = data.get("role")
+        password = data.get("password")
+        
+        if not user_id:
+            return {"error": "User ID is required for update."}, 400
+            
+        try:
+            update_data = {
+                "user_id": user_id,
+                "email": email,
+                "full_name": full_name,
+                "role": role
+            }
+            if password:
+                update_data["password"] = password
+                
+            result = admin_manager.manage_user("update", update_data)
+            return {"status": "SUCCESS", "message": "User updated successfully.", "data": result}, 200
+        except Exception as e:
+            return {"error": str(e)}, 400
+            
+    elif action == "delete":
+        user_id = data.get("user_id")
+        
+        if not user_id:
+            return {"error": "User ID is required for delete."}, 400
+            
+        try:
+            result = admin_manager.manage_user("delete", {"user_id": user_id})
+            return {"status": "SUCCESS", "message": "User deleted successfully.", "data": result}, 200
+        except Exception as e:
+            return {"error": str(e)}, 400
+    
+    else:
+        return {"error": "Invalid action. Must be create, update, or delete."}, 400
 
 @app.post("/admin/course/manage")
 def admin_manage_course():
@@ -804,8 +916,22 @@ def admin_manage_course():
     [POST] admin manage courses
     accepts: action (add/update/delete), course data
     """
-    if "user_id" not in session or session.get("user_type") != "AdminUser":
+    user_id = session.get("user_id")
+    if not user_id:
         return {"status": "ERROR", "message": "Unauthorized access."}, 401
+        
+    # Check if user is admin
+    try:
+        connection = sqlite3.connect("schedulai.db")
+        cursor = connection.cursor()
+        cursor.execute("SELECT role FROM students WHERE id = ?", (user_id,))
+        user_role = cursor.fetchone()
+        connection.close()
+        
+        if not user_role or user_role[0] != "admin":
+            return {"status": "ERROR", "message": "Unauthorized access."}, 401
+    except Exception as e:
+        return {"status": "ERROR", "message": f"Database error: {str(e)}"}, 500
     
     data = request.get_json()
     action = data.get("action")
