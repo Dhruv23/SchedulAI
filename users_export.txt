@@ -1,0 +1,24 @@
+User Data Export
+==================================================
+
+ID: 5
+Email: testadmin@example.com
+Full Name: Test Admin
+Role: admin
+Major: N/A
+Grad Quarter: N/A
+------------------------------
+ID: 1
+Email: maxverstappen1@gmail.com
+Full Name: max verstappen
+Role: student
+Major: Divebombing
+Grad Quarter: Spring
+------------------------------
+ID: 2
+Email: testuser@example.com
+Full Name: Test User
+Role: student
+Major: Computer Science and Engineering
+Grad Quarter: Spring
+------------------------------

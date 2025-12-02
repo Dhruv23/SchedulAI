@@ -1,5 +1,6 @@
 # main.py
 import os
+import sqlite3
 from datetime import timedelta
 from flask import Flask, jsonify, send_file
 
@@ -28,6 +29,7 @@ from classes.transcript_to_df import TranscriptParser
 from classes.transcript_course_model import TranscriptCourse
 from classes.student_progress_tracker import StudentProgressTracker
 from classes.chatbot_interface import ChatbotInterface
+from csv_sync import sync_users_to_csv, get_users_from_csv
 from flask import session
 import pandas as pd
 import re
@@ -280,6 +282,9 @@ def register_student():
     # add and commit to database
     db.session.add(student)
     db.session.commit()
+    
+    # Sync to CSV after successful registration
+    sync_users_to_csv()
     
     # return successful account creation
     return {
@@ -781,47 +786,62 @@ def delete_student_account():
 @app.get("/admin/users")
 def admin_get_users():
     """
-    [GET] admin get all users
+    [GET] admin get all users - now reads from CSV
     returns: list of all users in the system
     """
-    user_id = session.get("user_id")
-    if not user_id:
-        return {"status": "ERROR", "message": "Unauthorized access."}, 401
-        
-    # Check if user is admin
     try:
-        connection = sqlite3.connect("schedulai.db")
-        cursor = connection.cursor()
-        cursor.execute("SELECT role FROM students WHERE id = ?", (user_id,))
-        user_role = cursor.fetchone()
-        
-        if not user_role or user_role[0] != "admin":
-            connection.close()
-            return {"status": "ERROR", "message": "Unauthorized access."}, 401
-            
-        # Get all users from the database
-        cursor.execute("SELECT id, email, full_name, role, major, grad_quarter FROM students ORDER BY role, id")
-        users = cursor.fetchall()
-        connection.close()
-        
-        # Convert to list of dictionaries
-        user_list = []
-        for user in users:
-            user_list.append({
-                "id": user[0],
-                "email": user[1],
-                "full_name": user[2],
-                "role": user[3],
-                "major": user[4],
-                "grad_quarter": user[5]
-            })
-        
-        return user_list, 200
+        from csv_sync import get_users_from_csv
+        users = get_users_from_csv()
+        return users, 200
     except Exception as e:
         print(f"[ERROR] admin_get_users failed: {str(e)}")
         import traceback
         traceback.print_exc()
         return {"status": "ERROR", "message": f"Failed to get users: {str(e)}"}, 400
+
+@app.get("/users/csv")
+def get_users_csv():
+    """
+    [GET] get users data from CSV file - public endpoint for frontend
+    returns: list of all users from CSV
+    """
+    try:
+        users = get_users_from_csv()
+        return users, 200
+    except Exception as e:
+        print(f"[ERROR] get_users_csv failed: {str(e)}")
+        return {"status": "ERROR", "message": f"Failed to get users from CSV: {str(e)}"}, 400
+
+@app.post("/admin/sync-csv")
+def admin_sync_csv():
+    """
+    [POST] manually sync database to CSV files - admin only
+    returns: success/error status
+    """
+    user_id = session.get("user_id")
+    if not user_id:
+        return {"status": "ERROR", "message": "Unauthorized access."}, 401
+        
+    try:
+        connection = sqlite3.connect("schedulai.db")
+        cursor = connection.cursor()
+        cursor.execute("SELECT role FROM students WHERE id = ?", (user_id,))
+        user_role = cursor.fetchone()
+        connection.close()
+        
+        if not user_role or user_role[0] != "admin":
+            return {"status": "ERROR", "message": "Admin access required."}, 403
+            
+        # Perform CSV sync
+        success = sync_users_to_csv()
+        if success:
+            return {"status": "SUCCESS", "message": "CSV files synced successfully"}, 200
+        else:
+            return {"status": "ERROR", "message": "Failed to sync CSV files"}, 500
+            
+    except Exception as e:
+        print(f"[ERROR] admin_sync_csv failed: {str(e)}")
+        return {"status": "ERROR", "message": f"Sync failed: {str(e)}"}, 400
 
 @app.post("/admin/user/manage")
 def admin_manage_user():
@@ -866,24 +886,42 @@ def admin_manage_user():
                 "full_name": full_name,
                 "role": role
             })
+            # Sync to CSV after successful database operation
+            sync_users_to_csv()
             return {"status": "SUCCESS", "message": "User created successfully.", "data": result}, 200
         except Exception as e:
             return {"error": str(e)}, 400
             
     elif action == "update":
-        user_id = data.get("user_id")
         email = data.get("email")
+        new_email = data.get("new_email")  # Allow changing email
         full_name = data.get("full_name")
         role = data.get("role")
         password = data.get("password")
         
-        if not user_id:
-            return {"error": "User ID is required for update."}, 400
+        print(f"[DEBUG] Update request data: {data}")
+        print(f"[DEBUG] Extracted email: {email}")
+        
+        if not email:
+            return {"error": f"Email is required for update. Received data keys: {list(data.keys())}"}, 400
             
         try:
+            # Find user by current email first
+            connection = sqlite3.connect("schedulai.db")
+            cursor = connection.cursor()
+            cursor.execute("SELECT id FROM students WHERE email = ?", (email,))
+            user_result = cursor.fetchone()
+            
+            if not user_result:
+                connection.close()
+                return {"error": f"User with email {email} not found."}, 404
+                
+            user_id = user_result[0]
+            connection.close()
+            
             update_data = {
                 "user_id": user_id,
-                "email": email,
+                "email": new_email or email,  # Use new_email if provided, otherwise keep current
                 "full_name": full_name,
                 "role": role
             }
@@ -891,6 +929,8 @@ def admin_manage_user():
                 update_data["password"] = password
                 
             result = admin_manager.manage_user("update", update_data)
+            # Sync to CSV after successful database operation
+            sync_users_to_csv()
             return {"status": "SUCCESS", "message": "User updated successfully.", "data": result}, 200
         except Exception as e:
             return {"error": str(e)}, 400
@@ -903,6 +943,8 @@ def admin_manage_user():
             
         try:
             result = admin_manager.manage_user("delete", {"user_id": user_id})
+            # Sync to CSV after successful database operation
+            sync_users_to_csv()
             return {"status": "SUCCESS", "message": "User deleted successfully.", "data": result}, 200
         except Exception as e:
             return {"error": str(e)}, 400
@@ -1172,5 +1214,12 @@ if __name__ == "__main__":
     with app.app_context():
         db.create_all()
         print("[INFO] database connection successful. if model exists, tables created")
+        
+        # Sync users to CSV files on startup
+        try:
+            sync_users_to_csv()
+            print("[INFO] CSV files synced successfully on startup")
+        except Exception as e:
+            print(f"[WARNING] Failed to sync CSV on startup: {e}")
 
     app.run(debug=True)

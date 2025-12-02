@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { loadUsersFromCSV, sampleUsers } from "../utils/csvLoader";
 import "../styles/theme.css";
 
 function AdminUserManagement({ user }) {
@@ -9,6 +10,7 @@ function AdminUserManagement({ user }) {
   const [editingUser, setEditingUser] = useState(null);
   const [isCreating, setIsCreating] = useState(false);
   const [formData, setFormData] = useState({
+    current_email: '',  // Store the original email to identify the user
     email: '',
     full_name: '',
     role: 'student',
@@ -24,19 +26,28 @@ function AdminUserManagement({ user }) {
       setLoading(true);
       setError(null);
       
-      const response = await fetch('/admin/users', {
-        credentials: 'include',
-      });
+      // Use the CSV loader utility that handles multiple fallbacks
+      const userData = await loadUsersFromCSV();
+      console.log('Raw user data from CSV loader:', userData);
       
-      if (response.ok) {
-        const userData = await response.json();
-        setUsers(userData);
+      if (userData.length > 0) {
+        // Ensure all users have proper ID fields
+        const processedUsers = userData.map(user => ({
+          ...user,
+          id: parseInt(user.id) // Ensure ID is a number
+        }));
+        console.log('Processed user data:', processedUsers);
+        setUsers(processedUsers);
       } else {
-        setError('Failed to fetch users');
+        // Final fallback to sample data
+        setUsers(sampleUsers);
+        setError('Using sample data - database connection may be unavailable');
       }
     } catch (err) {
       console.error('Fetch users error:', err);
-      setError('Failed to load users');
+      // Final fallback to sample data
+      setUsers(sampleUsers);
+      setError('Failed to load data - showing sample data');
     } finally {
       setLoading(false);
     }
@@ -64,7 +75,7 @@ function AdminUserManagement({ user }) {
       
       if (response.ok) {
         setSuccess('User created successfully!');
-        setFormData({ email: '', full_name: '', role: 'student', password: '' });
+        setFormData({ current_email: '', email: '', full_name: '', role: 'student', password: '' });
         setIsCreating(false);
         fetchUsers(); // Refresh the list
       } else {
@@ -82,17 +93,27 @@ function AdminUserManagement({ user }) {
       setError(null);
       setSuccess(null);
       
+      console.log('Updating user with email:', formData.current_email);
+      console.log('Form data:', formData);
+      
+      const updatePayload = {
+        action: 'update',
+        email: formData.current_email, // Current email to identify user
+        new_email: formData.email !== formData.current_email ? formData.email : null, // Only send new_email if changed
+        full_name: formData.full_name,
+        role: formData.role,
+        password: formData.password || null
+      };
+      
+      console.log('Update payload:', updatePayload);
+      
       const response = await fetch('/admin/user/manage', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         credentials: 'include',
-        body: JSON.stringify({
-          action: 'update',
-          user_id: editingUser.id,
-          ...formData
-        }),
+        body: JSON.stringify(updatePayload),
       });
       
       const result = await response.json();
@@ -100,10 +121,10 @@ function AdminUserManagement({ user }) {
       if (response.ok) {
         setSuccess('User updated successfully!');
         setEditingUser(null);
-        setFormData({ email: '', full_name: '', role: 'student', password: '' });
+        setFormData({ current_email: '', email: '', full_name: '', role: 'student', password: '' });
         fetchUsers(); // Refresh the list
       } else {
-        setError(result.error || 'Failed to update user');
+        setError(result.error || result.message || 'Failed to update user');
       }
     } catch (err) {
       console.error('Update user error:', err);
@@ -147,8 +168,11 @@ function AdminUserManagement({ user }) {
   };
 
   const startEditing = (userToEdit) => {
+    console.log('Starting to edit user:', userToEdit);
+    console.log('User email:', userToEdit?.email);
     setEditingUser(userToEdit);
     setFormData({
+      current_email: userToEdit.email, // Store original email for identification
       email: userToEdit.email,
       full_name: userToEdit.full_name || '',
       role: userToEdit.role,
@@ -160,13 +184,13 @@ function AdminUserManagement({ user }) {
   const startCreating = () => {
     setIsCreating(true);
     setEditingUser(null);
-    setFormData({ email: '', full_name: '', role: 'student', password: '' });
+    setFormData({ current_email: '', email: '', full_name: '', role: 'student', password: '' });
   };
 
   const cancelForm = () => {
     setIsCreating(false);
     setEditingUser(null);
-    setFormData({ email: '', full_name: '', role: 'student', password: '' });
+    setFormData({ current_email: '', email: '', full_name: '', role: 'student', password: '' });
     setError(null);
   };
 
@@ -346,7 +370,12 @@ function AdminUserManagement({ user }) {
                   <div>{userData.major || 'N/A'}</div>
                   <div style={{ display: 'flex', gap: '0.5rem' }}>
                     <button
-                      onClick={() => startEditing(userData)}
+                      onClick={() => {
+                        console.log('Edit button clicked for user:', userData);
+                        console.log('User object keys:', Object.keys(userData));
+                        console.log('User ID from object:', userData.id);
+                        startEditing(userData);
+                      }}
                       style={{
                         padding: '0.25rem 0.5rem',
                         fontSize: '0.875rem',

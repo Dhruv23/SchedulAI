@@ -1,0 +1,4 @@
+id,email,full_name,role,major,grad_quarter
+5,testadmin@example.com,Test Admin,admin,N/A,N/A
+1,maxverstappen1@gmail.com,max verstappen,student,Divebombing,Spring
+2,testuser@example.com,Test User,student,Computer Science and Engineering,Spring

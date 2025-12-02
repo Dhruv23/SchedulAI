@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { loadUsersFromCSV, sampleUsers } from "../utils/csvLoader";
 import "../styles/theme.css";
 
 function AdminDashboard({ user }) {
@@ -20,13 +21,10 @@ function AdminDashboard({ user }) {
       setLoading(true);
       setError(null);
       
-      // Fetch all users
-      const response = await fetch('/admin/users', {
-        credentials: 'include',
-      });
+      // Use the CSV loader utility that handles multiple fallbacks
+      const userData = await loadUsersFromCSV();
       
-      if (response.ok) {
-        const userData = await response.json();
+      if (userData.length > 0) {
         setUsers(userData);
         
         // Calculate stats
@@ -36,11 +34,23 @@ function AdminDashboard({ user }) {
         
         setStats({ totalUsers, totalStudents, totalAdmins });
       } else {
-        setError('Failed to fetch users');
+        // Final fallback to sample data
+        setUsers(sampleUsers);
+        const totalUsers = sampleUsers.length;
+        const totalStudents = sampleUsers.filter(u => u.role === 'student').length;
+        const totalAdmins = sampleUsers.filter(u => u.role === 'admin').length;
+        setStats({ totalUsers, totalStudents, totalAdmins });
+        setError('Using sample data - database connection may be unavailable');
       }
     } catch (err) {
       console.error('Dashboard error:', err);
-      setError('Failed to load dashboard data');
+      // Final fallback to sample data
+      setUsers(sampleUsers);
+      const totalUsers = sampleUsers.length;
+      const totalStudents = sampleUsers.filter(u => u.role === 'student').length;
+      const totalAdmins = sampleUsers.filter(u => u.role === 'admin').length;
+      setStats({ totalUsers, totalStudents, totalAdmins });
+      setError('Failed to load data - showing sample data');
     } finally {
       setLoading(false);
     }
