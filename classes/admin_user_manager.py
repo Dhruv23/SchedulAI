@@ -64,7 +64,7 @@ class AdminUserManager:
         """
         Update an existing user's profile or role.
         """
-        user_id = data.get("id")
+        user_id = data.get("user_id") or data.get("id")  # Support both formats
         if not user_id:
             raise ValueError("Missing user id for update.")
 
@@ -95,7 +95,7 @@ class AdminUserManager:
         """
         Delete a user from the system.
         """
-        user_id = data.get("id")
+        user_id = data.get("user_id") or data.get("id")  # Support both formats
         if not user_id:
             raise ValueError("Missing user id for deletion.")
 

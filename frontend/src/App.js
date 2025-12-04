@@ -8,6 +8,7 @@ import {
 } from "react-router-dom";
 
 import Navbar from "./components/Navbar";
+import SimpleChatbot from "./components/SimpleChatbot";
 import LoginPage from "./pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
 import ForgotPasswordPage from "./pages/ForgotPasswordPage";
@@ -329,6 +330,9 @@ function App() {
           }
         />
       </Routes>
+      
+      {/* Chatbot - only show when logged in */}
+      {user && <SimpleChatbot />}
     </Router>
   );
 }

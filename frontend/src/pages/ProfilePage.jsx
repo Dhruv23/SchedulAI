@@ -670,13 +670,6 @@ function ProfilePage({ user, onUserUpdate, onLogout }) {
             <button
               type="button"
               className="link-button"
-              onClick={() => navigate("/dashboard")}
-            >
-              View Degree Audit
-            </button>
-            <button
-              type="button"
-              className="link-button"
               onClick={() => window.open("https://www.ratemyprofessors.com/school/882", "_blank")}
             >
               Rate Professors & Classes

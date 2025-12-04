@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import TranscriptUpload from "../components/TranscriptUpload";
 import ProgressBar from "../components/ProgressBar";
-import ChatbotWidget from "../components/ChatbotWidget";
 
 function Dashboard({ user, onLogout }) {
   const navigate = useNavigate();
@@ -187,9 +186,6 @@ function Dashboard({ user, onLogout }) {
           </tbody>
         </table>
       )}
-
-      {/* Chatbot floating widget */}
-      <ChatbotWidget />
     </div>
   );
 }
