@@ -7,12 +7,12 @@ class CourseExcelParser:
     course/section data from Excel files into structured CSVs.
     """
 
-    def __init__(self, excel_path: str, output_dir: str = "majors_csvs"):
+    def __init__(self, excel_path: str, output_dir: str = "data"):
         self.excel_path = excel_path
         self.output_dir = output_dir
         self.df = None
 
-    def parse_courses(self, csv_path: str = "courses_output.csv") -> pd.DataFrame:
+    def parse_courses(self, csv_path: str = "data/courses_output.csv") -> pd.DataFrame:
         """
         Reads an Excel file containing course and section data,
         combines all sheets into a single DataFrame, and optionally saves as CSV.

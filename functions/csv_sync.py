@@ -6,7 +6,7 @@ from datetime import datetime
 def sync_users_to_csv():
     """Sync users data from database to CSV file"""
     try:
-        conn = sqlite3.connect('schedulai.db')
+        conn = sqlite3.connect('data/schedulai.db')
         cursor = conn.cursor()
         
         # Get all users from the database
@@ -15,7 +15,7 @@ def sync_users_to_csv():
         
         # Write to CSV in both backend and frontend public folder
         csv_paths = [
-            'users_data.csv',  # Backend copy
+            'data/users_data.csv',  # Backend copy in data folder
             'frontend/public/users_data.csv'  # Frontend copy
         ]
         
@@ -29,7 +29,7 @@ def sync_users_to_csv():
                 writer.writerows(users)
         
         # Also create a timestamp file to track last update
-        with open('users_data_last_updated.txt', 'w') as f:
+        with open('data/users_data_last_updated.txt', 'w') as f:
             f.write(datetime.now().isoformat())
         
         conn.close()
@@ -44,7 +44,7 @@ def get_users_from_csv():
     """Get users data from CSV file"""
     try:
         users = []
-        with open('users_data.csv', 'r', encoding='utf-8') as csvfile:
+        with open('data/users_data.csv', 'r', encoding='utf-8') as csvfile:
             reader = csv.DictReader(csvfile)
             for row in reader:
                 users.append({

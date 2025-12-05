@@ -15,25 +15,27 @@ from werkzeug.utils import secure_filename
 
 # CORS for frontend-backend communication
 from flask_cors import CORS
-from db import db # because we only have one instance of SQLAlchemy
+from functions.db import db # because we only have one instance of SQLAlchemy
 from dotenv import load_dotenv
 
-# import classes
-from classes.student_model import Student
-from classes.course_model import Course
-from classes.auth_manager import AuthManager
-from classes.admin_user_manager import AdminUserManager
-from classes.schedule_planner import SchedulePlanner
-from classes.course_search_engine import CourseSearchEngine
-from classes.transcript_to_df import TranscriptParser
-from classes.transcript_course_model import TranscriptCourse
-from classes.student_progress_tracker import StudentProgressTracker
-from classes.chatbot_interface import ChatbotInterface
-from csv_sync import sync_users_to_csv, get_users_from_csv
+# import functions
+from functions.student_model import Student
+from functions.course_model import Course
+from functions.auth_manager import AuthManager
+from functions.admin_user_manager import AdminUserManager
+from functions.schedule_planner import SchedulePlanner
+from functions.course_search_engine import CourseSearchEngine
+from functions.transcript_to_df import TranscriptParser
+from functions.transcript_course_model import TranscriptCourse
+from functions.student_progress_tracker import StudentProgressTracker
+from functions.chatbot_interface import ChatbotInterface
+from functions.auth_utils import generate_reset_token, verify_reset_token
+from functions.data_utils import load_course_sections, load_and_transform_sections
+from functions.progress_utils import evaluate_student_progress
+from functions.csv_sync import sync_users_to_csv, get_users_from_csv
 from flask import session
 import pandas as pd
 import re
-from classes.transcript_to_df import TranscriptParser
 # load environment variables
 load_dotenv()
 
@@ -62,30 +64,9 @@ if not app.secret_key:
 # token serializer for password reset link
 serializer = URLSafeTimedSerializer(app.secret_key)
 
-# password reset helper functions
-RESET_SALT = "schedulai-password-reset" # extra security exclusive to password reset tokens
-
-def generate_reset_token(email: str) -> str:
-    """
-    create a signed, url-safe token (encodes user email)
-    stateless token, and no db rows are written
-    """
-    return serializer.dumps(email, salt=RESET_SALT)
-
-def verify_reset_token(token: str, max_age_seconds: int = 600) -> str | None:
-    """
-    verify token signature and age
-    return embedded email if valid, else return none
-    """
-    try:
-        email = serializer.loads(token, salt=RESET_SALT, max_age=max_age_seconds)
-        return email
-    except (BadSignature, SignatureExpired):
-        return None
-
 # configure database
 BASE_DIR = os.path.abspath(os.path.dirname(__file__))
-db_path = os.path.join(BASE_DIR, "schedulai.db")
+db_path = os.path.join(BASE_DIR, "data", "schedulai.db")
 
 app.config["SQLALCHEMY_DATABASE_URI"] = f"sqlite:///{db_path}"
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
@@ -97,54 +78,31 @@ auth_manager = AuthManager()
 admin_manager = AdminUserManager()
 
 # Load course section data for schedule planner
-def load_course_sections():
-    """Load and transform course section data for SchedulePlanner"""
-    try:
-        # Load raw course data
-        df = pd.read_csv('data/courses_output.csv')
-        
-        # Transform to SchedulePlanner format
-        sections = []
-        for _, row in df.iterrows():
-            # Parse meeting pattern like "M W F | 11:45 AM - 12:50 PM"
-            meeting_pattern = str(row['Meeting Patterns'])
-            if ' | ' in meeting_pattern:
-                days_part, time_part = meeting_pattern.split(' | ', 1)
-                if ' - ' in time_part:
-                    start_time, end_time = time_part.split(' - ', 1)
-                    
-                    # Split days (e.g., "M W F" -> ["M", "W", "F"])
-                    days = days_part.split()
-                    
-                    # Create a section entry for each day
-                    for day in days:
-                        # Map subject names to standard codes
-                        subject_code = row['Course Subject']
-                        if subject_code == 'Computer Science and Engineering':
-                            course_code = f"CSEN {row['Course Number']}"
-                        else:
-                            # Keep other subjects as-is for now, could expand mapping
-                            course_code = f"{subject_code} {row['Course Number']}"
-                            
-                        sections.append({
-                            'Course': course_code,
-                            'Section': row['Section Number'],
-                            'Day': day,
-                            'Start Time': start_time.strip(),
-                            'End Time': end_time.strip(),
-                            'Instructor': str(row['All Instructors']) if pd.notna(row['All Instructors']) else '',
-                            'Location': str(row['Locations']) if pd.notna(row['Locations']) else '',
-                            'Units': row['Units']
-                        })
-        
-        sections_df = pd.DataFrame(sections)
-        print(f"[INFO] Loaded {len(sections_df)} course section entries")
-        return sections_df
-    except Exception as e:
-        print(f"[ERROR] Failed to load course sections: {e}")
-        return pd.DataFrame()
+app = Flask(__name__)
+CORS(app, supports_credentials=True, origins=["http://localhost:3000", "http://localhost:3001", "http://localhost:3002"]) # to enable communication with frontend
 
-# Initialize planner with course data
+# configure flask mail and token serializer
+from flask_mail import Mail, Message
+from itsdangerous import URLSafeTimedSerializer
+
+app.config["MAIL_SERVER"] = "smtp.gmail.com"
+app.config["MAIL_PORT"] = 587
+app.config["MAIL_USE_TLS"] = True
+app.config["MAIL_USERNAME"] = "scu.schedulai@gmail.com"
+app.config["MAIL_PASSWORD"] = os.environ.get("MAIL_PASSWORD") # environment-stored app password
+app.config["MAIL_DEFAULT_SENDER"] = ("SchedulAI Support", "scu.schedulai@gmail.com")
+
+mail = Mail(app)
+
+# set secret key and initialize
+app.secret_key = os.environ.get("SECRET_KEY")
+if not app.secret_key:
+    raise ValueError("[ERROR] secret key not set. please configure in .env file")
+
+# token serializer for password reset link
+serializer = URLSafeTimedSerializer(app.secret_key)
+
+# Load course section data for schedule planner
 sections_df = load_course_sections()
 planner = SchedulePlanner(sections_df)
 course_engine = CourseSearchEngine()
@@ -171,7 +129,7 @@ def debug_info():
                 "python_version": sys.version,
                 "platform": platform.platform(),
                 "flask_running": True,
-                "database_file_exists": os.path.exists("schedulai.db"),
+                "database_file_exists": os.path.exists("data/schedulai.db"),
                 "env_file_exists": os.path.exists(".env"),
                 "upload_folder_exists": os.path.exists(UPLOAD_FOLDER),
                 "cors_origins": ["http://localhost:3000", "http://localhost:3001", "http://localhost:3002"]
@@ -421,7 +379,7 @@ def recover_password():
 
     user = Student.query.filter_by(email=email).first()
     if user:
-        token = generate_reset_token(email)
+        token = generate_reset_token(email, app.secret_key)
         reset_link = url_for("user_password_reset_landing", token=token, _external=True)
         
         subject = "[SchedulAI] Password Reset Request"
@@ -449,7 +407,7 @@ def user_password_reset_landing(token):
     """
     [GET] validate password reset token from email and redirect to frontend
     """
-    email = verify_reset_token(token, max_age_seconds=600)
+    email = verify_reset_token(token, app.secret_key, max_age_seconds=600)
     if not email:
         # Redirect to login with error parameter or show error page
         return redirect(f"http://localhost:3000/login?error=invalid_reset_link")
@@ -473,7 +431,7 @@ def user_password_reset_confirm():
         return {"status": "ERROR", "message": "token and new password are required"}, 400
     
     # verify token
-    email = verify_reset_token(token, max_age_seconds=600)
+    email = verify_reset_token(token, app.secret_key, max_age_seconds=600)
     if not email:
         return {"status": "ERROR", "message": "invalid or expired link"}, 400
     
@@ -823,7 +781,7 @@ def admin_sync_csv():
         return {"status": "ERROR", "message": "Unauthorized access."}, 401
         
     try:
-        connection = sqlite3.connect("schedulai.db")
+        connection = sqlite3.connect("data/schedulai.db")
         cursor = connection.cursor()
         cursor.execute("SELECT role FROM students WHERE id = ?", (user_id,))
         user_role = cursor.fetchone()
@@ -855,7 +813,7 @@ def admin_manage_user():
         
     # Check if user is admin
     try:
-        connection = sqlite3.connect("schedulai.db")
+        connection = sqlite3.connect("data/schedulai.db")
         cursor = connection.cursor()
         cursor.execute("SELECT role FROM students WHERE id = ?", (user_id,))
         user_role = cursor.fetchone()
@@ -907,7 +865,7 @@ def admin_manage_user():
             
         try:
             # Find user by current email first
-            connection = sqlite3.connect("schedulai.db")
+            connection = sqlite3.connect("data/schedulai.db")
             cursor = connection.cursor()
             cursor.execute("SELECT id FROM students WHERE email = ?", (email,))
             user_result = cursor.fetchone()
@@ -964,7 +922,7 @@ def admin_manage_course():
         
     # Check if user is admin
     try:
-        connection = sqlite3.connect("schedulai.db")
+        connection = sqlite3.connect("data/schedulai.db")
         cursor = connection.cursor()
         cursor.execute("SELECT role FROM students WHERE id = ?", (user_id,))
         user_role = cursor.fetchone()
@@ -1029,65 +987,6 @@ def chat_with_bot():
 # ============================================
 #   SCHEDULE PLANNER — CSV LOADING + ENDPOINTS
 # ============================================
-
-import re
-import pandas as pd
-
-CSV_PATH = "majors_csvs/Computer Science and Engineering.csv"
-
-def load_and_transform_sections(csv_path):
-    df = pd.read_csv(csv_path)
-
-    # Clean duplicated header lines (your CSV includes header twice)
-    df = df[df["Course Section"] != "Course Section"]
-
-    # Extract "Course" short code
-    # Example: "CSEN 10-1 - Introduction to Programming" → "CSEN 10-1"
-    df["Course"] = df["Course Section"].apply(
-        lambda x: re.split(r"\s+-\s+", str(x))[0]
-    )
-
-    # Instructor column cleanup
-    df["Instructor"] = df["All Instructors"].fillna("TBA")
-
-    # Parse meeting patterns such as:
-    #   "M W F | 11:45 AM - 12:50 PM"
-    def parse_meeting(m):
-        if pd.isna(m):
-            return ("", "", "")
-        parts = m.split("|")
-        if len(parts) != 2:
-            return ("", "", "")
-
-        # Convert "M W F" -> "MWF"
-        days = parts[0].strip().replace(" ", "")
-
-        times = parts[1].strip()
-        if "-" not in times:
-            return (days, "", "")
-        start, end = times.split(" - ")
-        return (days, start.strip(), end.strip())
-
-    parsed = df["Meeting Patterns"].apply(parse_meeting)
-    df["Day"] = parsed.apply(lambda x: x[0])
-    df["Start Time"] = parsed.apply(lambda x: x[1])
-    df["End Time"] = parsed.apply(lambda x: x[2])
-
-    # Select only the columns required by SchedulePlanner
-    df_clean = df[["Course", "Day", "Start Time", "End Time", "Instructor"]]
-
-    return df_clean
-
-# Load transformed CSV into SchedulePlanner
-try:
-    transformed_df = load_and_transform_sections(CSV_PATH)
-    planner = SchedulePlanner(transformed_df)
-    print(f"[INFO] Loaded {len(transformed_df)} section rows for SchedulePlanner.")
-except Exception as e:
-    print(f"[ERROR] Failed loading schedule planner CSV: {e}")
-    planner = SchedulePlanner(pd.DataFrame())
-
-
 
 # ============================================
 #       /planner/schedules  (POST)
@@ -1160,54 +1059,6 @@ def get_detailed_progress():
     student_id = session["user_id"]
     result = evaluate_student_progress(student_id)
     return result, 200
-
-
-
-def evaluate_student_progress(student_id: int):
-    """
-    Compare a student's transcript against ONLY:
-      - CSEN major requirements (course-based)
-
-    Core requirements removed from system.
-    """
-
-    # ------------------------------------------------------------
-    # 1. Load student transcript
-    # ------------------------------------------------------------
-    student = Student.query.get(student_id)
-    if not student:
-        return {"status": "ERROR", "message": "Student not found."}
-
-    # SIMPLIFIED VERSION: Just return all CSEN requirements as missing for now
-    # This allows testing of Schedule Planner without transcript complexity
-    
-    # Load CSEN major requirements
-    try:
-        req_df = pd.read_csv("majors_csvs/csen_requirements.csv")
-        
-        # Convert all requirements to "missing" format for Schedule Planner
-        major_missing = []
-        for _, row in req_df.iterrows():
-            dept = str(row["DEPARTMENT"])
-            num = str(row["COURSE_NUMBER"])
-            code_full = f"{dept} {num}"
-            major_missing.append({
-                "requirement": code_full,
-                "category": row.get("CATEGORY", ""),
-                "name": row["REQUIREMENT_NAME"]
-            })
-        
-        print(f"[DEBUG] Loaded {len(major_missing)} requirements for Schedule Planner")
-        
-        return {
-            "status": "SUCCESS",
-            "major_completed": [],  # Empty for now
-            "major_missing": major_missing
-        }
-        
-    except Exception as e:
-        print(f"[ERROR] Failed to load requirements CSV: {e}")
-        return {"status": "ERROR", "message": f"Failed to load requirements: {str(e)}"}
 
 if __name__ == "__main__":
     # create tables inside app context

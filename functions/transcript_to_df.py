@@ -18,7 +18,7 @@ class TranscriptParser:
     def _load_course_names(self) -> dict:
         """load course names from course_names.txt file"""
         course_map = {}
-        course_names_path = os.path.join(os.path.dirname(os.path.dirname(__file__)), 'course_names.txt')
+        course_names_path = os.path.join(os.path.dirname(os.path.dirname(__file__)), 'data', 'course_names.txt')
         
         try:
             with open(course_names_path, 'r', encoding='utf-8') as f:

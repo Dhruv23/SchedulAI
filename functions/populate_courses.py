@@ -11,7 +11,7 @@ def populate_courses():
     
     # read csv
     try:
-        df = pd.read_csv('csen_requirements.csv')
+        df = pd.read_csv('data/csen_requirements.csv')
         print(f"loaded {len(df)} course requirements from CSV")
     except Exception as e:
         print(f"error reading CSV: {e}")

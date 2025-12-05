@@ -16,7 +16,7 @@ class StudentProgressTracker:
     """
 
     def __init__(self):
-        self.requirements_path = os.path.join(os.getcwd(), "majors_csvs", "csen_requirements.csv")
+        self.requirements_path = os.path.join(os.getcwd(), "data", "csen_requirements.csv")
 
         # ALL departments that may offer required CSEN-major courses
         self.department_files = {
@@ -144,7 +144,7 @@ class StudentProgressTracker:
         all_suggestions = []
 
         for dept_prefix, filename in self.department_files.items():
-            offerings_path = os.path.join(os.getcwd(), "majors_csvs", filename)
+            offerings_path = os.path.join(os.getcwd(), "data", filename)
 
             if not os.path.exists(offerings_path):
                 print(f"[WARN] Offerings file missing: {filename}")
